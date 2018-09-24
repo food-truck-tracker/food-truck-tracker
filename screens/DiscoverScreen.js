@@ -1,15 +1,25 @@
 import React from 'react';
 import {
     Text,
-    View
+    View,
+    StyleSheet,
 } from 'react-native';
 
 export default class DiscoverScreen extends React.Component {
     render() {
         return (
             <View>
-                <Text>Discover View</Text>
+                <Text style={styles.header}>Discover View</Text>
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    header: {
+      fontSize: 32,
+      fontWeight: "bold",
+      padding: 10,
+      margin: 10
+    }
+  });
