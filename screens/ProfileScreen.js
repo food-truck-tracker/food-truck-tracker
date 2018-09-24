@@ -26,7 +26,7 @@ export default class ProfileScreen extends React.Component {
                 // <View>
                     // <Text>REGISTER</Text>
                 // </View>
-                <RegisterForm />
+                <RegisterForm changeView = {this._changeView}/>
             )
         } else if (this.state.view == 'login') {
             return (

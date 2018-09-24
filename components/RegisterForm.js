@@ -4,6 +4,7 @@ import {
     Text,
     View,
     StatusBar,
+    Button,
     TextInput
 }  from 'react-native';
 
@@ -30,33 +31,39 @@ export default class Registerform extends React.Component{
                 />
                 <Text>Username</Text>
                 <TextInput
-                    austoCorrect = {false}
+                    autoCorrect = {false}
                     placeholder = "Enter username..."
                     value = {this.state.username}
                     onChangeText = {username => this.setState({username})}
                 /> 
                 <Text>Email</Text>
                 <TextInput
-                    autoCorrext = {false}
+                    autoCorrect = {false}
                     placeholder = "Enter email..."
                     value = {this.state.email}
                     onChangeText = {email => this.setState({email})}
                     />
                 <Text>Password</Text>
                 <TextInput
-                    autoCorrext = {false}
+                    autoCorrect = {false}
                     placeholder = "Enter password..."
                     value = {this.state.password}
                     onChangeText = {password => this.setState({password})}
                 />
                 <Text>Reenter Password</Text>
                 <TextInput
-                    autoCorrext = {false}
+                    autoCorrect = {false}
                     placeholder = "Reenter password..."
                     value = {this.state.re_password}
                     onChangeText = {re_password => this.setState({re_password})}
                 />
-                
+
+                 <Button
+                  title="Go back"
+                  onPress={() => {
+                    this.props.changeView('root');
+                  }}
+                 />
             </View>
 
         );
