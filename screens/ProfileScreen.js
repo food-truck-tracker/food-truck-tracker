@@ -5,7 +5,7 @@ import {
     Button,
 } from 'react-native';
 import LoginForm from '../components/LoginForm'
-// import RegisterForm from '../components/RegisterForm'
+import RegisterForm from '../components/RegisterForm'
 
 export default class ProfileScreen extends React.Component {
 
@@ -23,10 +23,10 @@ export default class ProfileScreen extends React.Component {
     _chooseRender = () => {
         if(this.state.view == 'register') {
             return (
-                <View>
-                    <Text>REGISTER</Text>
-                </View>
-                // <Register />
+                // <View>
+                    // <Text>REGISTER</Text>
+                // </View>
+                <RegisterForm />
             )
         } else if (this.state.view == 'login') {
             return (
