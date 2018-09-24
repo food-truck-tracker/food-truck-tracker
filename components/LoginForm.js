@@ -13,9 +13,10 @@ export default class LoginForm extends React.Component {
   render() {
     return (
       <View>
-        <Text>Login</Text>
+        <Text style={styles.header}>Login</Text>
 
-        <TextInput
+        <TextInput 
+          style={styles.input}
           autoCorrect={false}
           placeholder="Enter your email..."
           value={this.state.email}
@@ -23,6 +24,7 @@ export default class LoginForm extends React.Component {
         />
 
         <TextInput
+          style={styles.input}
           autoCorrect={false}
           placeholder="Enter your password..."
           value={this.state.password}
@@ -33,13 +35,6 @@ export default class LoginForm extends React.Component {
         <Button
           title="Login"
           onPress={() => console.log("TODO: firebase auth")}
-        />
-
-        <View
-          style={{
-            borderBottomColor: "black",
-            borderBottomWidth: StyleSheet.hairlineWidth
-          }}
         />
 
         <Button
@@ -66,3 +61,16 @@ export default class LoginForm extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  input: {
+    padding: 15,
+    margin: 10,
+  },
+  header: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    padding: 10,
+    margin: 10,
+  }
+});
