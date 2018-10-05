@@ -2,6 +2,9 @@
 #
 .DS_Store
 
+#vscode
+.vscode/
+
 # Xcode
 #
 build/
@@ -54,3 +57,6 @@ buck-out/
 
 # Bundle artifact
 *.jsbundle
+
+#Cocoapods
+ios/Pods/*
