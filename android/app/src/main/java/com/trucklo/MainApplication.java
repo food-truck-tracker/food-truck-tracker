@@ -1,4 +1,4 @@
-package com.secondproject;
+package com.trucklo;
 
 import android.app.Application;
 
