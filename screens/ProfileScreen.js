@@ -50,6 +50,7 @@ export default class ProfileScreen extends React.Component {
 
 const styles = StyleSheet.create({
   header: {
+    textAlign: "center",
     fontSize: 32,
     fontWeight: "bold",
     padding: 10,
