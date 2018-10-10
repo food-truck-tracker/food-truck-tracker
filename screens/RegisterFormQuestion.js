@@ -1,7 +1,6 @@
 import React from "react";
 import { Text, View, Button, StyleSheet } from "react-native";
-import RegisterForm from "../components/RegisterForm";
-import Registerform from "../components/RegisterForm";
+import Register from "./Register";
 
 export default class RegisterFormQuestion extends React.Component {
   constructor(props) {
@@ -17,9 +16,9 @@ export default class RegisterFormQuestion extends React.Component {
 
   _chooseRender = () => {
     if (this.state.view == "Customer") {
-      return <RegisterForm changeView={this._changeView} user_input = "Customer"/>;
+      return <Register changeView={this._changeView} user_input = "Customer"/>;
     } else if (this.state.view == "Vendor") {
-        return <RegisterForm changeView={this._changeView} user_input = "Vendor"/>;
+        return <Register changeView={this._changeView} user_input = "Vendor"/>;
     } else {
       return (
         <View>
@@ -57,6 +56,7 @@ export default class RegisterFormQuestion extends React.Component {
 
 const styles = StyleSheet.create({
   header: {
+    textAlign: "center",
     fontSize: 26,
     fontWeight: "bold",
     padding: 10,
