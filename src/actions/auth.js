@@ -6,10 +6,6 @@ const loginStart = () => ({
   type: types.LOGIN_START,
 });
 
-const loginStart = () => ({
-  type: types.LOGIN_START,
-});
-
 const loginFinished = user => ({
   type: types.LOGIN_FINISHED,
   user,
