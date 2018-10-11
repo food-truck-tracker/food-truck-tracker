@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "851509553177",
+    "firebase_url": "https://food-truck-tracker-eb70e.firebaseio.com",
+    "project_id": "food-truck-tracker-eb70e",
+    "storage_bucket": "food-truck-tracker-eb70e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851509553177:android:aaff3b6a9f3bac8d",
+        "android_client_info": {
+          "package_name": "com.trucklo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851509553177-a2dr1fupui2pm5e2hd63g1ruvkmr46u3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKzc4eiOJNAfUbt4N3azjpuNyZIE1ZS_M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

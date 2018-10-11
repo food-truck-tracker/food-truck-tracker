@@ -8,9 +8,9 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0",
-    "firebase": "^5.5.1",
     "react": "16.5.0",
     "react-native": "0.57.1",
+    "react-native-firebase": "^5.0.0",
     "react-native-maps": "^0.21.0",
     "react-navigation": "^2.16.0"
   },
