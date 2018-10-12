@@ -4,7 +4,7 @@ import firebase from "react-native-firebase";
 import { connect } from "react-redux";
 
 import LoginForm from "../components/LoginForm";
-import RegisterFormQuestion from "./RegisterFormQuestion";
+import Register from "./Register";
 import { loginUser, logoutUser } from "../actions/auth";
 
 const styles = StyleSheet.create({
@@ -69,7 +69,7 @@ class ProfileScreen extends React.Component {
 
   _chooseRender = () => {
     if (this.state.view == "register") {
-      return <RegisterFormQuestion changeView={this._changeView} />;
+      return <Register changeView={this._changeView} />;
     } else if (this.state.view == "login") {
       return (
         <LoginForm
