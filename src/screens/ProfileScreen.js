@@ -51,6 +51,14 @@ class ProfileScreen extends React.Component {
     }
   };
 
+  onLogout = async () => {
+    try {
+      await this.props.logoutUser();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   onChangeLogin = (e, type) => {
     this.setState({ [`${type}Value`]: e });
   };
@@ -77,7 +85,10 @@ class ProfileScreen extends React.Component {
         <View>
           <Text style={styles.header}>Profile</Text>
           {this.props.auth.loggedIn ? (
-            <Text>HELLO</Text>
+            <>
+              <Text>Hello</Text>
+              <Button title="Logout" onPress={this.onLogout} />
+            </>
           ) : (
             <>
               <Button
