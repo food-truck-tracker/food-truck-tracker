@@ -57,6 +57,32 @@ export default (state = initialState, action) => {
         errorMessage: error,
       };
     }
+    case types.REGISTER_START: {
+      return {
+        ...state,
+        isFetching: true,
+      };
+    }
+    case types.REGISTER_FINISHED: {
+      const { user } = action;
+      return {
+        ...state,
+        isFetching: false,
+        loggedIn: true,
+        user,
+      };
+    }
+    case types.REGISTER_ERROR: {
+      const { error } = action;
+      return {
+        ...state,
+        isFetching: false,
+        loggedIn: false,
+        hasError: true,
+        user: null,
+        errorMessage: error,
+      };
+    }
     default: {
       return state;
     }
