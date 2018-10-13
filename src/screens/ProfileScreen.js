@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import LoginForm from "../components/LoginForm";
 import Register from "./Register";
-import { loginUser, logoutUser } from "../actions/auth";
+import { loginUser, logoutUser, registerUser } from "../actions/auth";
 
 const styles = StyleSheet.create({
   header: {
@@ -51,6 +51,15 @@ class ProfileScreen extends React.Component {
     }
   };
 
+  onRegister = async (name, email, pass) => {
+    try {
+      const response = await this.props.registerUser(name, email, pass);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   onLogout = async () => {
     try {
       await this.props.logoutUser();
@@ -69,7 +78,12 @@ class ProfileScreen extends React.Component {
 
   _chooseRender = () => {
     if (this.state.view == "register") {
-      return <Register changeView={this._changeView} />;
+      return (
+        <Register
+          changeView={this._changeView}
+          registerUser={this.onRegister}
+        />
+      );
     } else if (this.state.view == "login") {
       return (
         <LoginForm
@@ -122,6 +136,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   loginUser,
   logoutUser,
+  registerUser,
 };
 
 export default connect(
