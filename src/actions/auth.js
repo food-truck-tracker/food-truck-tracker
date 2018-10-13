@@ -2,6 +2,8 @@ import firebase from "react-native-firebase";
 
 import types from "../types/auth";
 
+// EMAIL LOGIN FLOW
+
 const loginStart = () => ({
   type: types.LOGIN_START,
 });
@@ -22,16 +24,60 @@ export const loginUser = (email, pass) => async (dispatch, getState) => {
     const response = await firebase
       .auth()
       .signInWithEmailAndPassword(email, pass);
-    console.log(response);
+    console.log("login response", response);
     if (response.error) {
       throw new Error(response);
     }
-    dispatch(loginFinished(response._user));
+    dispatch(loginFinished(response.user));
   } catch (error) {
     console.log(error);
     dispatch(loginError(error));
   }
 };
+
+// GOOGLE LOGIN FLOW
+
+const googleLoginStart = () => ({
+  type: types.GOOGLE_LOGIN_START,
+});
+
+const googleLoginFinished = user => ({
+  type: types.GOOGLE_LOGIN_FINISHED,
+  user,
+});
+
+const googleLoginError = error => ({
+  type: types.GOOGLE_LOGIN_ERROR,
+  error,
+});
+
+export const googleLoginUser = (idToken, accessToken) => async (
+  dispatch,
+  getState
+) => {
+  dispatch(googleLoginStart());
+  try {
+    const credential = firebase.auth.GoogleAuthProvider.credential(
+      idToken,
+      accessToken
+    );
+
+    const response = await firebase.auth().signInWithCredential(credential);
+
+    console.log(response);
+
+    if (response.error) {
+      throw new Error(response);
+    }
+
+    dispatch(googleLoginFinished(response.user));
+  } catch (error) {
+    console.log(error);
+    dispatch(googleLoginError(error));
+  }
+};
+
+// LOGOUT FLOW
 
 const logoutStart = () => ({
   type: types.LOGOUT_START,
@@ -55,6 +101,8 @@ export const logoutUser = () => async (dispatch, getState) => {
     dispatch(logoutError(error));
   }
 };
+
+// REGISTER FLOW
 
 const registerStart = () => ({
   type: types.REGISTER_START,
@@ -81,11 +129,15 @@ export const registerUser = (name, email, pass) => async (
       .createUserWithEmailAndPassword(email, pass);
     console.log(response);
 
-    const { _user } = response;
+    if (response.error) {
+      throw new Error(response);
+    }
 
-    await _user.updateProfile({ displayName: name });
+    const { user } = response;
 
-    dispatch(registerFinished(_user));
+    await user.updateProfile({ displayName: name });
+
+    dispatch(registerFinished(user));
   } catch (error) {
     dispatch(registerError(error));
   }
