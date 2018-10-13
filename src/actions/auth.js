@@ -70,7 +70,10 @@ const registerError = error => ({
   error,
 });
 
-export const registerUser = (name, email, pass) => (dispatch, getState) => {
+export const registerUser = (name, email, pass) => async (
+  dispatch,
+  getState
+) => {
   dispatch(registerStart());
   try {
     const response = await firebase
@@ -80,10 +83,10 @@ export const registerUser = (name, email, pass) => (dispatch, getState) => {
 
     const { _user } = response;
 
-    await _user.updateProfile({ displayName: name})
+    await _user.updateProfile({ displayName: name });
 
-    dispatch(registerFinished(_user))
+    dispatch(registerFinished(_user));
   } catch (error) {
-    dispatch(registerError(error))
+    dispatch(registerError(error));
   }
-}
+};
