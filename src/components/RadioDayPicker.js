@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, Button, StyleSheet, TouchableOpacity } from "react-native";
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
-import MultipleTimeInput from './MultipleTimeInput';
 
 
 
@@ -37,9 +36,9 @@ export default class RadioDayPicker extends Component {
     })
   }
 
-  _button_pressed = value => {
-    (value) => {this.setState({value:value})}
-    this.setState({current_value: value})
+  _button_pressed = (value) => {
+    this.props.onUpdate(value);
+    this.setState({current_value: value});
   }
 
 
@@ -57,8 +56,6 @@ export default class RadioDayPicker extends Component {
           initial={0}
           onPress={this._button_pressed}
         />
-        <Text>{this.state.current_value}</Text>
-        <MultipleTimeInput day = {this.state.current_value}/>
       </View>
     );
   }
