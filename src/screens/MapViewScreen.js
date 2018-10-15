@@ -11,10 +11,10 @@ import {
 import MapView from "react-native-maps";
 
 const Images = [
-  { uri: "https://i.imgur.com/sNam9iJ.jpg" },
-  { uri: "https://i.imgur.com/N7rlQYt.jpg" },
-  { uri: "https://i.imgur.com/UDrH0wm.jpg" },
-  { uri: "https://i.imgur.com/Ka8kNST.jpg" },
+  { uri: "https://cdn.pixabay.com/photo/2017/06/23/21/37/oldtimer-2436018_1280.jpg" },
+  { uri: "https://images.pexels.com/photos/221357/pexels-photo-221357.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
+  { uri: "https://images.pexels.com/photos/439851/pexels-photo-439851.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
+  { uri: "https://images.pexels.com/photos/1410484/pexels-photo-1410484.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
 ];
 
 const { width, height } = Dimensions.get("window");
@@ -36,8 +36,8 @@ export default class MapViewScreen extends React.Component {
       },
       {
         coordinate: {
-          latitude: 32.7473864,
-          longitude: -98.4782204,
+          latitude: 32.7497924,
+          longitude: -97.3590353,
         },
         title: "Chile Pepper Grill",
         description: "This is the second best place in Forth Worth",
@@ -65,8 +65,8 @@ export default class MapViewScreen extends React.Component {
     region: {
       latitude: 32.729649,
       longitude: -97.113142,
-      latitudeDelta: 0.5,
-      longitudeDelta: 0.5,
+      latitudeDelta: 0.4,
+      longitudeDelta: 0.4,
     },
   };
 

@@ -56,7 +56,6 @@ export default class RadioDayPicker extends Component {
           initial={0}
           onPress={this._button_pressed}
         />
-        <Text>{this.state.current_value}</Text>
       </View>
     );
   }

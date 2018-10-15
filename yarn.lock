@@ -4941,6 +4941,11 @@ react-native-firebase@^5.0.0:
     opencollective-postinstall "^2.0.0"
     prop-types "^15.6.2"
 
+react-native-google-signin@^1.0.0-rc6:
+  version "1.0.0-rc6"
+  resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-1.0.0-rc6.tgz#13278e39551d127008e76a9c6caf532f04246f17"
+  integrity sha512-F2flFlSKAhQEISc6StUiQ9UzeK62IR+p8PO+UmIUCQKvfygiXJSHoHhCQh9nB6subJyJKub9TVnk207aLx+k9A==
+
 react-native-maps@^0.21.0:
   version "0.21.0"
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.21.0.tgz#005f58e93d7623ad59667e8002101970ddf235c2"
