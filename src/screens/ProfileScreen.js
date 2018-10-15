@@ -33,20 +33,22 @@ class ProfileScreen extends React.Component {
     };
   }
 
+  // listening for realtime auth change
   componentDidMount() {
     this.authUnsubscriber = firebase.auth().onAuthStateChanged(user => {
       console.log("subscriber", user);
     });
   }
 
+  // removing listener when component unmounts
   componentWillUnmount() {
     if (this.authUnsubscriber) {
       this.authUnsubscriber();
     }
   }
 
+  // attempt to login
   onLogin = async () => {
-    if (!this.state.emailValue || !this.state.passwordValue) return;
     try {
       const response = await this.props.loginUser(
         this.state.emailValue,
@@ -58,6 +60,7 @@ class ProfileScreen extends React.Component {
     }
   };
 
+  // attempt to login with google
   onGoogleLogin = async () => {
     try {
       await GoogleSignin.configure();
@@ -75,6 +78,7 @@ class ProfileScreen extends React.Component {
     }
   };
 
+  // attempt to register
   onRegister = async (name, email, pass) => {
     try {
       const response = await this.props.registerUser(name, email, pass);
@@ -84,6 +88,7 @@ class ProfileScreen extends React.Component {
     }
   };
 
+  // attempt to logout
   onLogout = async () => {
     try {
       await this.props.logoutUser();
@@ -92,14 +97,17 @@ class ProfileScreen extends React.Component {
     }
   };
 
+  // changes state based on user input
   onChangeLogin = (e, type) => {
     this.setState({ [`${type}Value`]: e });
   };
 
+  // changes mounted component based on view var
   _changeView = view => {
     this.setState({ view });
   };
 
+  // returns view to render
   _chooseRender = () => {
     if (this.state.view == "register") {
       return (
@@ -156,6 +164,7 @@ class ProfileScreen extends React.Component {
   }
 }
 
+// redux connection
 const mapStateToProps = state => ({
   auth: state.auth,
 });

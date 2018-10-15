@@ -20,6 +20,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+// exporting redux store
 export default () => {
   const store = createStore(
     persistedReducer,

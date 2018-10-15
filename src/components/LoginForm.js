@@ -53,10 +53,12 @@ const LoginForm = ({
       <Button
         title="Login"
         onPress={() => {
+          // force input
           if (!emailValue || !passwordValue) {
             alert("Input all the fields!");
             return;
           }
+          // attempt to login, then change view to root
           onPress().then(() => changeView("root"));
         }}
       />

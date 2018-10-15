@@ -18,12 +18,14 @@ export default class Registerform extends React.Component {
     };
   }
 
+  // switches the checkbox state
   _checkBox = () => {
     this.setState({
       check_box_value: !this.state.check_box_value,
     });
   };
 
+  // changes view from given variable
   _changeView = view => {
     this.setState({ view });
   };
@@ -73,11 +75,11 @@ export default class Registerform extends React.Component {
               onPress={this._checkBox}
               checked={this.state.check_box_value}
             />
-
             <Button
               title="Continue"
               disabled={this.props.isFetching}
               onPress={() => {
+                // grab vars from state
                 const {
                   check_box_value,
                   full_name,
@@ -86,17 +88,21 @@ export default class Registerform extends React.Component {
                   re_password,
                 } = this.state;
 
+                // check if we need to go to vendor truck info page
                 if (check_box_value) {
                   this.setState({ view: "vendor" });
                 } else {
+                  // force input on fields
                   if (!full_name || !email || !password || !re_password) {
                     alert("Input all fields!");
                     return;
                   }
+                  // force password match
                   if (password !== re_password) {
                     alert("Passwords don't match!");
                     return;
                   }
+                  // attempt to register
                   this.props
                     .registerUser(full_name, email, password)
                     .then(() => {
