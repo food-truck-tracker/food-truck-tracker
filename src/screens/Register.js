@@ -11,7 +11,6 @@ export default class Registerform extends React.Component {
     this.state = {
       view: "root",
       full_name: "",
-      username: "",
       email: "",
       password: "",
       re_password: "",
@@ -77,23 +76,35 @@ export default class Registerform extends React.Component {
 
             <Button
               title="Continue"
+              disabled={this.props.isFetching}
               onPress={() => {
-                if (this.state.check_box_value) {
+                const {
+                  check_box_value,
+                  full_name,
+                  email,
+                  password,
+                  re_password,
+                } = this.state;
+
+                if (check_box_value) {
                   this.setState({ view: "vendor" });
                 } else {
+                  if (!full_name || !email || !password || !re_password) {
+                    alert("Input all fields!");
+                    return;
+                  }
+                  if (password !== re_password) {
+                    alert("Passwords don't match!");
+                    return;
+                  }
                   this.props
-                    .registerUser(
-                      this.state.full_name,
-                      this.state.email,
-                      this.state.password
-                    )
+                    .registerUser(full_name, email, password)
                     .then(() => {
                       this.props.changeView("root");
                     });
                 }
               }}
             />
-
             <Button
               title="Go back"
               onPress={() => {

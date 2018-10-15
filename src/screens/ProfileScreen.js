@@ -106,6 +106,7 @@ class ProfileScreen extends React.Component {
         <Register
           changeView={this._changeView}
           registerUser={this.onRegister}
+          isFetching={this.props.auth.isFetching}
         />
       );
     } else if (this.state.view == "login") {

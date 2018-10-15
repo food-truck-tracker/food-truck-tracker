@@ -52,14 +52,20 @@ const LoginForm = ({
       />
       <Button
         title="Login"
-        onPress={() => onPress().then(() => changeView("root"))}
+        onPress={() => {
+          if (!emailValue || !passwordValue) {
+            alert("Input all the fields!");
+            return;
+          }
+          onPress().then(() => changeView("root"));
+        }}
       />
       {/* <GoogleSigninButton
         style={styles.googleButton}
         onPress={googleLogin}
         disabled={isFetching}
       /> */}
-      <Button title="Go back" onPress={changeView} />
+      <Button title="Go back" onPress={changeView} disabled={isFetching} />
     </View>
   );
 };
