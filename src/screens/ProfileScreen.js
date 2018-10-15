@@ -1,11 +1,17 @@
 import React from "react";
 import { Text, View, Button, StyleSheet } from "react-native";
 import firebase from "react-native-firebase";
+import { GoogleSignin } from "react-native-google-signin";
 import { connect } from "react-redux";
 
 import LoginForm from "../components/LoginForm";
 import Register from "./Register";
-import { loginUser, logoutUser, registerUser } from "../actions/auth";
+import {
+  loginUser,
+  logoutUser,
+  registerUser,
+  googleLoginUser,
+} from "../actions/auth";
 
 const styles = StyleSheet.create({
   header: {
@@ -27,18 +33,21 @@ class ProfileScreen extends React.Component {
     };
   }
 
+  // listening for realtime auth change
   componentDidMount() {
     this.authUnsubscriber = firebase.auth().onAuthStateChanged(user => {
-      console.log(user);
+      console.log("subscriber", user);
     });
   }
 
+  // removing listener when component unmounts
   componentWillUnmount() {
     if (this.authUnsubscriber) {
       this.authUnsubscriber();
     }
   }
 
+  // attempt to login
   onLogin = async () => {
     try {
       const response = await this.props.loginUser(
@@ -51,6 +60,25 @@ class ProfileScreen extends React.Component {
     }
   };
 
+  // attempt to login with google
+  onGoogleLogin = async () => {
+    try {
+      await GoogleSignin.configure();
+      const data = await GoogleSignin.signIn();
+
+      // call dispatcher
+      const response = await this.props.googleLoginUser(
+        data.idToken,
+        data.accessToken
+      );
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // attempt to register
   onRegister = async (name, email, pass) => {
     try {
       const response = await this.props.registerUser(name, email, pass);
@@ -60,6 +88,7 @@ class ProfileScreen extends React.Component {
     }
   };
 
+  // attempt to logout
   onLogout = async () => {
     try {
       await this.props.logoutUser();
@@ -68,30 +97,36 @@ class ProfileScreen extends React.Component {
     }
   };
 
+  // changes state based on user input
   onChangeLogin = (e, type) => {
     this.setState({ [`${type}Value`]: e });
   };
 
+  // changes mounted component based on view var
   _changeView = view => {
     this.setState({ view });
   };
 
+  // returns view to render
   _chooseRender = () => {
     if (this.state.view == "register") {
       return (
         <Register
           changeView={this._changeView}
           registerUser={this.onRegister}
+          isFetching={this.props.auth.isFetching}
         />
       );
     } else if (this.state.view == "login") {
       return (
         <LoginForm
+          isFetching={this.props.auth.isFetching}
           changeView={this._changeView}
           emailValue={this.state.emailValue}
           passwordValue={this.state.passwordValue}
           onChange={(e, type) => this.onChangeLogin(e, type)}
           onPress={this.onLogin}
+          googleLogin={this.onGoogleLogin}
         />
       );
     } else {
@@ -100,7 +135,7 @@ class ProfileScreen extends React.Component {
           <Text style={styles.header}>Profile</Text>
           {this.props.auth.loggedIn ? (
             <>
-              <Text>Hello</Text>
+              <Text>User</Text>
               <Button title="Logout" onPress={this.onLogout} />
             </>
           ) : (
@@ -129,12 +164,14 @@ class ProfileScreen extends React.Component {
   }
 }
 
+// redux connection
 const mapStateToProps = state => ({
   auth: state.auth,
 });
 
 const mapDispatchToProps = {
   loginUser,
+  googleLoginUser,
   logoutUser,
   registerUser,
 };

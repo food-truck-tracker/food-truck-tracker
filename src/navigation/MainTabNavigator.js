@@ -1,36 +1,46 @@
-import React from 'react';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
+import React from "react";
+import {
+  createStackNavigator,
+  createBottomTabNavigator,
+} from "react-navigation";
 
-import DiscoverScreen from '../screens/DiscoverScreen'
-import MapViewScreen from '../screens/MapViewScreen'
-import ProfileScreen from '../screens/ProfileScreen'
+import DiscoverScreen from "../screens/DiscoverScreen";
+import MapViewScreen from "../screens/MapViewScreen";
+import ProfileScreen from "../screens/ProfileScreen";
+import LoginForm from "../components/LoginForm";
 
 const DiscoverStack = createStackNavigator({
-    Discover: DiscoverScreen,
+  Discover: DiscoverScreen,
 });
 
 DiscoverStack.navigationOptions = {
-    tabBarLabel: 'Discover',
+  tabBarLabel: "Discover",
 };
 
 const MapStack = createStackNavigator({
-    Map: MapViewScreen
+  Map: MapViewScreen,
 });
 
 MapStack.navigationOptions = {
-    tabBarLabel: 'Map',
+  tabBarLabel: "Map",
 };
 
-const ProfileStack = createStackNavigator({
-    Profile: ProfileScreen
-});
+const ProfileStack = createStackNavigator(
+  {
+    Profile: ProfileScreen,
+    Login: LoginForm,
+  },
+  {
+    initialRouteName: "Profile",
+  }
+);
 
 ProfileStack.navigationOptions = {
-    tabBarLabel: 'Profile'
+  tabBarLabel: "Profile",
 };
 
 export default createBottomTabNavigator({
-    DiscoverStack,
-    MapStack,
-    ProfileStack
+  DiscoverStack,
+  MapStack,
+  ProfileStack,
 });
