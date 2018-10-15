@@ -10,6 +10,7 @@ import { CheckBox } from 'react-native-elements'
 
 import ProfileScreen from "./ProfileScreen"
 import TruckRegisterForm from "./TruckRegisterForm"
+import { registerUser } from "../actions/auth";
 
 export default class Registerform extends React.Component {
     constructor(props) {
@@ -60,7 +61,9 @@ export default class Registerform extends React.Component {
         }
 
         else if(this.state.view == "Customer"){
-            return <ProfileScreen/>
+            return this.props.registerUser(this.state.full_name, this.state.email, this.state.password)
+            .then(() => <ProfileScreen/>)
+            
         }
         else {
             return (
@@ -97,7 +100,6 @@ export default class Registerform extends React.Component {
                         secureTextEntry={true}
                     />
                     <CheckBox 
-                        center
                         containerStyle = {styles.CheckBox}
                         title='Are you a vendor?'
                         onPress={this._checkBox}
@@ -142,7 +144,9 @@ const styles = StyleSheet.create({
       left: -40
     },
     CheckBox:{
-        width: 200
+        width: 200,
+        backgroundColor: 'rgba(255,255,255,0)'
+
     },
     button_offset:{
       height: 30
