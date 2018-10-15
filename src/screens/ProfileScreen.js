@@ -1,11 +1,17 @@
 import React from "react";
 import { Text, View, Button, StyleSheet } from "react-native";
 import firebase from "react-native-firebase";
+import { GoogleSignin } from "react-native-google-signin";
 import { connect } from "react-redux";
 
 import LoginForm from "../components/LoginForm";
 import Register from "./Register";
-import { loginUser, logoutUser, registerUser } from "../actions/auth";
+import {
+  loginUser,
+  logoutUser,
+  registerUser,
+  googleLoginUser,
+} from "../actions/auth";
 
 const styles = StyleSheet.create({
   header: {
@@ -29,7 +35,7 @@ class ProfileScreen extends React.Component {
 
   componentDidMount() {
     this.authUnsubscriber = firebase.auth().onAuthStateChanged(user => {
-      console.log(user);
+      console.log("subscriber", user);
     });
   }
 
@@ -40,11 +46,29 @@ class ProfileScreen extends React.Component {
   }
 
   onLogin = async () => {
+    if (!this.state.emailValue || !this.state.passwordValue) return;
     try {
       const response = await this.props.loginUser(
         this.state.emailValue,
         this.state.passwordValue
       );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  onGoogleLogin = async () => {
+    try {
+      await GoogleSignin.configure();
+      const data = await GoogleSignin.signIn();
+
+      // call dispatcher
+      const response = await this.props.googleLoginUser(
+        data.idToken,
+        data.accessToken
+      );
+
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -87,11 +111,13 @@ class ProfileScreen extends React.Component {
     } else if (this.state.view == "login") {
       return (
         <LoginForm
+          isFetching={this.props.auth.isFetching}
           changeView={this._changeView}
           emailValue={this.state.emailValue}
           passwordValue={this.state.passwordValue}
           onChange={(e, type) => this.onChangeLogin(e, type)}
           onPress={this.onLogin}
+          googleLogin={this.onGoogleLogin}
         />
       );
     } else {
@@ -100,7 +126,7 @@ class ProfileScreen extends React.Component {
           <Text style={styles.header}>Profile</Text>
           {this.props.auth.loggedIn ? (
             <>
-              <Text>Hello</Text>
+              <Text>User</Text>
               <Button title="Logout" onPress={this.onLogout} />
             </>
           ) : (
@@ -135,6 +161,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   loginUser,
+  googleLoginUser,
   logoutUser,
   registerUser,
 };
