@@ -13,20 +13,36 @@ export default class TruckRegisterForm extends React.Component {
       description: "",
       view: "root",
       current_day: 0,
-      concat_sunday_open: "",
-      concat_sunday_closed: "",
-      concat_monday_open: "",
-      concat_monday_closed: "",
-      concat_tuesday_open: "",
-      concat_tuesday_closed: "",
-      concat_wednesday_open: "",
-      concat_wednesday_closed: "",
-      concat_thursday_open: "",
-      concat_thursday_closed: "",
-      concat_friday_open: "",
-      concat_friday_closed: "",
-      concat_saturday_open: "",
-      concat_saturday_closed: "",
+      concat: {
+        sunday:{
+          open: "",
+          close: "",
+        },
+        monday:{
+          open: "",
+          close: "",
+        },
+        tuesday:{
+          open: "",
+          close: "",
+        },
+        wednesday:{
+          open: "",
+          close: "",
+        },
+        thursday:{
+          open: "",
+          close: "",
+        },
+        friday:{
+          open: "",
+          close: "",
+        },
+        saturday:{
+          open: "",
+          close: "",
+        },
+      }
     };
   }
 
@@ -35,15 +51,19 @@ export default class TruckRegisterForm extends React.Component {
       current_day: val
     })
   };
+  /*
+    onUpdateDay = (monday_open_time, monday_close_time, tuesday_open_time, tuesday_close_time,
+                   wednesday_open_time, wednesday_close_time, thursday_open_time, thursday_close_time,
+                   friday_open_time, friday_close_time, saturday_open_time, saturday_close_time,
+                   sunday_open_time, sunday_close_time) => {
+        
+  
+    }
+  */
 
-  onUpdateDay = (monday_open_time, monday_close_time, tuesday_open_time, tuesday_close_time,
-                 wednesday_open_time, wednesday_close_time, thursday_open_time, thursday_close_time,
-                 friday_open_time, friday_close_time, saturday_open_time, saturday_close_time,
-                 sunday_open_time, sunday_close_time) => {
-      
-
+  onUpdateDay = (certain_day, open_or_closed_section, input) =>{
+    this.state.concat[certain_day][open_or_closed_section] = input;
   }
-
   changeView = view => {
     this.setState({ view: view });
   }
@@ -71,8 +91,12 @@ export default class TruckRegisterForm extends React.Component {
         <Text fontSize='20'> Enter hours of operation: </Text>
         <View style={{ flexDirection: 'row' }}>
           <RadioDayPicker
-            onUpdate={this.onUpdate} />
-          <MultipleTimeInput day={this.state.current_day} />
+            onUpdate={this.onUpdate}
+          />
+          <MultipleTimeInput
+            day={this.state.current_day}
+            onUpdateDay={this.onUpdateDay}
+          />
         </View>
         <Button style={styles.button_offset}
           title="Continue"
@@ -86,7 +110,6 @@ export default class TruckRegisterForm extends React.Component {
             this.props.changeView("root");
           }}
         />
-
       </View>
     );
   }

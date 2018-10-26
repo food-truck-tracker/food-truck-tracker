@@ -100,6 +100,8 @@ export default class MultipleTimeInput extends Component {
       this.state.day.sunday.open_time_min = "";
       this.state.concat.sunday.open = "";
       this.state.concat.sunday.close = "";
+      this.props.onUpdateDay("sunday", "open", "");
+      this.props.onUpdateDay("sunday", "close", "");
       this.forceUpdate();
       if (this.state.day.sunday.closed == false) {
         this.state.day.sunday.closed = true;
@@ -118,6 +120,8 @@ export default class MultipleTimeInput extends Component {
       this.state.day.monday.open_time_min = "";
       this.state.concat.monday.open = "";
       this.state.concat.monday.close = "";
+      this.props.onUpdateDay("monday", "open", "");
+      this.props.onUpdateDay("monday", "close", "");
       if (this.state.day.monday.closed == false) {
         this.state.day.monday.closed = true;
         this.forceUpdate();
@@ -135,6 +139,8 @@ export default class MultipleTimeInput extends Component {
       this.state.day.tuesday.open_time_min = "";
       this.state.concat.tuesday.open = "";
       this.state.concat.tuesday.close = "";
+      this.props.onUpdateDay("tuesday", "open", "");
+      this.props.onUpdateDay("tuesday", "close", "");
       if (this.state.day.tuesday.closed == false) {
         this.state.day.tuesday.closed = true;
         this.forceUpdate();
@@ -152,6 +158,8 @@ export default class MultipleTimeInput extends Component {
       this.state.day.wednesday.open_time_min = "";
       this.state.concat.wednesday.open = "";
       this.state.concat.wednesday.close = "";
+      this.props.onUpdateDay("wednesday", "open", "");
+      this.props.onUpdateDay("wednesday", "close", "");
       if (this.state.day.wednesday.closed == false) {
         this.state.day.wednesday.closed = true;
         this.forceUpdate();
@@ -169,6 +177,8 @@ export default class MultipleTimeInput extends Component {
       this.state.day.thursday.open_time_min = "";
       this.state.concat.thursday.open = "";
       this.state.concat.thursday.close = "";
+      this.props.onUpdateDay("thursday", "open", "");
+      this.props.onUpdateDay("thursday", "close", "");
       if (this.state.day.thursday.closed == false) {
         this.state.day.thursday.closed = true;
         this.forceUpdate();
@@ -186,6 +196,8 @@ export default class MultipleTimeInput extends Component {
       this.state.day.friday.open_time_min = "";
       this.state.concat.friday.open = "";
       this.state.concat.friday.close = "";
+      this.props.onUpdateDay("friday", "open", "");
+      this.props.onUpdateDay("friday", "close", "");
       if (this.state.day.friday.closed == false) {
         this.state.day.friday.closed = true;
         this.forceUpdate();
@@ -203,6 +215,8 @@ export default class MultipleTimeInput extends Component {
       this.state.day.saturday.open_time_min = "";
       this.state.concat.saturday.open = "";
       this.state.concat.saturday.close = "";
+      this.props.onUpdateDay("saturday", "open", "");
+      this.props.onUpdateDay("saturday", "close", "");
       if (this.state.day.saturday.closed == false) {
         this.state.day.saturday.closed = true;
         this.forceUpdate();
@@ -242,8 +256,8 @@ export default class MultipleTimeInput extends Component {
         return;
       }
     }
-    if (input >= 23 || input < -1) {
-      alert("Please enter numbers between 00 through 23");
+    if (input >= 59 || input < -1) {
+      alert("Please enter numbers between 00 through 59");
       this.state.day[certain_day][open_close_min] = "";
     }
     else {
@@ -253,13 +267,15 @@ export default class MultipleTimeInput extends Component {
   }
 
   attempt_concat_input(certain_day, open_or_closed_section) {
+      
       if (open_or_closed_section == "open") {
       if (this.state.day[certain_day].open_time_hour == "" || this.state.day[certain_day].open_time_min == "") {
         return;
       }
       else {
+        
         this.state.concat[certain_day].open = this.state.day[certain_day].open_time_hour + ":" + this.state.day[certain_day].open_time_min;
-        alert("success concate");
+        this.props.onUpdateDay(certain_day, open_or_closed_section, this.state.concat[certain_day].open);
       }
     }
     else if (open_or_closed_section == "close") {
@@ -267,8 +283,9 @@ export default class MultipleTimeInput extends Component {
         return;
       }
       else {
-        this.state.concat[certain_day].close = this.state.day[certain_day].close_time_hour + ":" + this.state.day[certain_day].open_time_min;
-        alert("success concate");
+        
+        this.state.concat[certain_day].close = this.state.day[certain_day].close_time_hour + ":" + this.state.day[certain_day].close_time_min;
+        this.props.onUpdateDay(certain_day, open_or_closed_section, this.state.concat[certain_day].close);
       }
     }
   }
@@ -705,7 +722,7 @@ export default class MultipleTimeInput extends Component {
             <Text style={styles.text}>  :  </Text>
             <TextInput
               style={styles.input}
-              editable={!this.state.day.thursday.closed}
+              editable={!this.state.day.friday.closed}
               maxLength={2}
               keyboardType='decimal-pad'
               placeholder="min"
