@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0",
+    "@shoutem/ui": "shoutem/ui",
     "react": "16.5.0",
     "react-native": "0.57.1",
     "react-native-elements": "^0.19.1",

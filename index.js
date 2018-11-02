@@ -8,7 +8,7 @@ import App from "./src/App";
 import { name as appName } from "./app.json";
 
 const { store, persistor } = configureStore();
-
+console.disableYellowBox = true;
 // connect app with redux store and persistor
 const ConnectedApp = () => (
   <Provider store={store}>

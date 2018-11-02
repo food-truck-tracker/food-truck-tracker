@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -56,6 +55,18 @@
 		F3590568A02C4A198D7847D6 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5546E4151F064535AF096B79 /* Octicons.ttf */; };
 		FED0AFC29FDD4E968333B97D /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1810D8C9E464A25A9D1D7FF /* MaterialCommunityIcons.ttf */; };
 		FF10DEE728314AC4BF59EF4D /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DDD566226FB84CF9BAD85FC0 /* FontAwesome.ttf */; };
+		11FA6999CAC24BA6822AF9E4 /* libRNPhotoView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1005232C37F9435BB147A615 /* libRNPhotoView.a */; };
+		AC1251C152DF4602886A4D67 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DB355C471C444D5B586FDEA /* rubicon-icon-font.ttf */; };
+		93C81234274B42A98B97A58A /* Rubik-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D57CF2DBC5494F40BB977C97 /* Rubik-Black.ttf */; };
+		C85761834BA54C8FB4E75615 /* Rubik-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A95BB8616DC47458BA7A657 /* Rubik-BlackItalic.ttf */; };
+		B4B9C41D9B2643C7BA7A916F /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89E9A1E3835844B5B292FEC0 /* Rubik-Bold.ttf */; };
+		AF9261D151AB4B53BCC60D94 /* Rubik-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7AD2634C18454F62A2D5A576 /* Rubik-BoldItalic.ttf */; };
+		DD5EFC6108CC4229AC24808B /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B4DB007B3F448208E1F29AE /* Rubik-Italic.ttf */; };
+		6BC70D5E9A324F9E9A6CFC5C /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 289A8FF3B5204E2686FFBB10 /* Rubik-Light.ttf */; };
+		97EA389177794E1A957C79A5 /* Rubik-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 545017A635E440A29CDB61CE /* Rubik-LightItalic.ttf */; };
+		B7D792C86E06455C86BC6E0B /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 845E2C1748134ED0B88B60F6 /* Rubik-Medium.ttf */; };
+		556C31ADB3BB4FFF93670E11 /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C944A8B25D74353A8F89B8B /* Rubik-MediumItalic.ttf */; };
+		D056B4938CFC4E088CC2698D /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665C312E9325471AA7FCEF4C /* Rubik-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -389,6 +400,19 @@
 		E0D60D0994B1C33D578C991C /* Pods-TruckLo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TruckLo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TruckLo/Pods-TruckLo.debug.xcconfig"; sourceTree = "<group>"; };
 		EA31F96CBC894EDCA0E108C8 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		FC5655F46A13468FBDBC5D11 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		126298556B60481CA8CB395E /* RNPhotoView.xcodeproj */ = {isa = PBXFileReference; name = "RNPhotoView.xcodeproj"; path = "../node_modules/react-native-photo-view/ios/RNPhotoView.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		1005232C37F9435BB147A615 /* libRNPhotoView.a */ = {isa = PBXFileReference; name = "libRNPhotoView.a"; path = "libRNPhotoView.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		6DB355C471C444D5B586FDEA /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; name = "rubicon-icon-font.ttf"; path = "../node_modules/@shoutem/ui/fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D57CF2DBC5494F40BB977C97 /* Rubik-Black.ttf */ = {isa = PBXFileReference; name = "Rubik-Black.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0A95BB8616DC47458BA7A657 /* Rubik-BlackItalic.ttf */ = {isa = PBXFileReference; name = "Rubik-BlackItalic.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-BlackItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		89E9A1E3835844B5B292FEC0 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; name = "Rubik-Bold.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7AD2634C18454F62A2D5A576 /* Rubik-BoldItalic.ttf */ = {isa = PBXFileReference; name = "Rubik-BoldItalic.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8B4DB007B3F448208E1F29AE /* Rubik-Italic.ttf */ = {isa = PBXFileReference; name = "Rubik-Italic.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		289A8FF3B5204E2686FFBB10 /* Rubik-Light.ttf */ = {isa = PBXFileReference; name = "Rubik-Light.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		545017A635E440A29CDB61CE /* Rubik-LightItalic.ttf */ = {isa = PBXFileReference; name = "Rubik-LightItalic.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		845E2C1748134ED0B88B60F6 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; name = "Rubik-Medium.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6C944A8B25D74353A8F89B8B /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; name = "Rubik-MediumItalic.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-MediumItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		665C312E9325471AA7FCEF4C /* Rubik-Regular.ttf */ = {isa = PBXFileReference; name = "Rubik-Regular.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -418,6 +442,7 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				BEF66F3DCB06447DB59771FB /* libRNFirebase.a in Frameworks */,
 				3BB9D061E9676F5E94E1E9E3 /* libPods-TruckLo.a in Frameworks */,
+				11FA6999CAC24BA6822AF9E4 /* libRNPhotoView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,6 +663,7 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				2BD2020E1EF24CB5AAC9256D /* RNFirebase.xcodeproj */,
+				126298556B60481CA8CB395E /* RNPhotoView.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -661,6 +687,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				44B0534D21714EBE0098D85C /* Recovered References */,
 				B1F3F60F5DCE284C071D2EA3 /* Pods */,
+				16AE7CF84B8F4B2AA44EA979 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -695,6 +722,25 @@
 			);
 			name = Pods;
 			sourceTree = "<group>";
+		};
+		16AE7CF84B8F4B2AA44EA979 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				6DB355C471C444D5B586FDEA /* rubicon-icon-font.ttf */,
+				D57CF2DBC5494F40BB977C97 /* Rubik-Black.ttf */,
+				0A95BB8616DC47458BA7A657 /* Rubik-BlackItalic.ttf */,
+				89E9A1E3835844B5B292FEC0 /* Rubik-Bold.ttf */,
+				7AD2634C18454F62A2D5A576 /* Rubik-BoldItalic.ttf */,
+				8B4DB007B3F448208E1F29AE /* Rubik-Italic.ttf */,
+				289A8FF3B5204E2686FFBB10 /* Rubik-Light.ttf */,
+				545017A635E440A29CDB61CE /* Rubik-LightItalic.ttf */,
+				845E2C1748134ED0B88B60F6 /* Rubik-Medium.ttf */,
+				6C944A8B25D74353A8F89B8B /* Rubik-MediumItalic.ttf */,
+				665C312E9325471AA7FCEF4C /* Rubik-Regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -1174,6 +1220,17 @@
 				01B74C0A43BC4DD699E7B8E7 /* SimpleLineIcons.ttf in Resources */,
 				ED2A8052AEDB48C9A2E6013D /* Zocial.ttf in Resources */,
 				44B0537921714F350098D85C /* GoogleService-Info.plist in Resources */,
+				AC1251C152DF4602886A4D67 /* rubicon-icon-font.ttf in Resources */,
+				93C81234274B42A98B97A58A /* Rubik-Black.ttf in Resources */,
+				C85761834BA54C8FB4E75615 /* Rubik-BlackItalic.ttf in Resources */,
+				B4B9C41D9B2643C7BA7A916F /* Rubik-Bold.ttf in Resources */,
+				AF9261D151AB4B53BCC60D94 /* Rubik-BoldItalic.ttf in Resources */,
+				DD5EFC6108CC4229AC24808B /* Rubik-Italic.ttf in Resources */,
+				6BC70D5E9A324F9E9A6CFC5C /* Rubik-Light.ttf in Resources */,
+				97EA389177794E1A957C79A5 /* Rubik-LightItalic.ttf in Resources */,
+				B7D792C86E06455C86BC6E0B /* Rubik-Medium.ttf in Resources */,
+				556C31ADB3BB4FFF93670E11 /* Rubik-MediumItalic.ttf in Resources */,
+				D056B4938CFC4E088CC2698D /* Rubik-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1375,12 +1432,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-firebaseiosRNFirebase/**",
+					"$(SRCROOT)\..\node_modules\react-native-photo-view\ios/**",
 				);
 				INFOPLIST_FILE = TruckLoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1401,12 +1460,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-firebaseiosRNFirebase/**",
+					"$(SRCROOT)\..\node_modules\react-native-photo-view\ios/**",
 				);
 				INFOPLIST_FILE = TruckLoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1430,6 +1491,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-firebaseiosRNFirebase/**",
+					"$(SRCROOT)\..\node_modules\react-native-photo-view\ios/**",
 				);
 				INFOPLIST_FILE = TruckLo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1454,6 +1516,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-firebaseiosRNFirebase/**",
+					"$(SRCROOT)\..\node_modules\react-native-photo-view\ios/**",
 				);
 				INFOPLIST_FILE = TruckLo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1483,11 +1546,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-firebaseiosRNFirebase/**",
+					"$(SRCROOT)\..\node_modules\react-native-photo-view\ios/**",
 				);
 				INFOPLIST_FILE = "TruckLo-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1517,11 +1582,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-firebaseiosRNFirebase/**",
+					"$(SRCROOT)\..\node_modules\react-native-photo-view\ios/**",
 				);
 				INFOPLIST_FILE = "TruckLo-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1550,11 +1617,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-firebaseiosRNFirebase/**",
+					"$(SRCROOT)\..\node_modules\react-native-photo-view\ios/**",
 				);
 				INFOPLIST_FILE = "TruckLo-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1583,11 +1652,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-firebaseiosRNFirebase/**",
+					"$(SRCROOT)\..\node_modules\react-native-photo-view\ios/**",
 				);
 				INFOPLIST_FILE = "TruckLo-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
