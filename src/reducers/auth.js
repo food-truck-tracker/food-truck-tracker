@@ -113,6 +113,28 @@ export default (state = initialState, action) => {
         errorMessage: error,
       };
     }
+    // TRUCKREGISTER REDUCERS
+    case types.TRUCK_REGISTER_START: {
+      return {
+        ...state,
+        isFetching: true,
+      };
+    }
+    case types.TRUCK_REGISTER_FINISH: {
+      return {
+        ...state,
+        isFetching: false,
+      };
+    }
+    case types.TRUCK_REGISTER_ERROR: {
+      const { error } = action;
+      return {
+        ...state,
+        isFetching: false,
+        hasError: true,
+        errorMessage: error,
+      };
+    }
     default: {
       return state;
     }

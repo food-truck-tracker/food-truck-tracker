@@ -142,3 +142,42 @@ export const registerUser = (name, email, pass) => async (
     dispatch(registerError(error));
   }
 };
+
+// TRUCK REGISTER FLOW
+
+const truckRegisterStart = () => ({
+  type: types.TRUCK_REGISTER_START,
+});
+
+const truckRegisterFinished = user => ({
+  type: types.TRUCK_REGISTER_FINISH,
+  user,
+});
+
+const truckRegisterError = error => ({
+  type: types.TRUCK_REGISTER_ERROR,
+  error,
+});
+
+export const truckRegister = (
+  id,
+  name,
+  description,
+  hours
+) => async dispatch => {
+  dispatch(truckRegisterStart());
+  try {
+    let ref = firebase.firestore().collection("trucks");
+
+    await ref.add({
+      vendor_id: id,
+      name,
+      description,
+      hours,
+    });
+
+    dispatch(truckRegisterFinished());
+  } catch (error) {
+    dispatch(truckRegisterError(error));
+  }
+};
