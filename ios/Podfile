@@ -50,6 +50,8 @@ target 'TruckLo' do
     pod 'Google-Maps-iOS-Utils' # Remove this line if you don't want to support GoogleMaps on iOS
     pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+    pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
     pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
 
   end

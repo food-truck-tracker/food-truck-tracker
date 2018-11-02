@@ -3,12 +3,13 @@ import { StyleSheet, View } from "react-native";
 
 // main navigator
 import AppNavigator from "./navigation/AppNavigator";
+import TruckPage from "./screens/TruckPage";
 
 export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <AppNavigator />
+        <AppNavigator/>
       </View>
     );
   }
