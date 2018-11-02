@@ -3,13 +3,14 @@ import { Text, View, Button, StyleSheet, TextInput } from "react-native";
 import RadioDayPicker from "../components/RadioDayPicker"
 import MultipleTimeInput from "../components/MultipleTimeInput"
 import ProfileScreen from "./ProfileScreen"
+import { connect } from "react-redux";
 
 export default class TruckRegisterForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       truck_name: "",
-      hours_of_operation: "",
+      //hours_of_operation: "",
       description: "",
       view: "root",
       current_day: 0,
@@ -51,15 +52,17 @@ export default class TruckRegisterForm extends React.Component {
       current_day: val
     })
   };
-  /*
-    onUpdateDay = (monday_open_time, monday_close_time, tuesday_open_time, tuesday_close_time,
-                   wednesday_open_time, wednesday_close_time, thursday_open_time, thursday_close_time,
-                   friday_open_time, friday_close_time, saturday_open_time, saturday_close_time,
-                   sunday_open_time, sunday_close_time) => {
-        
-  
+
+  onRegisterVendor = async (uid, truck_name, description, hours_of_operation) => {
+    try {
+      const response = await this.props.truckRegister(uid, truck_name, description, hours_of_operation);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
     }
-  */
+  };
+
+  
 
   onUpdateDay = (certain_day, open_or_closed_section, input) =>{
     this.state.concat[certain_day][open_or_closed_section] = input;
@@ -101,6 +104,8 @@ export default class TruckRegisterForm extends React.Component {
         <Button style={styles.button_offset}
           title="Continue"
           onPress={() => {
+            this.state.onRegisterVendor(this.props.auth.uid, this.state.truck_name, 
+                                        this.state.description, this.state.concat);
             this.changeView("Continue");
           }}
         />
@@ -139,3 +144,11 @@ const styles = StyleSheet.create({
     height: 30
   }
 });
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+
+export default connect(
+  mapStateToProps,
+)(ProfileScreen);

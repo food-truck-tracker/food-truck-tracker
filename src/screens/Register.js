@@ -90,7 +90,11 @@ export default class Registerform extends React.Component {
 
                 // check if we need to go to vendor truck info page
                 if (check_box_value) {
-                  this.setState({ view: "vendor" });
+                  this.props
+                    .registerUser(full_name, email, password)
+                    .then(() => {
+                      this.props.changeView("vendor");
+                    });
                 } else {
                   // force input on fields
                   if (!full_name || !email || !password || !re_password) {
