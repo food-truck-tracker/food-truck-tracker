@@ -5,7 +5,7 @@ import MultipleTimeInput from "../components/MultipleTimeInput"
 import ProfileScreen from "./ProfileScreen"
 import { connect } from "react-redux";
 
-export default class TruckRegisterForm extends React.Component {
+ class TruckRegisterForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,13 +46,15 @@ export default class TruckRegisterForm extends React.Component {
       }
     };
   }
-
+  
+  //updates the value of the day
   onUpdate = (val) => {
     this.setState({
       current_day: val
     })
   };
 
+  //registers truck to firebase.
   onRegisterVendor = async (uid, truck_name, description, hours_of_operation) => {
     try {
       const response = await this.props.truckRegister(uid, truck_name, description, hours_of_operation);
@@ -151,4 +153,4 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-)(ProfileScreen);
+)(TruckRegisterForm);
