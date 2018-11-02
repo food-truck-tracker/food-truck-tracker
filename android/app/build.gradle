@@ -138,12 +138,12 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-maps')
-    compile project(':react-native-google-signin')
-    compile project(':react-native-firebase')
-    compile project(':react-native-photo-view')
-    compile project(':react-native-linear-gradient')
-    compile project(':react-native-vector-icons')
+    implementation project(':react-native-maps')
+    implementation project(':react-native-google-signin')
+    implementation project(':react-native-firebase')
+    implementation project(':react-native-photo-view')
+    implementation project(':react-native-linear-gradient')
+    implementation project(':react-native-vector-icons')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-maps')
     implementation project(':react-native-firebase')
