@@ -61,7 +61,6 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-<<<<<<< HEAD
 	<string/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -77,9 +76,6 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-=======
-	<string></string>
->>>>>>> origin/master
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
