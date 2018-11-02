@@ -93,7 +93,7 @@ export default class Registerform extends React.Component {
                   this.props
                     .registerUser(full_name, email, password)
                     .then(() => {
-                      this.props.changeView("vendor");
+                      this.setState({ view: "vendor" });
                     });
                 } else {
                   // force input on fields

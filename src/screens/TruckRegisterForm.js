@@ -4,6 +4,7 @@ import RadioDayPicker from "../components/RadioDayPicker"
 import MultipleTimeInput from "../components/MultipleTimeInput"
 import ProfileScreen from "./ProfileScreen"
 import { connect } from "react-redux";
+import { truckRegister } from "../actions/auth";
 
  class TruckRegisterForm extends React.Component {
   constructor(props) {
@@ -106,7 +107,7 @@ import { connect } from "react-redux";
         <Button style={styles.button_offset}
           title="Continue"
           onPress={() => {
-            this.state.onRegisterVendor(this.props.auth.uid, this.state.truck_name, 
+            this.props.truckRegister(this.props.auth.uid, this.state.truck_name, 
                                         this.state.description, this.state.concat);
             this.changeView("Continue");
           }}
@@ -147,10 +148,15 @@ const styles = StyleSheet.create({
   }
 });
 
+const mapDispatchToProps = {
+  truckRegister
+};
+
 const mapStateToProps = state => ({
   auth: state.auth,
 });
 
 export default connect(
   mapStateToProps,
+  mapDispatchToProps,
 )(TruckRegisterForm);
