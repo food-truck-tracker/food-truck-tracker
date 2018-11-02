@@ -10,6 +10,9 @@ target 'TruckLo' do
     pod 'Firebase/Database', '~> 5.9.0'
     pod 'Firebase/Storage', '~> 5.9.0'
 
+    pod 'GoogleSignIn'
+    pod 'GoogleAppMeasurement', '~> 5.2.0'
+
     rn_path = '../node_modules/react-native'
     rn_maps_path = '../node_modules/react-native-maps'
   
@@ -46,6 +49,10 @@ target 'TruckLo' do
     pod 'GoogleMaps'  # Remove this line if you don't want to support GoogleMaps on iOS
     pod 'Google-Maps-iOS-Utils' # Remove this line if you don't want to support GoogleMaps on iOS
     pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+    pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
+    pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
 
   end
   

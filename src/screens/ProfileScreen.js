@@ -107,6 +107,17 @@ class ProfileScreen extends React.Component {
     this.setState({ view });
   };
 
+  // attempt to register vendor
+  /*
+  onRegisterVendor = async (name, email, pass, truck_name, description, hours_of_operation) => {
+    try {
+      const response = await this.props.registerTruck(name, email, pass, hours_of_operation);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+*/
   // returns view to render
   _chooseRender = () => {
     if (this.state.view == "register") {

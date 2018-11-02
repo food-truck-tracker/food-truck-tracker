@@ -10,6 +10,8 @@ import {
 
 import MapView from "react-native-maps";
 
+
+
 const Images = [
   { uri: "https://cdn.pixabay.com/photo/2017/06/23/21/37/oldtimer-2436018_1280.jpg" },
   { uri: "https://images.pexels.com/photos/221357/pexels-photo-221357.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
@@ -70,6 +72,8 @@ export default class MapViewScreen extends React.Component {
     },
   };
 
+  
+
   componentWillMount() {
     this.index = 0;
     this.animation = new Animated.Value(0);
@@ -127,6 +131,7 @@ export default class MapViewScreen extends React.Component {
     return (
       <View style={styles.container}>
         <MapView
+        
           ref={map => (this.map = map)}
           initialRegion={this.state.region}
           style={styles.container}
