@@ -3,6 +3,8 @@ import GeoFire from "geofire";
 
 import types from "../types/truck";
 
+// LOCATION FETCHING
+
 const fetchLocationStart = () => ({
   type: types.TRUCK_LOCATION_FETCH_START,
 });
@@ -38,7 +40,34 @@ export const fetchTrucksLocation = (userLocation, radius) => async (
   }
 };
 
-export const fetchTrucksInfo = (userLocation, radius) => async (
-  dispatch,
-  getState
-) => {};
+const fetchInfoStart = () => ({
+  type: types.TRUCK_INFO_FETCH_START,
+});
+
+const fetchInfoError = error => ({
+  type: types.TRUCK_INFO_FETCH_ERROR,
+  error,
+});
+
+const fetchInfoFinish = infos => ({
+  type: types.TRUCK_INFO_FETCH_FINISHED,
+  infos,
+});
+
+export const fetchTrucksInfo = () => async dispatch => {
+  dispatch(fetchInfoStart());
+  try {
+    let ref = await firebase.firestore().collection("trucks");
+    let snap = await ref.get();
+
+    let data = [];
+
+    snap.forEach(async e => {
+      data.push(e.data());
+    });
+
+    dispatch(fetchInfoFinish(data));
+  } catch (e) {
+    dispatch(fetchInfoError(e));
+  }
+};
