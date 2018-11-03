@@ -35,48 +35,6 @@ export const loginUser = (email, pass) => async (dispatch, getState) => {
   }
 };
 
-// GOOGLE LOGIN FLOW
-
-const googleLoginStart = () => ({
-  type: types.GOOGLE_LOGIN_START,
-});
-
-const googleLoginFinished = user => ({
-  type: types.GOOGLE_LOGIN_FINISHED,
-  user,
-});
-
-const googleLoginError = error => ({
-  type: types.GOOGLE_LOGIN_ERROR,
-  error,
-});
-
-export const googleLoginUser = (idToken, accessToken) => async (
-  dispatch,
-  getState
-) => {
-  dispatch(googleLoginStart());
-  try {
-    const credential = firebase.auth.GoogleAuthProvider.credential(
-      idToken,
-      accessToken
-    );
-
-    const response = await firebase.auth().signInWithCredential(credential);
-
-    console.log(response);
-
-    if (response.error) {
-      throw new Error(response);
-    }
-
-    dispatch(googleLoginFinished(response.user));
-  } catch (error) {
-    console.log(error);
-    dispatch(googleLoginError(error));
-  }
-};
-
 // LOGOUT FLOW
 
 const logoutStart = () => ({

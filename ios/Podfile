@@ -10,7 +10,6 @@ target 'TruckLo' do
     pod 'Firebase/Database', '~> 5.9.0'
     pod 'Firebase/Storage', '~> 5.9.0'
 
-    pod 'GoogleSignIn'
     pod 'GoogleAppMeasurement', '~> 5.2.0'
 
     rn_path = '../node_modules/react-native'
@@ -51,8 +50,6 @@ target 'TruckLo' do
     pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
     pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
-
-    pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
 
   end
   
