@@ -37,33 +37,6 @@ export default (state = initialState, action) => {
         errorMessage: error,
       };
     }
-    // GOOGLE LOGIN REDUCER
-    case types.GOOGLE_LOGIN_START: {
-      return {
-        ...state,
-        isFetching: true,
-      };
-    }
-    case types.GOOGLE_LOGIN_FINISHED: {
-      const { user } = action;
-      return {
-        ...state,
-        isFetching: false,
-        loggedIn: true,
-        user,
-      };
-    }
-    case types.GOOGLE_LOGIN_ERROR: {
-      const { error } = action;
-      return {
-        ...state,
-        isFetching: false,
-        loggedIn: false,
-        hasError: true,
-        user: null,
-        errorMessage: error,
-      };
-    }
     // LOGOUT REDUCERS
     case types.LOGOUT_START: {
       return {

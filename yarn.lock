@@ -5328,11 +5328,6 @@ react-native-gesture-responder@0.1.1:
   dependencies:
     react-timer-mixin "^0.13.3"
 
-react-native-google-signin@^1.0.0-rc6:
-  version "1.0.0-rc7"
-  resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-1.0.0-rc7.tgz#c0e825fdd40d23a0e42bcea13f56d97112ac1bbd"
-  integrity sha512-3BMbHOVvJM95N1SvOhuKgd+9JsMv3PSQ5tp7MmL6gp1Ig81r+9GFTVM9qUcmGnSLUWdOBDkaHhtAdIvQ0anxog==
-
 react-native-lightbox@shoutem/react-native-lightbox#v0.7.2:
   version "0.7.2"
   resolved "https://codeload.github.com/shoutem/react-native-lightbox/tar.gz/91f3f58759e9901d9c006b01ce32d074606eda0e"
