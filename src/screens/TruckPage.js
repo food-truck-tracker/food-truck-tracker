@@ -1,6 +1,8 @@
 import React from "react";
 import {View, StyleSheet,ScrollView,Text} from "react-native";
 import {InlineGallery} from '@shoutem/ui'
+import Review from "../components/Review"
+
 
 export default class TruckPage extends React.Component {
     constructor(props) {
@@ -31,8 +33,9 @@ export default class TruckPage extends React.Component {
           <Text style = {styles.text}> Thursday: Closed</Text>
           <Text style = {styles.text}> Friday: 13:00 - 20:00</Text>
           <Text style = {styles.text}> Saturday: 12:00 - 23:00</Text>
-          <Text style = {styles.text}> Sunday: 13:00 - 18:00{"\n"}</Text>
-          <Text style = {{fontSize: 22, textAlign: "center"}}> Reviews</Text>
+          <Text style = {styles.text}> Sunday: 13:00 - 18:00{"\n\n"}</Text>
+          <Text style = {{fontSize: 32, textAlign: "center"}}> Reviews</Text>
+          <Review/>
           </ScrollView>
         );
       }

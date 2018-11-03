@@ -5370,6 +5370,14 @@ react-native-photo-view@~1.5.0:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-ratings@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-ratings/-/react-native-ratings-6.0.0.tgz#8083c4955c14aef0751abb7f5ba6c48ae8b2189b"
+  integrity sha512-65gbGrtR+Y+/bEWxZGbNmYP1CL/3FerNFLQXWCuoYS0Gzn7HqMuSS3HObYjHX4jlRH9KKjIjhP/q59N7AwgAiA==
+  dependencies:
+    lodash "^4.17.4"
+    prop-types "^15.5.10"
+
 react-native-safe-area-view@0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.11.0.tgz#4f3dda43c2bace37965e7c6aef5fc83d4f19d174"
