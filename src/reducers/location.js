@@ -1,30 +1,30 @@
-import types from "../types/truck";
+import types from "../types/location";
 
 const initialState = {
   isFetching: false,
   hasError: false,
   errorMessage: "",
-  trucksInfo: null,
+  trucksLocation: null,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    // INFO FETCH FROM FIRESTORE
-    case types.TRUCK_INFO_FETCH_START: {
+    // LOCATION FETCH FROM REALTIME DATABASE
+    case types.TRUCK_LOCATION_FETCH_START: {
       return {
         ...state,
         isFetching: true,
       };
     }
-    case types.TRUCK_INFO_FETCH_FINISHED: {
-      const { infos } = action;
+    case types.TRUCK_LOCATION_FETCH_FINISHED: {
+      const { locations } = action;
       return {
         ...state,
         isFetching: false,
-        trucksInfo: infos,
+        trucksLocation: locations,
       };
     }
-    case types.TRUCK_INFO_FETCH_ERROR: {
+    case types.TRUCK_LOCATION_FETCH_ERROR: {
       const { error } = action;
       return {
         ...state,
