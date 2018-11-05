@@ -107,7 +107,7 @@ import { truckRegister } from "../actions/auth";
         <Button style={styles.button_offset}
           title="Continue"
           onPress={() => {
-            this.props.truckRegister(this.props.auth.uid, this.state.truck_name, 
+            this.props.truckRegister(this.props.auth.user.uid, this.state.truck_name, 
                                         this.state.description, this.state.concat);
             this.changeView("Continue");
           }}
