@@ -7,16 +7,28 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-
 import MapView from "react-native-maps";
+import { connect } from "react-redux";
 
-
+import { fetchTrucksLocation } from "../actions/location";
 
 const Images = [
-  { uri: "https://cdn.pixabay.com/photo/2017/06/23/21/37/oldtimer-2436018_1280.jpg" },
-  { uri: "https://images.pexels.com/photos/221357/pexels-photo-221357.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
-  { uri: "https://images.pexels.com/photos/439851/pexels-photo-439851.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
-  { uri: "https://images.pexels.com/photos/1410484/pexels-photo-1410484.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
+  {
+    uri:
+      "https://cdn.pixabay.com/photo/2017/06/23/21/37/oldtimer-2436018_1280.jpg",
+  },
+  {
+    uri:
+      "https://images.pexels.com/photos/221357/pexels-photo-221357.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  },
+  {
+    uri:
+      "https://images.pexels.com/photos/439851/pexels-photo-439851.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  },
+  {
+    uri:
+      "https://images.pexels.com/photos/1410484/pexels-photo-1410484.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  },
 ];
 
 const { width, height } = Dimensions.get("window");
@@ -72,11 +84,13 @@ export default class MapViewScreen extends React.Component {
     },
   };
 
-  
-
   componentWillMount() {
     this.index = 0;
     this.animation = new Animated.Value(0);
+
+    // hard-coded right now
+    console.log("SHOULD")
+    this.props.fetchTrucksLocation([32.7296726, -97.11290559999999], 30);
   }
   componentDidMount() {
     // We should detect when scrolling has stopped then animate
@@ -131,7 +145,6 @@ export default class MapViewScreen extends React.Component {
     return (
       <View style={styles.container}>
         <MapView
-        
           ref={map => (this.map = map)}
           initialRegion={this.state.region}
           style={styles.container}
@@ -200,6 +213,22 @@ export default class MapViewScreen extends React.Component {
   }
 }
 
+// redux connection
+const mapStateToProps = state => ({
+  location: state.location,
+});
+
+const mapDispatchToProps = {
+  fetchTrucksLocation
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MapViewScreen);
+
+
+// styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -265,3 +294,4 @@ const styles = StyleSheet.create({
     borderColor: "rgba(130,4,150, 0.5)",
   },
 });
+

@@ -1,4 +1,5 @@
 import firebase from "react-native-firebase";
+import GeoFire from "geofire";
 
 import types from "../types/location";
 
