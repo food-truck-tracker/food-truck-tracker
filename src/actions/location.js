@@ -20,7 +20,6 @@ const fetchLocationFinish = locations => ({
 export const fetchTrucksLocation = (userLocation, radius) => async dispatch => {
   dispatch(fetchLocationStart());
   try {
-    /*
     const ref = firebase.database().ref("/trucks");
     let geoFire = new GeoFire(ref);
 
@@ -29,7 +28,9 @@ export const fetchTrucksLocation = (userLocation, radius) => async dispatch => {
       radius,
     });
 
-*/
+    query.on("key-entered", (key, location, distance) => {
+      dispatch(fetchLocationFinish(key, location, distance));
+    });
   } catch (error) {
     dispatch(fetchLocationError(error));
   }

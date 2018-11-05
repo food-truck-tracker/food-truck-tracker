@@ -17,11 +17,14 @@ export default (state = initialState, action) => {
       };
     }
     case types.TRUCK_LOCATION_FETCH_FINISHED: {
-      const { locations } = action;
+      const { key, location, distance } = action;
       return {
         ...state,
         isFetching: false,
-        trucksLocation: locations,
+        trucksLocation: {
+          ...state.trucksLocation,
+          [key]: { location, distance },
+        },
       };
     }
     case types.TRUCK_LOCATION_FETCH_ERROR: {
