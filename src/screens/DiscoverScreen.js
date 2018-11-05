@@ -18,7 +18,7 @@ import {
   ListView
 } from "@shoutem/ui";
 
-// import TruckPage from "../components/"
+import TruckPage from "../screens/TruckPage"
 import { fetchTrucksInfo } from "../actions/truck";
 
 
@@ -33,6 +33,7 @@ class DiscoverScreen extends React.Component {
 
   truckTileClick = () => {
     // navigate to truck page
+    // this.props.navigation.push()
   }
 
   renderRow(rowData, sectionId, index) {
