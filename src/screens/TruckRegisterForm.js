@@ -66,7 +66,7 @@ import { truckRegister } from "../actions/auth";
   };
 
   
-
+// places the concat string inside the state variable.
   onUpdateDay = (certain_day, open_or_closed_section, input) =>{
     this.state.concat[certain_day][open_or_closed_section] = input;
   }

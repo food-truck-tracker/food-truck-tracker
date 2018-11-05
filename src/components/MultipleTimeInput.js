@@ -92,6 +92,7 @@ export default class MultipleTimeInput extends Component {
     }
   }
 
+  //updates the values of checkboxes to present to the user.
   _checkBox = certain_day => {
     if (certain_day == 0) {
       this.state.day.sunday.close_time_hour = "";
@@ -228,6 +229,8 @@ export default class MultipleTimeInput extends Component {
     }
   };
 
+
+  //user error handling to make sure that the time format is correct.
   check_input_hour(input, certain_day, open_close_hour) {
     for (i = 0; i < input.length; i++) {
       if (input[i] == " " || input[i] == "-") {
@@ -266,6 +269,7 @@ export default class MultipleTimeInput extends Component {
     this.forceUpdate();
   }
 
+  //concatenates hour/time together and sends info to parent function.
   attempt_concat_input(certain_day, open_or_closed_section) {
       
       if (open_or_closed_section == "open") {
@@ -293,6 +297,8 @@ export default class MultipleTimeInput extends Component {
 
 
   render() {
+    // depending on the day thats clicked in the parent component,
+    // this component will update the input fields for that day.
     if (this.props.day == 0) {
       return (
         <View style={{ flexDirection: 'column' }}>
