@@ -237,7 +237,7 @@ export default class MultipleTimeInput extends Component {
         return;
       }
     }
-    if (input >= 23 || input < -1) {
+    if (input >= 24 || input < -1) {
       alert("Please enter numbers between 00 through 23");
       this.state.day[certain_day][open_close_hour] = "";
     }
@@ -256,7 +256,7 @@ export default class MultipleTimeInput extends Component {
         return;
       }
     }
-    if (input >= 59 || input < -1) {
+    if (input >= 60 || input < -1) {
       alert("Please enter numbers between 00 through 59");
       this.state.day[certain_day][open_close_min] = "";
     }
