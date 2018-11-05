@@ -1,17 +1,11 @@
 import React from "react";
 import { Text, View, Button, StyleSheet } from "react-native";
 import firebase from "react-native-firebase";
-import { GoogleSignin } from "react-native-google-signin";
 import { connect } from "react-redux";
 
 import LoginForm from "../components/LoginForm";
 import Register from "./Register";
-import {
-  loginUser,
-  logoutUser,
-  registerUser,
-  googleLoginUser,
-} from "../actions/auth";
+import { loginUser, logoutUser, registerUser } from "../actions/auth";
 
 const styles = StyleSheet.create({
   header: {
@@ -54,24 +48,6 @@ class ProfileScreen extends React.Component {
         this.state.emailValue,
         this.state.passwordValue
       );
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // attempt to login with google
-  onGoogleLogin = async () => {
-    try {
-      await GoogleSignin.configure();
-      const data = await GoogleSignin.signIn();
-
-      // call dispatcher
-      const response = await this.props.googleLoginUser(
-        data.idToken,
-        data.accessToken
-      );
-
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -126,7 +102,6 @@ class ProfileScreen extends React.Component {
           passwordValue={this.state.passwordValue}
           onChange={(e, type) => this.onChangeLogin(e, type)}
           onPress={this.onLogin}
-          googleLogin={this.onGoogleLogin}
         />
       );
     } else {
@@ -171,7 +146,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   loginUser,
-  googleLoginUser,
   logoutUser,
   registerUser,
 };

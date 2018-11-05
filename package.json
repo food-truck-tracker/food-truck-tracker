@@ -16,7 +16,6 @@
     "react-native": "0.57.1",
     "react-native-elements": "^0.19.1",
     "react-native-firebase": "^5.0.0",
-    "react-native-google-signin": "^1.0.0-rc6",
     "react-native-maps": "^0.21.0",
     "react-native-ratings": "^6.0.0",
     "react-native-simple-radio-button": "^2.7.3",
