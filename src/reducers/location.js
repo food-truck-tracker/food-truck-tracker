@@ -33,6 +33,28 @@ export default (state = initialState, action) => {
         errorMessage: error,
       };
     }
+    // LOCATION UPDATE FROM REALTIME DATABASE
+    case types.TRUCK_LOCATION_UPDATE_START: {
+      return {
+        ...state,
+        isFetching: true,
+      };
+    }
+    case types.TRUCK_LOCATION_UPDATE_FINISHED: {
+      return {
+        ...state,
+        isFetching: false,
+      };
+    }
+    case types.TRUCK_LOCATION_UPDATE_ERROR: {
+      const { error } = action;
+      return {
+        ...state,
+        isFetching: false,
+        hasError: true,
+        errorMessage: error,
+      };
+    }
     default: {
       return state;
     }

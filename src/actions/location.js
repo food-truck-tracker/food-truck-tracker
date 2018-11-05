@@ -34,3 +34,34 @@ export const fetchTrucksLocation = (userLocation, radius) => async dispatch => {
     dispatch(fetchLocationError(error));
   }
 };
+
+// LOCATION UPDATE
+const updateLocationStart = () => ({
+  type: types.TRUCK_LOCATION_UPDATE_START,
+});
+
+const updateLocationError = error => ({
+  type: types.TRUCK_LOCATION_UPDATE_ERROR,
+  error,
+});
+
+const updateLocationFinish = () => ({
+  type: types.TRUCK_LOCATION_UPDATE_FINISHED,
+});
+
+export const updateTrucksLocation = (lat, lon) => async dispatch => {
+  dispatch(updateLocationStart());
+  try {
+    // get current user
+    const user = firebase.auth().currentUser;
+
+    // make geofire ref
+    const ref = firebase.database().ref("/trucks");
+    let geoFire = new GeoFire(ref);
+
+    await geoFire.set(user.uid, [lat, lon]);
+    dispatch(updateLocationFinish());
+  } catch (error) {
+    dispatch(updateLocationError(error));
+  }
+};
