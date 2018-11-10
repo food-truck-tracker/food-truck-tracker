@@ -46,8 +46,8 @@ class ProfileScreen extends React.Component {
   onLocationUpdate = async () => {
     /*
     navigator.geolocation.getCurrentPosition(
-      async location => {
-        await updateTrucksLocation(
+      location => {
+        this.props.updateTrucksLocation(
           location.coords.latitude,
           location.coords.longitude
         );

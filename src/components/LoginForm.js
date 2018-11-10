@@ -29,18 +29,21 @@ const LoginForm = ({
       <Text style={styles.header}>Login</Text>
       <TextInput
         style={styles.input}
-        autoCorrect={false}
         placeholder="Enter your email..."
         value={emailValue}
         onChangeText={e => onChange(e, "email")}
+        keyboardType="email-address"
+        autoCorrect={false}
+        autoCapitalize="none"
       />
       <TextInput
         style={styles.input}
-        autoCorrect={false}
         placeholder="Enter your password..."
         value={passwordValue}
         onChangeText={e => onChange(e, "password")}
         secureTextEntry={true}
+        autoCapitalize="none"
+        autoCorrect={false}
       />
       <Button
         title="Login"
