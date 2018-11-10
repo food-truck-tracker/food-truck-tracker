@@ -24,11 +24,11 @@ class DiscoverScreen extends React.Component {
       <ScrollView>
         <Text style={styles.header}>Discover View</Text>
         {trucksInfo &&
-          trucksInfo.map((truck, i) => (
-            <View key={i}>
-              <Text>{truck.name}</Text>
-              <Text>{truck.category}</Text>
-              <Text>{truck.description}</Text>
+          Object.entries(trucksInfo).map(truck => (
+            <View key={truck[0]}>
+              <Text>{truck[1].name}</Text>
+              <Text>{truck[1].category}</Text>
+              <Text>{truck[1].description}</Text>
             </View>
           ))}
       </ScrollView>

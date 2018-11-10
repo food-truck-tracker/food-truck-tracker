@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import LoginForm from "../components/LoginForm";
 import Register from "./Register";
 import { loginUser, logoutUser, registerUser } from "../actions/auth";
+import { updateTrucksLocation } from "../actions/location";
 
 const styles = StyleSheet.create({
   header: {
@@ -40,6 +41,24 @@ class ProfileScreen extends React.Component {
       this.authUnsubscriber();
     }
   }
+
+  // get user location to update in database
+  onLocationUpdate = async () => {
+    /*
+    navigator.geolocation.getCurrentPosition(
+      async location => {
+        await updateTrucksLocation(
+          location.coords.latitude,
+          location.coords.longitude
+        );
+      },
+      e => {
+        console.error("GET LOCATION ERROR", e);
+      }
+    );
+    */
+    this.props.updateTrucksLocation(32.7296726, -97.11290559999999);
+  };
 
   // attempt to login
   onLogin = async () => {
@@ -110,7 +129,8 @@ class ProfileScreen extends React.Component {
           <Text style={styles.header}>Profile</Text>
           {this.props.auth.loggedIn ? (
             <>
-              <Text>User</Text>
+              <Text>{this.props.auth.user.email}</Text>
+              <Button title="Update Location" onPress={this.onLocationUpdate} />
               <Button title="Logout" onPress={this.onLogout} />
             </>
           ) : (
@@ -142,12 +162,14 @@ class ProfileScreen extends React.Component {
 // redux connection
 const mapStateToProps = state => ({
   auth: state.auth,
+  location: state.location,
 });
 
 const mapDispatchToProps = {
   loginUser,
   logoutUser,
   registerUser,
+  updateTrucksLocation,
 };
 
 export default connect(

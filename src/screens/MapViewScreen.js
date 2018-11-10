@@ -36,7 +36,7 @@ const { width, height } = Dimensions.get("window");
 const CARD_HEIGHT = height / 4;
 const CARD_WIDTH = CARD_HEIGHT - 50;
 
-export default class MapViewScreen extends React.Component {
+class MapViewScreen extends React.Component {
   state = {
     markers: [
       {
@@ -89,7 +89,7 @@ export default class MapViewScreen extends React.Component {
     this.animation = new Animated.Value(0);
 
     // hard-coded right now
-    console.log("SHOULD")
+    console.log("SHOULD");
     this.props.fetchTrucksLocation([32.7296726, -97.11290559999999], 30);
   }
   componentDidMount() {
@@ -219,14 +219,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchTrucksLocation
+  fetchTrucksLocation,
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(MapViewScreen);
-
 
 // styles
 const styles = StyleSheet.create({
@@ -294,4 +293,3 @@ const styles = StyleSheet.create({
     borderColor: "rgba(130,4,150, 0.5)",
   },
 });
-
