@@ -309,7 +309,7 @@
 			remoteGlobalIDString = 3D3CD9181DE5FBD800167DC4;
 			remoteInfo = "jschelpers-tvOS";
 		};
-		44288B74218FA50A00FA79F6 /* PBXContainerItemProxy */ = {
+		44288C00218FC76E00FA79F6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 126298556B60481CA8CB395E /* RNPhotoView.xcodeproj */;
 			proxyType = 2;
@@ -624,10 +624,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		44288B71218FA50A00FA79F6 /* Products */ = {
+		44288BD7218FC75500FA79F6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				44288B75218FA50A00FA79F6 /* libRNPhotoView.a */,
+				44288C01218FC76E00FA79F6 /* libRNPhotoView.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -933,7 +933,7 @@
 					ProjectRef = 2BD2020E1EF24CB5AAC9256D /* RNFirebase.xcodeproj */;
 				},
 				{
-					ProductGroup = 44288B71218FA50A00FA79F6 /* Products */;
+					ProductGroup = 44288BD7218FC75500FA79F6 /* Products */;
 					ProjectRef = 126298556B60481CA8CB395E /* RNPhotoView.xcodeproj */;
 				},
 			);
@@ -1172,11 +1172,11 @@
 			remoteRef = 3DAD3EAE1DF850E9000B6D8A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		44288B75218FA50A00FA79F6 /* libRNPhotoView.a */ = {
+		44288C01218FC76E00FA79F6 /* libRNPhotoView.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNPhotoView.a;
-			remoteRef = 44288B74218FA50A00FA79F6 /* PBXContainerItemProxy */;
+			remoteRef = 44288C00218FC76E00FA79F6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		44B0537721714EBE0098D85C /* libRNFirebase.a */ = {

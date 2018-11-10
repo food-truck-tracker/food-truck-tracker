@@ -38,6 +38,7 @@ export default class TruckPage extends React.Component {
 
   render() {
     return (
+      //static view of what trucks should look like.
       <ScrollView>
         <InlineGallery styleName="large-banner" data={this.state.photos} />
         <Text style={styles.truckname}>
@@ -87,8 +88,9 @@ export default class TruckPage extends React.Component {
           </View>
 
           <Text style={{ fontSize: 32, textAlign: "center" }}> Reviews</Text>
+          {/* star and comment review for users. TODO: fix bug with keyboard when comment
+              is clicked */}
           <Review />
-
           <TextInput
             placeholder={"Write a review..."}
             borderWidth = {2}

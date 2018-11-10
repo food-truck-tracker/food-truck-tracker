@@ -15,9 +15,10 @@ import {
   Screen,
   NavigationBar,
   ListView,
+  Icon,
+  Button,
 } from "@shoutem/ui";
 
-import TruckPage from "../screens/TruckPage";
 import { fetchTrucksInfo } from "../actions/truck";
 
 class DiscoverScreen extends React.Component {
@@ -31,7 +32,7 @@ class DiscoverScreen extends React.Component {
 
   truckTileClick = () => {
     // navigate to truck page
-    // this.props.navigation.push()
+    this.props.navigation.push("Truck");
   };
 
   renderRow(rowData, sectionId, index) {
@@ -116,7 +117,15 @@ class DiscoverScreen extends React.Component {
       //     ))}
       // </ScrollView>
       <Screen>
-        <NavigationBar title="Discover Page" styleName="inline" />
+        <NavigationBar
+          styleName="inline"
+          centerComponent={<Title bold>Discover Page</Title>}
+          rightComponent={
+            <Button onPress={this.props.fetchTrucksInfo}>
+              <Icon name="refresh" />
+            </Button>
+          }
+        />
         <ListView data={groupedData} renderRow={this.renderRow} />
       </Screen>
     );

@@ -126,7 +126,7 @@ class ProfileScreen extends React.Component {
     } else {
       return (
         <View>
-          <Text style={styles.header}>Profile</Text>
+          {/* <Text style={styles.header}>Profile</Text> */}
           {this.props.auth.loggedIn ? (
             <>
               <Text>{this.props.auth.user.email}</Text>
