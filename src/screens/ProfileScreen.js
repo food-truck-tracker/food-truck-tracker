@@ -7,6 +7,7 @@ import LoginForm from "../components/LoginForm";
 import Register from "./Register";
 import { loginUser, logoutUser, registerUser } from "../actions/auth";
 import { updateTrucksLocation } from "../actions/location";
+import { getUserLocation } from "../utils";
 
 const styles = StyleSheet.create({
   header: {
@@ -44,20 +45,12 @@ class ProfileScreen extends React.Component {
 
   // get user location to update in database
   onLocationUpdate = async () => {
-    /*
-    navigator.geolocation.getCurrentPosition(
-      location => {
-        this.props.updateTrucksLocation(
-          location.coords.latitude,
-          location.coords.longitude
-        );
-      },
-      e => {
-        console.error("GET LOCATION ERROR", e);
-      }
-    );
-    */
-    this.props.updateTrucksLocation(32.7296726, -97.11290559999999);
+    try {
+      let res = await getUserLocation();
+      this.props.updateTrucksLocation(res.lat, res.lon);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   // attempt to login

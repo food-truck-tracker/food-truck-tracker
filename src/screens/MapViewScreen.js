@@ -11,6 +11,7 @@ import MapView from "react-native-maps";
 import { connect } from "react-redux";
 
 import { fetchTrucksLocation } from "../actions/location";
+import { getUserLocation } from "../utils";
 
 const Images = [
   {
@@ -84,13 +85,17 @@ class MapViewScreen extends React.Component {
     },
   };
 
-  componentWillMount() {
+  async componentWillMount() {
     this.index = 0;
     this.animation = new Animated.Value(0);
 
     // hard-coded right now
-    console.log("SHOULD");
-    this.props.fetchTrucksLocation([32.7296726, -97.11290559999999], 30);
+    try {
+      const res = await getUserLocation();
+      this.props.fetchTrucksLocation(res, 3000);
+    } catch (e) {
+      console.error(e);
+    }
   }
   componentDidMount() {
     // We should detect when scrolling has stopped then animate

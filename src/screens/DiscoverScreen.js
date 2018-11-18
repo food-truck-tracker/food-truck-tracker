@@ -117,7 +117,7 @@ class DiscoverScreen extends React.Component {
       //     ))}
       // </ScrollView>
       <Screen>
-        <NavigationBar
+        {/* <NavigationBar
           styleName="inline"
           centerComponent={<Title bold>Discover Page</Title>}
           rightComponent={
@@ -125,7 +125,7 @@ class DiscoverScreen extends React.Component {
               <Icon name="refresh" />
             </Button>
           }
-        />
+        /> */}
         <ListView data={groupedData} renderRow={this.renderRow} />
       </Screen>
     );

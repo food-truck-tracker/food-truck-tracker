@@ -29,7 +29,8 @@ export const fetchTrucksLocation = (userLocation, radius) => async dispatch => {
       radius,
     });
 
-    query.on("key-entered", (key, location, distance) => {
+    query.on("key_entered", (key, location, distance) => {
+      console.log("FOUND");
       dispatch(fetchLocationFinish(key, location, distance));
     });
   } catch (error) {
