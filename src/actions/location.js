@@ -24,15 +24,12 @@ export const fetchTrucksLocation = (userLocation, radius) => async dispatch => {
     const ref = firebase.database().ref("/trucks");
     let geoFire = new GeoFire(ref);
 
-    console.log("LOCATION: ", userLocation);
-
     let query = geoFire.query({
       center: [userLocation.lat, userLocation.lon],
       radius,
     });
 
     query.on("key_entered", (key, location, distance) => {
-      console.log("FOUND");
       dispatch(fetchLocationFinish({ key, location, distance }));
     });
   } catch (error) {
