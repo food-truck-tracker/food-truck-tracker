@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 import LoginForm from "../components/LoginForm";
 import Register from "./Register";
+import TruckRegisterForm from "./TruckRegisterForm";
 import { loginUser, logoutUser, registerUser } from "../actions/auth";
 import { updateTrucksLocation } from "../actions/location";
 import { getUserLocation } from "../utils";
@@ -116,14 +117,21 @@ class ProfileScreen extends React.Component {
           onPress={this.onLogin}
         />
       );
+    } else if (this.state.view == "page_edit") {
+      return <TruckRegisterForm changeView={this._changeView} />;
     } else {
       return (
         <View>
-          {/* <Text style={styles.header}>Profile</Text> */}
           {this.props.auth.loggedIn ? (
             <>
               <Text>{this.props.auth.user.email}</Text>
               <Button title="Update Location" onPress={this.onLocationUpdate} />
+              <Button
+                title="Edit truck info"
+                onPress={() => {
+                  this.setState({ view: "page_edit" });
+                }}
+              />
               <Button title="Logout" onPress={this.onLogout} />
             </>
           ) : (
