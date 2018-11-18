@@ -1,5 +1,4 @@
 import Permissions from "react-native-permissions";
-import { reject } from "rsvp";
 
 export const getUserLocation = async () => {
   // first check location permission
@@ -17,8 +16,7 @@ export const getUserLocation = async () => {
   // get user location
   try {
     const options = {
-      enableHighAccuracy: true,
-      timeout: 20000,
+      timeout: 10000,
       maximumAge: 1000,
     };
     const position = await getCurrentPosition(options);

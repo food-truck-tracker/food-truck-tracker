@@ -92,6 +92,7 @@ class MapViewScreen extends React.Component {
     // hard-coded right now
     try {
       const res = await getUserLocation();
+      console.log("UTIL RESULT: ", res);
       this.props.fetchTrucksLocation(res, 3000);
     } catch (e) {
       console.error(e);
