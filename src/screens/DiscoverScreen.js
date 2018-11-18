@@ -23,7 +23,9 @@ import { fetchTrucksInfo } from "../actions/truck";
 
 class DiscoverScreen extends React.Component {
   componentWillMount() {
-    this.props.fetchTrucksInfo();
+    if (!this.props.truck.trucksInfo) {
+      this.props.fetchTrucksInfo();
+    }
   }
   constructor(props) {
     super(props);

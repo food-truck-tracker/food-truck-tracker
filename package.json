@@ -9,6 +9,7 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "@shoutem/ui": "^0.23.4",
+    "firebase": "^5.5.8",
     "geofire": "^4.1.2",
     "prop-types": "^15.6.2",
     "react": "16.5.0",
