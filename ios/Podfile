@@ -51,6 +51,8 @@ target 'TruckLo' do
 
     pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
+    pod 'ReactNativePermissions', :path => '../node_modules/react-native-permissions'
+
   end
   
   post_install do |installer|
