@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 import LoginForm from "../components/LoginForm";
 import Register from "./Register";
+import TruckRegisterForm from "./TruckRegisterForm";
 import { loginUser, logoutUser, registerUser } from "../actions/auth";
 
 const styles = StyleSheet.create({
@@ -12,8 +13,8 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: "bold",
     padding: 10,
-    margin: 10,
-  },
+    margin: 10
+  }
 });
 
 class ProfileScreen extends React.Component {
@@ -23,7 +24,7 @@ class ProfileScreen extends React.Component {
     this.state = {
       view: "root",
       emailValue: "",
-      passwordValue: "",
+      passwordValue: ""
     };
   }
 
@@ -104,6 +105,8 @@ class ProfileScreen extends React.Component {
           onPress={this.onLogin}
         />
       );
+    } else if (this.state.view == "page_edit") {
+      return <TruckRegisterForm changeView={this._changeView} />;
     } else {
       return (
         <View>
@@ -111,6 +114,12 @@ class ProfileScreen extends React.Component {
           {this.props.auth.loggedIn ? (
             <>
               <Text>User</Text>
+              <Button
+                title="Edit truck info"
+                onPress={() => {
+                  this.setState({ view: "page_edit" });
+                }}
+              />
               <Button title="Logout" onPress={this.onLogout} />
             </>
           ) : (
@@ -141,13 +150,13 @@ class ProfileScreen extends React.Component {
 
 // redux connection
 const mapStateToProps = state => ({
-  auth: state.auth,
+  auth: state.auth
 });
 
 const mapDispatchToProps = {
   loginUser,
   logoutUser,
-  registerUser,
+  registerUser
 };
 
 export default connect(
