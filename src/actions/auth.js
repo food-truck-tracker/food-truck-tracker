@@ -24,13 +24,12 @@ export const loginUser = (email, pass) => async (dispatch, getState) => {
     const response = await firebase
       .auth()
       .signInWithEmailAndPassword(email, pass);
-    console.log("login response", response);
     if (response.error) {
       throw new Error(response);
     }
     dispatch(loginFinished(response.user));
   } catch (error) {
-    console.log(error);
+    console.error(error);
     dispatch(loginError(error));
   }
 };
@@ -76,16 +75,12 @@ const registerError = error => ({
   error,
 });
 
-export const registerUser = (name, email, pass) => async (
-  dispatch,
-  getState
-) => {
+export const registerUser = (name, email, pass) => async dispatch => {
   dispatch(registerStart());
   try {
     const response = await firebase
       .auth()
       .createUserWithEmailAndPassword(email, pass);
-    console.log(response);
 
     if (response.error) {
       throw new Error(response);
@@ -93,7 +88,16 @@ export const registerUser = (name, email, pass) => async (
 
     const { user } = response;
 
-    await user.updateProfile({ displayName: name });
+    // add user entry to firestore
+
+    let ref = firebase
+      .firestore()
+      .collection("users")
+      .doc(user.uid);
+
+    await ref.set({
+      name,
+    });
 
     dispatch(registerFinished(user));
   } catch (error) {
@@ -127,11 +131,22 @@ export const truckRegister = (
   try {
     let ref = firebase.firestore().collection("trucks");
 
-    await ref.add({
-      vendor_id: id,
+    let response = await ref.add({
       name,
       description,
       hours,
+    });
+
+    // now add the truck id to user table
+    const user = firebase.auth().currentUser;
+
+    let userRef = firebase
+      .firestore()
+      .collection("users")
+      .doc(user.uid);
+
+    await userRef.set({
+      truck_id: response.id,
     });
 
     dispatch(truckRegisterFinished());
