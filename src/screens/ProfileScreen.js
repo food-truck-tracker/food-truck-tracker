@@ -7,14 +7,16 @@ import LoginForm from "../components/LoginForm";
 import Register from "./Register";
 import TruckRegisterForm from "./TruckRegisterForm";
 import { loginUser, logoutUser, registerUser } from "../actions/auth";
+import { updateTrucksLocation } from "../actions/location";
+import { getUserLocation } from "../utils";
 
 const styles = StyleSheet.create({
   header: {
     fontSize: 32,
     fontWeight: "bold",
     padding: 10,
-    margin: 10
-  }
+    margin: 10,
+  },
 });
 
 class ProfileScreen extends React.Component {
@@ -24,7 +26,7 @@ class ProfileScreen extends React.Component {
     this.state = {
       view: "root",
       emailValue: "",
-      passwordValue: ""
+      passwordValue: "",
     };
   }
 
@@ -41,6 +43,16 @@ class ProfileScreen extends React.Component {
       this.authUnsubscriber();
     }
   }
+
+  // get user location to update in database
+  onLocationUpdate = async () => {
+    try {
+      let res = await getUserLocation();
+      this.props.updateTrucksLocation(res.lat, res.lon);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   // attempt to login
   onLogin = async () => {
@@ -110,10 +122,10 @@ class ProfileScreen extends React.Component {
     } else {
       return (
         <View>
-          {/* <Text style={styles.header}>Profile</Text> */}
           {this.props.auth.loggedIn ? (
             <>
-              <Text>User</Text>
+              <Text>{this.props.auth.user.email}</Text>
+              <Button title="Update Location" onPress={this.onLocationUpdate} />
               <Button
                 title="Edit truck info"
                 onPress={() => {
@@ -150,13 +162,15 @@ class ProfileScreen extends React.Component {
 
 // redux connection
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  location: state.location,
 });
 
 const mapDispatchToProps = {
   loginUser,
   logoutUser,
-  registerUser
+  registerUser,
+  updateTrucksLocation,
 };
 
 export default connect(

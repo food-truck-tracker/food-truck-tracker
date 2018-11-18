@@ -79,7 +79,7 @@ import { truckRegister } from "../actions/auth";
     }
     return (
       <View>
-        {this.props.auth.loggedIn ? <Text style={styles.header}>Update truck page</Text> : <Text style={styles.header}>aaRegister truck cont.</Text>}
+        {this.props.updaing == "true" ? <Text style={styles.header}>Update truck page</Text> : <Text style={styles.header}>Register truck cont.</Text>}
         <TextInput
           style={styles.input}
           autoCorrect={false}
@@ -99,6 +99,7 @@ import { truckRegister } from "../actions/auth";
           <RadioDayPicker
             onUpdate={this.onUpdate}
           />
+
           <MultipleTimeInput
             day={this.state.current_day}
             onUpdateDay={this.onUpdateDay}
@@ -107,14 +108,10 @@ import { truckRegister } from "../actions/auth";
         <Button style={styles.button_offset}
           title="Continue"
           onPress={() => {
-            if(this.props.auth.loggedIn){
-              //update truck info
-              
-            }
-            else {
+          
               this.props.truckRegister(this.props.auth.user.uid, this.state.truck_name, 
                                        this.state.description, this.state.concat);
-            }
+            
             this.changeView("Continue");
           }}
         />
