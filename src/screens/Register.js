@@ -14,14 +14,14 @@ export default class Registerform extends React.Component {
       email: "",
       password: "",
       re_password: "",
-      check_box_value: false,
+      check_box_value: false
     };
   }
 
   // switches the checkbox state
   _checkBox = () => {
     this.setState({
-      check_box_value: !this.state.check_box_value,
+      check_box_value: !this.state.check_box_value
     });
   };
 
@@ -41,13 +41,16 @@ export default class Registerform extends React.Component {
             <TextInput
               style={styles.input}
               autoCorrect={false}
+              autoCapitalize="none"
               placeholder="Enter full name..."
               value={this.state.full_name}
               onChangeText={full_name => this.setState({ full_name })}
             />
             <TextInput
               style={styles.input}
+              keyboardType="email-address"
               autoCorrect={false}
+              autoCapitalize="none"
               placeholder="Enter email..."
               value={this.state.email}
               onChangeText={email => this.setState({ email })}
@@ -59,6 +62,7 @@ export default class Registerform extends React.Component {
               value={this.state.password}
               onChangeText={password => this.setState({ password })}
               secureTextEntry={true}
+              autoCapitalize="none"
             />
             <TextInput
               style={styles.input}
@@ -67,6 +71,7 @@ export default class Registerform extends React.Component {
               value={this.state.re_password}
               onChangeText={re_password => this.setState({ re_password })}
               secureTextEntry={true}
+              autoCapitalize="none"
             />
             <CheckBox
               center
@@ -85,7 +90,7 @@ export default class Registerform extends React.Component {
                   full_name,
                   email,
                   password,
-                  re_password,
+                  re_password
                 } = this.state;
 
                 // check if we need to go to vendor truck info page
@@ -134,25 +139,25 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: "bold",
     padding: 10,
-    margin: 10,
+    margin: 10
   },
   input: {
     height: 40,
     backgroundColor: "rgba(255,255,255,0.7)",
     marginBottom: 5,
-    paddingHorizontal: 5,
+    paddingHorizontal: 5
   },
   text: {
     fontSize: 100,
     top: 100,
     textAlign: "right",
-    left: -40,
+    left: -40
   },
   CheckBox: {
     width: 200,
-    backgroundColor: "rgba(255, 255, 255, 0)",
+    backgroundColor: "rgba(255, 255, 255, 0)"
   },
   button_offset: {
-    height: 30,
-  },
+    height: 30
+  }
 });
