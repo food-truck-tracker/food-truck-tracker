@@ -13,7 +13,6 @@ import {
   Card,
   Image,
   Screen,
-  NavigationBar,
   ListView,
   Icon,
   Button,
@@ -22,6 +21,14 @@ import {
 import { fetchTrucksInfo } from "../actions/truck";
 
 class DiscoverScreen extends React.Component {
+  static navigationOptions = {
+    title: "Discover",
+    headerRight: (
+      <Button onPress={() => this.props.fetchTrucksInfo()}>
+        <Icon name="refresh" />
+      </Button>
+    ),
+  };
   componentWillMount() {
     this.props.fetchTrucksInfo();
   }
@@ -105,27 +112,7 @@ class DiscoverScreen extends React.Component {
     });
 
     return (
-      // <ScrollView>
-      //   <Text style={styles.header}>Discover View</Text>
-      //   {trucksInfo &&
-      //     Object.entries(trucksInfo).map(truck => (
-      //       <View key={truck[0]}>
-      //         <Text>{truck[1].name}</Text>
-      //         <Text>{truck[1].category}</Text>
-      //         <Text>{truck[1].description}</Text>
-      //       </View>
-      //     ))}
-      // </ScrollView>
       <Screen>
-        {/* <NavigationBar
-          styleName="inline"
-          centerComponent={<Title bold>Discover Page</Title>}
-          rightComponent={
-            <Button onPress={this.props.fetchTrucksInfo}>
-              <Icon name="refresh" />
-            </Button>
-          }
-        /> */}
         <ListView data={groupedData} renderRow={this.renderRow} />
       </Screen>
     );
