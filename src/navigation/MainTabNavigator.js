@@ -1,7 +1,7 @@
 import React from "react";
 import {
   createStackNavigator,
-  createBottomTabNavigator
+  createBottomTabNavigator,
 } from "react-navigation";
 import { Icon } from "@shoutem/ui";
 
@@ -14,57 +14,54 @@ import TruckPage from "../screens/TruckPage";
 const DiscoverStack = createStackNavigator(
   {
     Discover: DiscoverScreen,
-    Truck: TruckPage
+    Truck: TruckPage,
   },
   {
     initialRouteName: "Discover",
-    navigationOptions: {
-      header: null
-    }
   }
 );
 
 DiscoverStack.navigationOptions = {
   tabBarLabel: "Discover",
-  tabBarIcon: <Icon name="add-to-favorites-on" />
+  tabBarIcon: <Icon name="add-to-favorites-on" />,
 };
 
 const MapStack = createStackNavigator(
   {
-    Map: MapViewScreen
+    Map: MapViewScreen,
   },
   {
     navigationOptions: {
-      title: "Map"
-    }
+      title: "Map",
+    },
   }
 );
 
 MapStack.navigationOptions = {
   tabBarLabel: "Map",
-  tabBarIcon: <Icon name="maps" />
+  tabBarIcon: <Icon name="maps" />,
 };
 
 const ProfileStack = createStackNavigator(
   {
     Profile: ProfileScreen,
-    Login: LoginForm
+    Login: LoginForm,
   },
   {
     initialRouteName: "Profile",
     navigationOptions: {
-      title: "Profile"
-    }
+      title: "Profile",
+    },
   }
 );
 
 ProfileStack.navigationOptions = {
   tabBarLabel: "Profile",
-  tabBarIcon: <Icon name="user-profile" />
+  tabBarIcon: <Icon name="user-profile" />,
 };
 
 export default createBottomTabNavigator({
   DiscoverStack,
   MapStack,
-  ProfileStack
+  ProfileStack,
 });

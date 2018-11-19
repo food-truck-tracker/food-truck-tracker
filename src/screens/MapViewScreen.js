@@ -12,23 +12,12 @@ import { connect } from "react-redux";
 
 import { fetchTrucksLocation } from "../actions/location";
 import { getUserLocation } from "../utils";
+import { Button, Icon } from "@shoutem/ui";
 
 const Images = [
   {
     uri:
       "https://cdn.pixabay.com/photo/2017/06/23/21/37/oldtimer-2436018_1280.jpg",
-  },
-  {
-    uri:
-      "https://images.pexels.com/photos/221357/pexels-photo-221357.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  },
-  {
-    uri:
-      "https://images.pexels.com/photos/439851/pexels-photo-439851.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  },
-  {
-    uri:
-      "https://images.pexels.com/photos/1410484/pexels-photo-1410484.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },
 ];
 
@@ -38,45 +27,15 @@ const CARD_HEIGHT = height / 4;
 const CARD_WIDTH = CARD_HEIGHT - 50;
 
 class MapViewScreen extends React.Component {
+  static navigationOptions = {
+    headerRight: (
+      <Button onPress={() => this.displayTrucks()}>
+        <Icon name="refresh" />
+      </Button>
+    ),
+  };
   state = {
-    markers: [
-      {
-        coordinate: {
-          latitude: 32.7150184,
-          longitude: -97.3613696,
-        },
-        title: "Salsa Limon",
-        description: "This is the best place in south Forth Worth",
-        image: Images[0],
-      },
-      {
-        coordinate: {
-          latitude: 32.7497924,
-          longitude: -97.3590353,
-        },
-        title: "Chile Pepper Grill",
-        description: "This is the second best place in Forth Worth",
-        image: Images[1],
-      },
-      {
-        coordinate: {
-          latitude: 33.1012865,
-          longitude: -97.1925607,
-        },
-        title: "Snappy snow",
-        description: "This is the best place in Argyle",
-        image: Images[2],
-      },
-      {
-        coordinate: {
-          latitude: 32.7898895,
-          longitude: -96.8038707,
-        },
-        title: "Yummy Pizza Food Truck",
-        description: "This is the best place in Dallas",
-        image: Images[3],
-      },
-    ],
+    markers: [],
     region: {
       latitude: 32.729649,
       longitude: -97.113142,
@@ -89,7 +48,10 @@ class MapViewScreen extends React.Component {
     this.index = 0;
     this.animation = new Animated.Value(0);
 
-    // hard-coded right now
+    this.displayTrucks();
+  }
+
+  displayTrucks = async () => {
     try {
       const res = await getUserLocation();
       this.setState({
@@ -126,7 +88,7 @@ class MapViewScreen extends React.Component {
     } catch (e) {
       console.error(e);
     }
-  }
+  };
 
   componentDidMount() {
     // We should detect when scrolling has stopped then animate
