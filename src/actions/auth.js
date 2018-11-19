@@ -95,9 +95,12 @@ export const registerUser = (name, email, pass) => async dispatch => {
       .collection("users")
       .doc(user.uid);
 
-    await ref.set({
-      name,
-    });
+    await ref.set(
+      {
+        name,
+      },
+      { merge: true }
+    );
 
     dispatch(registerFinished(user));
   } catch (error) {
@@ -145,9 +148,14 @@ export const truckRegister = (
       .collection("users")
       .doc(user.uid);
 
-    await userRef.set({
-      truck_id: response.id,
-    });
+    await userRef.set(
+      {
+        truck_id: response.id,
+      },
+      {
+        merge: true,
+      }
+    );
 
     dispatch(truckRegisterFinished());
   } catch (error) {

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -92,11 +92,42 @@ class MapViewScreen extends React.Component {
     // hard-coded right now
     try {
       const res = await getUserLocation();
-      this.props.fetchTrucksLocation(res, 3000);
+      this.setState({
+        region: {
+          latitude: res.lat,
+          longitude: res.lon,
+          latitudeDelta: 0.4,
+          longitudeDelta: 0.4,
+        },
+      });
+      this.props.fetchTrucksLocation(res, 30);
+
+      // now update cards
+      let markers = [];
+
+      const { trucksLocation } = this.props.location;
+      const { trucksInfo } = this.props.truck;
+
+      for (let truck in trucksLocation) {
+        console.log("TRUCK: ", truck);
+        const marker = {
+          coordinate: {
+            latitude: trucksLocation[truck].location[0],
+            longitude: trucksLocation[truck].location[1],
+          },
+          image: Images[0],
+          title: trucksInfo[truck].name,
+          description: trucksInfo[truck].description,
+        };
+        markers.push(marker);
+      }
+
+      this.setState({ markers });
     } catch (e) {
       console.error(e);
     }
   }
+
   componentDidMount() {
     // We should detect when scrolling has stopped then animate
     // We should just debounce the event listener here
@@ -221,6 +252,7 @@ class MapViewScreen extends React.Component {
 // redux connection
 const mapStateToProps = state => ({
   location: state.location,
+  truck: state.truck,
 });
 
 const mapDispatchToProps = {
