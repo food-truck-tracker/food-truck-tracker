@@ -79,7 +79,7 @@ import { truckRegister } from "../actions/auth";
     }
     return (
       <View>
-        {this.props.updaing == "true" ? <Text style={styles.header}>Update truck page</Text> : <Text style={styles.header}>Register truck cont.</Text>}
+        {this.props.update ? <Text style={styles.header}>Update truck page</Text> : <Text style={styles.header}>Register truck cont.</Text>}
         <TextInput
           style={styles.input}
           autoCorrect={false}
@@ -108,9 +108,13 @@ import { truckRegister } from "../actions/auth";
         <Button style={styles.button_offset}
           title="Continue"
           onPress={() => {
-          
-              this.props.truckRegister(this.props.auth.user.uid, this.state.truck_name, 
-                                       this.state.description, this.state.concat);
+          if(this.props.update){
+
+          }
+          else{
+            this.props.truckRegister(this.props.auth.user.uid, this.state.truck_name, 
+              this.state.description, this.state.concat);
+          }
             
             this.changeView("Continue");
           }}

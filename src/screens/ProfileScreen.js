@@ -118,7 +118,7 @@ class ProfileScreen extends React.Component {
         />
       );
     } else if (this.state.view == "page_edit") {
-      return <TruckRegisterForm changeView={this._changeView} />;
+      return <TruckRegisterForm update={true} changeView={this._changeView} />;
     } else {
       return (
         <View>
