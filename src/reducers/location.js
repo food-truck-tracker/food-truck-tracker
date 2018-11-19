@@ -17,14 +17,22 @@ export default (state = initialState, action) => {
       };
     }
     case types.TRUCK_LOCATION_FETCH_FINISHED: {
-      const { key, location, distance } = action;
+      const { key, location, distance } = action.location;
+
+      let locations;
+      if (state.trucksLocation) {
+        locations = Object.assign({}, state.trucksLocation);
+      } else {
+        locations = {};
+      }
+
+      // add new location
+      locations[key] = { location, distance };
+
       return {
         ...state,
         isFetching: false,
-        trucksLocation: {
-          ...state.trucksLocation,
-          [key]: { location, distance },
-        },
+        trucksLocation: locations,
       };
     }
     case types.TRUCK_LOCATION_FETCH_ERROR: {
