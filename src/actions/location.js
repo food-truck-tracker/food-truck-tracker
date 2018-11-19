@@ -55,13 +55,22 @@ export const updateTrucksLocation = (lat, lon) => async dispatch => {
   dispatch(updateLocationStart());
   try {
     // get current user
-    const user = firebase.auth().currentUser;
+    const user = await firebase.auth().currentUser;
+
+    // get user truck id
+    const userRef = await firebase
+      .firestore()
+      .collection("users")
+      .doc(user.uid);
+
+    const docref = await userRef.get();
+    const data = await docref.data();
 
     // make geofire ref
     const ref = firebase.database().ref("/trucks");
     let geoFire = new GeoFire(ref);
 
-    await geoFire.set(user.uid, [lat, lon]);
+    await geoFire.set(data["truck_id"], [lat, lon]);
     dispatch(updateLocationFinish());
   } catch (error) {
     dispatch(updateLocationError(error));
