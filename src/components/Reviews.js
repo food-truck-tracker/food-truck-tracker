@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, TextInput, Button } from "@shoutem/ui";
+import { Text, TextInput, Button, View } from "@shoutem/ui";
 import { connect } from "react-redux";
 import { AirbnbRating } from "react-native-ratings";
 
@@ -9,29 +9,57 @@ class Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rating_num: "",
+      stars: 5,
+      body: "",
     };
   }
 
-  ratingCompleted = value => {
-    this.setState({ rating_num: value });
+  componentDidMount() {
+    this.props.fetchReviews(this.props.truck_id);
+  }
+
+  ratingCompleted = stars => {
+    this.setState({ stars });
+  };
+
+  onSubmit = () => {
+    try {
+      this.props.addReview({ ...this.state, truck_id: this.props.truck_id });
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   render() {
+    const { reviews } = this.props.review;
     return (
-      <>
+      <View>
         <Text>Reviews</Text>
-        <AirbnbRating reviews={["", "", "", "", ""]} />
+        <AirbnbRating
+          reviews={["", "", "", "", ""]}
+          onFinishRating={this.ratingCompleted}
+        />
         <TextInput
           placeholder={"Write a review..."}
           borderWidth={2}
           multiline={true}
           marginBottom={10}
+          onChangeText={body => this.setState({ body })}
         />
-        <Button styleName="secondary">
+        <Button styleName="secondary" onPress={this.onSubmit}>
           <Text>Submit review...</Text>
         </Button>
-      </>
+        {reviews ? (
+          reviews.map((review, i) => (
+            <View key={i}>
+              <Text>{review.body}</Text>
+              <Text>Rating: {review.stars}</Text>
+            </View>
+          ))
+        ) : (
+          <Text>Be the first to review!</Text>
+        )}
+      </View>
     );
   }
 }
