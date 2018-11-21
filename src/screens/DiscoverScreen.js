@@ -45,9 +45,12 @@ class DiscoverScreen extends React.Component {
     this.props.fetchTrucksInfo();
   }
 
-  truckTileClick = () => {
+  truckTileClick = truck_id => {
     // navigate to truck page
-    this.props.navigation.push("Truck");
+    this.props.navigation.push("Truck", {
+      truck_id,
+      info: this.props.truck.trucksInfo[truck_id],
+    });
   };
 
   renderRow(rowData, sectionId, index) {
@@ -55,7 +58,10 @@ class DiscoverScreen extends React.Component {
     // so we need to remap it into cells and pass to GridRow
     if (index === "0") {
       return (
-        <TouchableOpacity key={index} onPress={this.truckTileClick}>
+        <TouchableOpacity
+          key={index}
+          onPress={() => this.truckTileClick(rowData[0]["id"])}
+        >
           <ImageBackground
             styleName="large"
             source={{
@@ -80,7 +86,7 @@ class DiscoverScreen extends React.Component {
         <TouchableOpacity
           key={id}
           styleName="flexible"
-          onPress={this.truckTileClick}
+          onPress={() => this.truckTileClick(truck["id"])}
         >
           <Card styleName="flexible">
             <Image
@@ -108,8 +114,14 @@ class DiscoverScreen extends React.Component {
 
   render() {
     const { trucksInfo } = this.props.truck;
-    // Group the restaurants into rows with 2 columns, except for the
-    // first restaurant. The first restaurant is treated as a featured restaurant
+
+    // add id as a field also to retrive when going to truck page
+    for (let truck in trucksInfo) {
+      trucksInfo[truck]["id"] = truck;
+    }
+
+    // Group the trucks into rows with 2 columns, except for the
+    // first truck. The first truck is treated as a featured truck
     let isFirstArticle = true;
     const groupedData = GridRow.groupByRows(trucksInfo, 2, () => {
       if (isFirstArticle) {

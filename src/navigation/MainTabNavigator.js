@@ -29,11 +29,10 @@ DiscoverStack.navigationOptions = {
 const MapStack = createStackNavigator(
   {
     Map: MapViewScreen,
+    Truck: TruckPage,
   },
   {
-    navigationOptions: {
-      title: "Map",
-    },
+    initialRouteName: "Map",
   }
 );
 
