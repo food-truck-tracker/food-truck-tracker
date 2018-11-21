@@ -27,13 +27,16 @@ const CARD_HEIGHT = height / 4;
 const CARD_WIDTH = CARD_HEIGHT - 50;
 
 class MapViewScreen extends React.Component {
-  static navigationOptions = {
-    headerRight: (
-      <Button onPress={() => this.displayTrucks()}>
-        <Icon name="refresh" />
-      </Button>
-    ),
+  static navigationOptions = ({navigation}) =>  {
+    return {
+      headerRight: (
+        <Button onPress={navigation.getParam("displayTrucks")}>
+          <Icon name="refresh" />
+        </Button>
+      )
+    }
   };
+
   state = {
     markers: [],
     region: {
@@ -48,10 +51,10 @@ class MapViewScreen extends React.Component {
     this.index = 0;
     this.animation = new Animated.Value(0);
 
-    this.displayTrucks();
+    this._displayTrucks();
   }
 
-  displayTrucks = async () => {
+  _displayTrucks = async () => {
     try {
       const res = await getUserLocation();
       this.setState({
@@ -91,6 +94,9 @@ class MapViewScreen extends React.Component {
   };
 
   componentDidMount() {
+    this.props.navigation.setParams({
+      displayTrucks: this._displayTrucks,
+    });
     // We should detect when scrolling has stopped then animate
     // We should just debounce the event listener here
     this.animation.addListener(({ value }) => {
