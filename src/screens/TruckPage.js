@@ -1,9 +1,13 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { InlineGallery, Button, Text, TextInput } from "@shoutem/ui";
-import Review from "../components/Review";
+import Reviews from "../components/Reviews";
 
 export default class TruckPage extends React.Component {
+  static navigationOptions = {
+    tabBarVisible: false,
+  };
+
   constructor(props) {
     super(props);
 
@@ -35,6 +39,7 @@ export default class TruckPage extends React.Component {
     // grab navigation params
     const { navigation } = this.props;
     const info = navigation.getParam("info", {});
+    const truck_id = navigation.getParam("truck_id", "");
 
     return (
       //static view of what trucks should look like.
@@ -44,7 +49,7 @@ export default class TruckPage extends React.Component {
         <Text>{info["description"]}</Text>
 
         <View style={{ paddingLeft: 32, paddingRight: 32 }}>
-          <Text style={styles.text}> Hours of operation</Text>
+          <Text style={styles.text}>Hours of operation</Text>
 
           {info["hours"] &&
             Object.keys(info["hours"]).map(key => {
@@ -60,59 +65,7 @@ export default class TruckPage extends React.Component {
                 </View>
               );
             })}
-
-          {/* <View style={styles.view_row}>
-            <Text style={styles.text}> Monday: </Text>
-            <Text style={styles.text}>Closed</Text>
-          </View>
-
-          <View style={styles.view_row}>
-            <Text style={styles.text}> Tuesday: </Text>
-            <Text style={styles.text}>13:00 - 18:00</Text>
-          </View>
-
-          <View style={styles.view_row}>
-            <Text style={styles.text}> Wednesday: </Text>
-            <Text style={styles.text}>13:00 - 18:00</Text>
-          </View>
-
-          <View style={styles.view_row}>
-            <Text style={styles.text}> Thursday: </Text>
-            <Text style={styles.text}>Closed</Text>
-          </View>
-
-          <View style={styles.view_row}>
-            <Text style={styles.text}> Friday: </Text>
-            <Text style={styles.text}>13:00 - 20:00</Text>
-          </View>
-
-          <View style={styles.view_row}>
-            <Text style={styles.text}> Saturday: </Text>
-            <Text style={styles.text}>33:00 - 23:00</Text>
-          </View>
-
-          <View style={styles.view_row}>
-            <Text style={styles.text}> Sunday: </Text>
-            <Text style={styles.text}>
-              13:00 - 18:00
-              {"\n\n"}
-            </Text>
-          </View> */}
-
-          <Text style={{ fontSize: 32, textAlign: "center" }}> Reviews</Text>
-          {/* star and comment review for users. TODO: fix bug with keyboard when comment
-              is clicked */}
-          <Review />
-          <TextInput
-            placeholder={"Write a review..."}
-            borderWidth={2}
-            multiline={true}
-            marginBottom={10}
-          />
-
-          <Button styleName="secondary">
-            <Text>Submit review...</Text>
-          </Button>
+          <Reviews truck_id={truck_id} />
         </View>
       </ScrollView>
     );
@@ -122,18 +75,6 @@ export default class TruckPage extends React.Component {
 const styles = StyleSheet.create({
   text: {
     fontSize: 22,
-  },
-  header: {
-    fontSize: 32,
-    fontWeight: "bold",
-    padding: 10,
-    margin: 10,
-  },
-  input: {
-    height: 40,
-    backgroundColor: "rgba(255,255,255,0.7)",
-    borderWidth: 2,
-    borderColor: "black",
   },
   truckname: {
     fontWeight: "bold",

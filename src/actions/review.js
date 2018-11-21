@@ -22,7 +22,9 @@ export const fetchReviews = truck_id => async dispatch => {
     const ref = await firebase.firestore().collection("/reviews");
 
     // logic for fetching review
-    const query = await ref.where("truck_id", "==", truck_id);
+    const query = await ref
+      .where("truck_id", "==", truck_id)
+      .orderBy("created_at");
 
     const reviews = await query.get().docs;
 
@@ -58,6 +60,7 @@ export const addReview = ({ stars, body, truck_id }) => async dispatch => {
       stars,
       body,
       truck_id,
+      created_at: Date.now(),
     });
 
     dispatch(reviewAddFinish());
