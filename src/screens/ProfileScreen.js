@@ -7,6 +7,7 @@ import Register from "./Register";
 import TruckRegisterForm from "./TruckRegisterForm";
 import { loginUser, logoutUser, registerUser } from "../actions/auth";
 import { updateTrucksLocation } from "../actions/location";
+import { fetchUserInfo } from "../actions/user";
 import { getUserLocation } from "../utils";
 
 class ProfileScreen extends React.Component {
@@ -18,6 +19,10 @@ class ProfileScreen extends React.Component {
       emailValue: "",
       passwordValue: "",
     };
+  }
+
+  componentDidMount() {
+    this.props.fetchUserInfo();
   }
 
   // get user location to update in database
@@ -33,11 +38,11 @@ class ProfileScreen extends React.Component {
   // attempt to login
   onLogin = async () => {
     try {
-      const response = await this.props.loginUser(
+      await this.props.loginUser(
         this.state.emailValue,
         this.state.passwordValue
       );
-      console.log(response);
+      await this.props.fetchUserInfo();
     } catch (error) {
       console.log(error);
     }
@@ -96,18 +101,30 @@ class ProfileScreen extends React.Component {
     } else if (this.state.view == "page_edit") {
       return <TruckRegisterForm update={true} changeView={this._changeView} />;
     } else {
+      const { user } = this.props.user;
       return (
         <View>
           {this.props.auth.loggedIn ? (
             <>
               <Text>{this.props.auth.user.email}</Text>
-              <Button title="Update Location" onPress={this.onLocationUpdate} />
-              <Button
-                title="Edit truck info"
-                onPress={() => {
-                  this.setState({ view: "page_edit" });
-                }}
-              />
+              {user && user["truck_id"] ? (
+                <>
+                  <Button
+                    title="Update Location"
+                    onPress={this.onLocationUpdate}
+                  />
+                  <Button
+                    title="Edit truck info"
+                    onPress={() => {
+                      this.setState({ view: "page_edit" });
+                    }}
+                  />
+                </>
+              ) : (
+                <>
+                  <Text>I'm just a user</Text>
+                </>
+              )}
               <Button title="Logout" onPress={this.onLogout} />
             </>
           ) : (
@@ -140,6 +157,7 @@ class ProfileScreen extends React.Component {
 const mapStateToProps = state => ({
   auth: state.auth,
   location: state.location,
+  user: state.user,
 });
 
 const mapDispatchToProps = {
@@ -147,6 +165,7 @@ const mapDispatchToProps = {
   logoutUser,
   registerUser,
   updateTrucksLocation,
+  fetchUserInfo,
 };
 
 export default connect(
