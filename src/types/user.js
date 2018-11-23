@@ -1,0 +1,7 @@
+const types = {
+  USER_FETCH_START: "USER_FETCH_START",
+  USER_FETCH_FINISHED: "USER_FETCH_FINISHED",
+  USER_FETCH_ERROR: "USER_FETCH_ERROR",
+};
+
+export default types;
