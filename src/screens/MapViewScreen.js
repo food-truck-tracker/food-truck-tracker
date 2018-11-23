@@ -133,6 +133,7 @@ class MapViewScreen extends React.Component {
     this.props.navigation.navigate("Truck", {
       truck_id,
       info: this.props.truck.trucksInfo[truck_id],
+      location: this.props.location.trucksLocation[truck_id],
     });
   };
 

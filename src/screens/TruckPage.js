@@ -1,6 +1,6 @@
 import React from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
-import { InlineGallery, Button, Text, TextInput } from "@shoutem/ui";
+import { View, StyleSheet, ScrollView, Platform, Linking } from "react-native";
+import { InlineGallery, Button, Text } from "@shoutem/ui";
 import Reviews from "../components/Reviews";
 
 export default class TruckPage extends React.Component {
@@ -35,6 +35,26 @@ export default class TruckPage extends React.Component {
     };
   }
 
+  openMaps = () => {
+    // set up url
+    const { navigation } = this.props;
+    const location = navigation.getParam("location", {});
+
+    if (Platform.OS === "ios") {
+      Linking.openURL(
+        `http://maps.apple.com/?ll=${location.location[0]}+${
+          location.location[1]
+        }`
+      );
+    } else {
+      Linking.openURL(
+        `http://maps.google.com/?daddr=${location.location[0]}+${
+          location.location[1]
+        }`
+      );
+    }
+  };
+
   render() {
     // grab navigation params
     const { navigation } = this.props;
@@ -47,6 +67,10 @@ export default class TruckPage extends React.Component {
         <InlineGallery styleName="large-banner" data={this.state.photos} />
         <Text style={styles.truckname}>{info["name"]}</Text>
         <Text>{info["description"]}</Text>
+
+        <Button onPress={this.openMaps}>
+          <Text>Get Directions</Text>
+        </Button>
 
         <View style={{ paddingLeft: 32, paddingRight: 32 }}>
           <Text style={styles.text}>Hours of operation</Text>

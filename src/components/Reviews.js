@@ -22,9 +22,13 @@ class Reviews extends React.Component {
     this.setState({ stars });
   };
 
-  onSubmit = () => {
+  onSubmit = async () => {
     try {
-      this.props.addReview({ ...this.state, truck_id: this.props.truck_id });
+      await this.props.addReview({
+        ...this.state,
+        truck_id: this.props.truck_id,
+      });
+      this.props.fetchReviews(this.props.truck_id);
     } catch (e) {
       console.error(e);
     }
