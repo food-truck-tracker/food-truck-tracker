@@ -21,6 +21,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
+        hasError: false,
+        errorMessage: "",
         reviews,
       };
     }

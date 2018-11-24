@@ -6,6 +6,7 @@ import {
   Animated,
   Image,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
 import MapView from "react-native-maps";
 import { connect } from "react-redux";
@@ -27,13 +28,17 @@ const CARD_HEIGHT = height / 4;
 const CARD_WIDTH = CARD_HEIGHT - 50;
 
 class MapViewScreen extends React.Component {
-  static navigationOptions = {
-    headerRight: (
-      <Button onPress={() => this.displayTrucks()}>
-        <Icon name="refresh" />
-      </Button>
-    ),
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: "Map",
+      headerRight: (
+        <Button onPress={navigation.getParam("displayTrucks")}>
+          <Icon name="refresh" />
+        </Button>
+      ),
+    };
   };
+
   state = {
     markers: [],
     region: {
@@ -48,10 +53,10 @@ class MapViewScreen extends React.Component {
     this.index = 0;
     this.animation = new Animated.Value(0);
 
-    this.displayTrucks();
+    this._displayTrucks();
   }
 
-  displayTrucks = async () => {
+  _displayTrucks = async () => {
     try {
       const res = await getUserLocation();
       this.setState({
@@ -80,6 +85,7 @@ class MapViewScreen extends React.Component {
           image: Images[0],
           title: trucksInfo[truck].name,
           description: trucksInfo[truck].description,
+          id: truck,
         };
         markers.push(marker);
       }
@@ -91,6 +97,9 @@ class MapViewScreen extends React.Component {
   };
 
   componentDidMount() {
+    this.props.navigation.setParams({
+      displayTrucks: this._displayTrucks,
+    });
     // We should detect when scrolling has stopped then animate
     // We should just debounce the event listener here
     this.animation.addListener(({ value }) => {
@@ -119,6 +128,14 @@ class MapViewScreen extends React.Component {
       }, 10);
     });
   }
+
+  onTileClick = truck_id => {
+    this.props.navigation.navigate("Truck", {
+      truck_id,
+      info: this.props.truck.trucksInfo[truck_id],
+      location: this.props.location.trucksLocation[truck_id],
+    });
+  };
 
   render() {
     const interpolations = this.state.markers.map((marker, index) => {
@@ -189,21 +206,26 @@ class MapViewScreen extends React.Component {
           contentContainerStyle={styles.endPadding}
         >
           {this.state.markers.map((marker, index) => (
-            <View style={styles.card} key={index}>
-              <Image
-                source={marker.image}
-                style={styles.cardImage}
-                resizeMode="cover"
-              />
-              <View style={styles.textContent}>
-                <Text numberOfLines={1} style={styles.cardtitle}>
-                  {marker.title}
-                </Text>
-                <Text numberOfLines={1} style={styles.cardDescription}>
-                  {marker.description}
-                </Text>
+            <TouchableOpacity
+              key={index}
+              onPress={() => this.onTileClick(marker["id"])}
+            >
+              <View style={styles.card}>
+                <Image
+                  source={marker.image}
+                  style={styles.cardImage}
+                  resizeMode="cover"
+                />
+                <View style={styles.textContent}>
+                  <Text numberOfLines={1} style={styles.cardtitle}>
+                    {marker.title}
+                  </Text>
+                  <Text numberOfLines={1} style={styles.cardDescription}>
+                    {marker.description}
+                  </Text>
+                </View>
               </View>
-            </View>
+            </TouchableOpacity>
           ))}
         </Animated.ScrollView>
       </View>
