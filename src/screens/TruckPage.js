@@ -1,14 +1,13 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-
-} from "react-native";
-import { InlineGallery, Button, Text, TextInput } from "@shoutem/ui";
-import Review from "../components/Review";
+import { View, StyleSheet, ScrollView, Platform, Linking } from "react-native";
+import { InlineGallery, Button, Text } from "@shoutem/ui";
+import Reviews from "../components/Reviews";
 
 export default class TruckPage extends React.Component {
+  static navigationOptions = {
+    tabBarVisible: false,
+  };
+
   constructor(props) {
     super(props);
 
@@ -17,91 +16,80 @@ export default class TruckPage extends React.Component {
         {
           source: {
             uri:
-              "https://shoutem.github.io/static/getting-started/restaurant-1.jpg"
-          }
+              "https://shoutem.github.io/static/getting-started/restaurant-1.jpg",
+          },
         },
         {
           source: {
             uri:
-              "https://shoutem.github.io/static/getting-started/restaurant-2.jpg"
-          }
+              "https://shoutem.github.io/static/getting-started/restaurant-2.jpg",
+          },
         },
         {
           source: {
             uri:
-              "https://shoutem.github.io/static/getting-started/restaurant-3.jpg"
-          }
-        }
-      ]
+              "https://shoutem.github.io/static/getting-started/restaurant-3.jpg",
+          },
+        },
+      ],
     };
   }
 
+  openMaps = () => {
+    // set up url
+    const { navigation } = this.props;
+    const location = navigation.getParam("location", {});
+
+    if (Platform.OS === "ios") {
+      Linking.openURL(
+        `http://maps.apple.com/?ll=${location.location[0]}+${
+          location.location[1]
+        }`
+      );
+    } else {
+      Linking.openURL(
+        `http://maps.google.com/?daddr=${location.location[0]}+${
+          location.location[1]
+        }`
+      );
+    }
+  };
+
   render() {
+    // grab navigation params
+    const { navigation } = this.props;
+    const info = navigation.getParam("info", {});
+    const truck_id = navigation.getParam("truck_id", "");
+
     return (
       //static view of what trucks should look like.
       <ScrollView>
         <InlineGallery styleName="large-banner" data={this.state.photos} />
-        <Text style={styles.truckname}>
-          (Name of truck)
-          {"\n"}
-        </Text>
+        <Text style={styles.truckname}>{info["name"]}</Text>
+        <Text>{info["description"]}</Text>
+
+        <Button onPress={this.openMaps}>
+          <Text>Get Directions</Text>
+        </Button>
 
         <View style={{ paddingLeft: 32, paddingRight: 32 }}>
-          <Text style={styles.text}> Hours of operation</Text>
+          <Text style={styles.text}>Hours of operation</Text>
 
-          <View style={styles.view_row}>
-            <Text style={styles.text}> Monday: </Text>
-            <Text style={styles.text}>Closed</Text>
-          </View>
-
-          <View style={styles.view_row}>
-            <Text style={styles.text}> Tuesday: </Text>
-            <Text style={styles.text}>13:00 - 18:00</Text>
-          </View>
-
-          <View style={styles.view_row}>
-            <Text style={styles.text}> Wednesday: </Text>
-            <Text style={styles.text}>13:00 - 18:00</Text>
-          </View>
-
-          <View style={styles.view_row}>
-            <Text style={styles.text}> Thursday: </Text>
-            <Text style={styles.text}>Closed</Text>
-          </View>
-
-          <View style={styles.view_row}>
-            <Text style={styles.text}> Friday: </Text>
-            <Text style={styles.text}>13:00 - 20:00</Text>
-          </View>
-
-          <View style={styles.view_row}>
-            <Text style={styles.text}> Saturday: </Text>
-            <Text style={styles.text}>33:00 - 23:00</Text>
-          </View>
-
-          <View style={styles.view_row}>
-            <Text style={styles.text}> Sunday: </Text>
-            <Text style={styles.text}>
-              13:00 - 18:00
-              {"\n\n"}
-            </Text>
-          </View>
-
-          <Text style={{ fontSize: 32, textAlign: "center" }}> Reviews</Text>
-          {/* star and comment review for users. TODO: fix bug with keyboard when comment
-              is clicked */}
-          <Review />
-          <TextInput
-            placeholder={"Write a review..."}
-            borderWidth = {2}
-            multiline={true}   
-            marginBottom = {10}
-          />
-
-          <Button 
-          styleName="secondary">
-            <Text>Submit review...</Text>
-          </Button>
+          {info["hours"] &&
+            Object.keys(info["hours"]).map(key => {
+              const val = info["hours"][key];
+              return (
+                <View style={styles.view_row} key={key}>
+                  <Text style={styles.text}> {key} </Text>
+                  <Text style={styles.text}>
+                    {val["open"]
+                      ? `${val["open"]} - ${val["close"]}`
+                      : "Closed"}
+                  </Text>
+                </View>
+              );
+            })}
+          <Reviews truck_id={truck_id} />
         </View>
       </ScrollView>
     );
@@ -110,26 +98,14 @@ export default class TruckPage extends React.Component {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 22
-  },
-  header: {
-    fontSize: 32,
-    fontWeight: "bold",
-    padding: 10,
-    margin: 10
-  },
-  input: {
-    height: 40,
-    backgroundColor: "rgba(255,255,255,0.7)",
-    borderWidth: 2,
-    borderColor: "black"
+    fontSize: 22,
   },
   truckname: {
     fontWeight: "bold",
-    fontSize: 32
+    fontSize: 32,
   },
   view_row: {
     justifyContent: "space-between",
-    flexDirection: "row"
-  }
+    flexDirection: "row",
+  },
 });

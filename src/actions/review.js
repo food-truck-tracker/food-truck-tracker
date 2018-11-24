@@ -19,14 +19,20 @@ const reviewFetchFinish = reviews => ({
 export const fetchReviews = truck_id => async dispatch => {
   dispatch(reviewFetchStart());
   try {
-    const ref = await firebase.firestore().collection("/reviews");
+    const ref = await firebase.firestore().collection("reviews");
 
     // logic for fetching review
     const query = await ref.where("truck_id", "==", truck_id);
+    // const ordered = await query.orderBy("created_at");
+    const reviews = await query.get();
 
-    const reviews = await query.get().docs;
+    let result = [];
 
-    dispatch(reviewFetchFinish(reviews));
+    await reviews.forEach(async e => {
+      result.push(e.data());
+    });
+
+    dispatch(reviewFetchFinish(result));
   } catch (error) {
     dispatch(reviewFetchError(error));
   }
@@ -58,6 +64,7 @@ export const addReview = ({ stars, body, truck_id }) => async dispatch => {
       stars,
       body,
       truck_id,
+      created_at: Date.now(),
     });
 
     dispatch(reviewAddFinish());
