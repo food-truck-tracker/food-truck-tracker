@@ -39,7 +39,7 @@ class DiscoverScreen extends React.Component {
 
   truckTileClick = () => {
     // navigate to truck page
-    this.props.navigation.push("Truck");
+    this.props.navigation.navigate("Truck", {shit: 29});
   };
 
   renderRow(rowData, sectionId, index) {
