@@ -1,9 +1,26 @@
 import React from "react";
 import { View, StyleSheet, ScrollView, Platform, Linking } from "react-native";
+import { connect } from "react-redux";
 import { InlineGallery, Button, Text } from "@shoutem/ui";
-import Reviews from "../components/Reviews";
 
-export default class TruckPage extends React.Component {
+import Reviews from "../components/Reviews";
+import { addFavorite, removeFavorite, fetchUserInfo } from "../actions/user";
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize: 22,
+  },
+  truckname: {
+    fontWeight: "bold",
+    fontSize: 32,
+  },
+  view_row: {
+    justifyContent: "space-between",
+    flexDirection: "row",
+  },
+});
+
+class TruckPage extends React.Component {
   static navigationOptions = {
     tabBarVisible: false,
   };
@@ -55,22 +72,63 @@ export default class TruckPage extends React.Component {
     }
   };
 
+  onAddFavorite = async truck_id => {
+    try {
+      await this.props.addFavorite(truck_id);
+      await this.props.fetchUserInfo();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  onRemoveFavorite = async truck_id => {
+    try {
+      await this.props.removeFavorite(truck_id);
+      await this.props.fetchUserInfo();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   render() {
     // grab navigation params
     const { navigation } = this.props;
     const info = navigation.getParam("info", {});
     const truck_id = navigation.getParam("truck_id", "");
 
+    // check if truck is favorite
+    let isfav = false;
+    const { user } = this.props.user;
+
+    if (user && user.favorites && user.favorites.indexOf(truck_id) > -1) {
+      isfav = true;
+    }
+
     return (
-      //static view of what trucks should look like.
       <ScrollView>
         <InlineGallery styleName="large-banner" data={this.state.photos} />
         <Text style={styles.truckname}>{info["name"]}</Text>
         <Text>{info["description"]}</Text>
 
-        <Button onPress={this.openMaps}>
+        <Button onPress={this.openMaps} styleName="secondary">
           <Text>Get Directions</Text>
         </Button>
+
+        {isfav ? (
+          <Button
+            onPress={() => this.onRemoveFavorite(truck_id)}
+            styleName="secondary"
+          >
+            <Text>Remove from favorite</Text>
+          </Button>
+        ) : (
+          <Button
+            onPress={() => this.onAddFavorite(truck_id)}
+            styleName="secondary"
+          >
+            <Text>Add to favorite</Text>
+          </Button>
+        )}
 
         <View style={{ paddingLeft: 32, paddingRight: 32 }}>
           <Text style={styles.text}>Hours of operation</Text>
@@ -96,16 +154,18 @@ export default class TruckPage extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 22,
-  },
-  truckname: {
-    fontWeight: "bold",
-    fontSize: 32,
-  },
-  view_row: {
-    justifyContent: "space-between",
-    flexDirection: "row",
-  },
+// redux connection
+const mapStateToProps = state => ({
+  user: state.user,
 });
+
+const mapDispatchToProps = {
+  addFavorite,
+  removeFavorite,
+  fetchUserInfo,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TruckPage);
