@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, Button } from "react-native";
+import { Text, View, Button } from "@shoutem/ui";
 import { connect } from "react-redux";
 
 import LoginForm from "../components/LoginForm";
@@ -7,7 +7,7 @@ import Register from "./Register";
 import TruckRegisterForm from "./TruckRegisterForm";
 import { loginUser, logoutUser, registerUser } from "../actions/auth";
 import { updateTrucksLocation } from "../actions/location";
-import { fetchUserInfo } from "../actions/user";
+import { fetchUserInfo, resetUserInfo } from "../actions/user";
 import { getUserLocation } from "../utils";
 
 class ProfileScreen extends React.Component {
@@ -33,6 +33,13 @@ class ProfileScreen extends React.Component {
     } catch (err) {
       console.error(err);
     }
+  };
+
+  // open page of favroites
+  onOpenFavorites = () => {
+    this.props.navigation.push("Favorites", {
+      list: this.props.user.user["favorites"],
+    });
   };
 
   // attempt to login
@@ -62,6 +69,7 @@ class ProfileScreen extends React.Component {
   onLogout = async () => {
     try {
       await this.props.logoutUser();
+      await this.props.resetUserInfo();
     } catch (error) {
       console.log(error);
     }
@@ -107,40 +115,46 @@ class ProfileScreen extends React.Component {
           {this.props.auth.loggedIn ? (
             <>
               <Text>{this.props.auth.user.email}</Text>
-              {user && user["truck_id"] ? (
+              {user && user["truck_id"] && (
                 <>
+                  <Button styleName="secondary" onPress={this.onLocationUpdate}>
+                    <Text>Update Location</Text>
+                  </Button>
                   <Button
-                    title="Update Location"
-                    onPress={this.onLocationUpdate}
-                  />
-                  <Button
-                    title="Edit truck info"
+                    styleName="secondary"
                     onPress={() => {
                       this.setState({ view: "page_edit" });
                     }}
-                  />
-                </>
-              ) : (
-                <>
-                  <Text>I'm just a user</Text>
+                  >
+                    <Text>Edit truck info</Text>
+                  </Button>
                 </>
               )}
-              <Button title="Logout" onPress={this.onLogout} />
+              <Button styleName="secondary" onPress={this.onOpenFavorites}>
+                <Text>Favorites</Text>
+              </Button>
+              <Button styleName="secondary" onPress={this.onLogout}>
+                <Text>Logout</Text>
+              </Button>
             </>
           ) : (
             <>
               <Button
-                title="Login"
+                styleName="secondary"
                 onPress={() => {
                   this.setState({ view: "login" });
                 }}
-              />
+              >
+                <Text>Login</Text>
+              </Button>
               <Button
-                title="Register"
+                styleName="secondary"
                 onPress={() => {
                   this.setState({ view: "register" });
                 }}
-              />
+              >
+                <Text>Register</Text>
+              </Button>
             </>
           )}
         </View>
@@ -166,6 +180,7 @@ const mapDispatchToProps = {
   registerUser,
   updateTrucksLocation,
   fetchUserInfo,
+  resetUserInfo,
 };
 
 export default connect(

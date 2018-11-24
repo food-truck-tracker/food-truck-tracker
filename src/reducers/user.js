@@ -33,6 +33,11 @@ export default (state = initialState, action) => {
         errorMessage: error,
       };
     }
+    case types.RESET_USER_INFO: {
+      return {
+        ...initialState,
+      };
+    }
     default: {
       return state;
     }

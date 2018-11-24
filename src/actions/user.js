@@ -22,7 +22,6 @@ export const fetchUserInfo = () => async dispatch => {
     // go to firestore ref for user
     let ref = await firebase.firestore().collection("users");
     let user = await firebase.auth().currentUser;
-
     let doc = await ref.doc(user.uid);
     let snap = await doc.get();
 
@@ -30,4 +29,10 @@ export const fetchUserInfo = () => async dispatch => {
   } catch (e) {
     dispatch(fetchInfoError(e));
   }
+};
+
+export const resetUserInfo = () => async dispatch => {
+  dispatch({
+    type: types.RESET_USER_INFO,
+  });
 };
