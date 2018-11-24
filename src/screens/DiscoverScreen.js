@@ -21,20 +21,28 @@ import {
 import { fetchTrucksInfo } from "../actions/truck";
 
 class DiscoverScreen extends React.Component {
-  static navigationOptions = {
-    title: "Discover",
-    headerRight: (
-      <Button onPress={() => this.props.fetchTrucksInfo()}>
-        <Icon name="refresh" />
-      </Button>
-    ),
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: "Discover",
+      headerRight: (
+        <Button onPress={navigation.getParam("fetchTrucksInfo")}>
+          <Icon name="refresh" />
+        </Button>
+      ),
+    };
   };
-  componentWillMount() {
-    this.props.fetchTrucksInfo();
-  }
+
   constructor(props) {
     super(props);
     this.renderRow = this.renderRow.bind(this);
+  }
+
+  componentDidMount() {
+    // set prop function to navigation props
+    this.props.navigation.setParams({
+      fetchTrucksInfo: this.props.fetchTrucksInfo,
+    });
+    this.props.fetchTrucksInfo();
   }
 
   truckTileClick = () => {

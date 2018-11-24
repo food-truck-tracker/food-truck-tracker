@@ -1,6 +1,5 @@
 import React from "react";
-import { Text, View, Button, StyleSheet } from "react-native";
-import firebase from "react-native-firebase";
+import { Text, View, Button } from "react-native";
 import { connect } from "react-redux";
 
 import LoginForm from "../components/LoginForm";
@@ -9,15 +8,6 @@ import TruckRegisterForm from "./TruckRegisterForm";
 import { loginUser, logoutUser, registerUser } from "../actions/auth";
 import { updateTrucksLocation } from "../actions/location";
 import { getUserLocation } from "../utils";
-
-const styles = StyleSheet.create({
-  header: {
-    fontSize: 32,
-    fontWeight: "bold",
-    padding: 10,
-    margin: 10,
-  },
-});
 
 class ProfileScreen extends React.Component {
   constructor(props) {
@@ -28,20 +18,6 @@ class ProfileScreen extends React.Component {
       emailValue: "",
       passwordValue: "",
     };
-  }
-
-  // listening for realtime auth change
-  componentDidMount() {
-    this.authUnsubscriber = firebase.auth().onAuthStateChanged(user => {
-      console.log("subscriber", user);
-    });
-  }
-
-  // removing listener when component unmounts
-  componentWillUnmount() {
-    if (this.authUnsubscriber) {
-      this.authUnsubscriber();
-    }
   }
 
   // get user location to update in database
