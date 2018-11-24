@@ -36,3 +36,73 @@ export const resetUserInfo = () => async dispatch => {
     type: types.RESET_USER_INFO,
   });
 };
+
+// adding favorite actions
+const addFavoriteStart = () => ({
+  type: types.ADD_FAVORITE_START,
+});
+
+const addFavoriteFinish = () => ({
+  type: types.ADD_FAVORITE_FINISHED,
+});
+
+const addFavoriteError = error => ({
+  type: types.ADD_FAVORITE_ERROR,
+  error,
+});
+
+export const addFavorite = truck_id => async dispatch => {
+  dispatch(addFavoriteStart());
+  try {
+    // go to firestore ref for user
+    let user = await firebase.auth().currentUser;
+    let docRef = await firebase
+      .firestore()
+      .collection("users")
+      .doc(user.uid);
+
+    // add new truck into array
+    await docRef.update({
+      favorites: firebase.firestore.FieldValue.arrayUnion(truck_id),
+    });
+
+    dispatch(addFavoriteFinish());
+  } catch (e) {
+    dispatch(addFavoriteError(e));
+  }
+};
+
+// removing favorite trucks
+const removeFavoriteStart = () => ({
+  type: types.REMOVE_FAVORITE_START,
+});
+
+const removeFavoriteFinish = () => ({
+  type: types.REMOVE_FAVORITE_FINISHED,
+});
+
+const removeFavoriteError = error => ({
+  type: types.REMOVE_FAVORITE_ERROR,
+  error,
+});
+
+export const removeFavorite = truck_id => async dispatch => {
+  dispatch(removeFavoriteStart());
+  try {
+    // go to firestore ref for user
+    let user = await firebase.auth().currentUser;
+    let docRef = await firebase
+      .firestore()
+      .collection("users")
+      .doc(user.uid);
+
+    // remove truck from array
+    await docRef.update({
+      favorites: firebase.firestore.FieldValue.arrayRemove(truck_id),
+    });
+
+    dispatch(removeFavoriteFinish());
+  } catch (e) {
+    dispatch(removeFavoriteError(e));
+  }
+};
