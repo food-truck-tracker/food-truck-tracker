@@ -1,5 +1,6 @@
 import React from "react";
-import { Text, View, Button, TextInput, StyleSheet } from "react-native";
+import { View, TextInput, StyleSheet } from "react-native";
+import { Button, Text } from "@shoutem/ui";
 import { connect } from "react-redux";
 
 const styles = StyleSheet.create({
@@ -12,6 +13,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     padding: 10,
     margin: 10,
+  },
+  button: {
+    marginBottom: 5,
   },
 });
 
@@ -45,8 +49,10 @@ const LoginForm = ({
         autoCapitalize="none"
         autoCorrect={false}
       />
+      <View style={{ paddingLeft: 32, paddingRight: 32 }}>
       <Button
-        title="Login"
+        style={styles.button}
+        styleName="secondary"
         onPress={() => {
           // force input
           if (!emailValue || !passwordValue) {
@@ -56,8 +62,13 @@ const LoginForm = ({
           // attempt to login, then change view to root
           onPress().then(() => changeView("root"));
         }}
-      />
-      <Button title="Go back" onPress={changeView} disabled={isFetching} />
+      >
+      <Text>Log in</Text>
+      </Button>
+      <Button style={styles.button} styleName="secondary" onPress={changeView} disabled={isFetching}>
+        <Text>Go backkkkkkkk</Text>
+      </Button>
+      </View>
     </View>
   );
 };

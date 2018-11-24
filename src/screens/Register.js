@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, ScrollView, Button, TextInput } from "react-native";
+import { StyleSheet, ScrollView, TextInput, View } from "react-native";
+import { Button, Text } from "@shoutem/ui";
 import { CheckBox } from "react-native-elements";
 
 import ProfileScreen from "./ProfileScreen";
@@ -80,8 +81,10 @@ export default class Registerform extends React.Component {
               onPress={this._checkBox}
               checked={this.state.check_box_value}
             />
+            <View style={{ paddingLeft: 32, paddingRight: 32 }}>
             <Button
-              title="Continue"
+              style={styles.button}
+              styleName="secondary"
               disabled={this.props.isFetching}
               onPress={() => {
                 // grab vars from state
@@ -119,13 +122,20 @@ export default class Registerform extends React.Component {
                     });
                 }
               }}
-            />
+            >
+            <Text>Continue</Text>
+            </Button>
+
             <Button
-              title="Go back"
+              style={styles.button}
+              styleName="secondary"
               onPress={() => {
                 this.props.changeView("root");
               }}
-            />
+            >
+            <Text>Go back</Text>
+            </Button>
+            </View>
           </ScrollView>
         )}
       </>
@@ -159,5 +169,8 @@ const styles = StyleSheet.create({
   },
   button_offset: {
     height: 30
+  },
+  button: {
+    marginBottom: 5,
   }
 });
