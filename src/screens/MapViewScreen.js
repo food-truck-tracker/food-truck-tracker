@@ -15,13 +15,6 @@ import { fetchTrucksLocation } from "../actions/location";
 import { getUserLocation } from "../utils";
 import { Button, Icon } from "@shoutem/ui";
 
-const Images = [
-  {
-    uri:
-      "https://cdn.pixabay.com/photo/2017/06/23/21/37/oldtimer-2436018_1280.jpg",
-  },
-];
-
 const { width, height } = Dimensions.get("window");
 
 const CARD_HEIGHT = height / 4;
@@ -82,7 +75,7 @@ class MapViewScreen extends React.Component {
             latitude: trucksLocation[truck].location[0],
             longitude: trucksLocation[truck].location[1],
           },
-          image: Images[0],
+          image: { uri: trucksInfo[truck].thumbnail },
           title: trucksInfo[truck].name,
           description: trucksInfo[truck].description,
           id: truck,
