@@ -1,13 +1,14 @@
 import React from "react";
 import { Text, View, Button } from "@shoutem/ui";
 import { connect } from "react-redux";
+import ImagePicker from "react-native-image-picker";
 
 import LoginForm from "../components/LoginForm";
 import Register from "./Register";
 import TruckRegisterForm from "./TruckRegisterForm";
 import { loginUser, logoutUser, registerUser } from "../actions/auth";
 import { updateTrucksLocation } from "../actions/location";
-import { fetchUserInfo, resetUserInfo } from "../actions/user";
+import { fetchUserInfo, resetUserInfo, uploadImage } from "../actions/user";
 import { getUserLocation } from "../utils";
 
 class ProfileScreen extends React.Component {
@@ -40,6 +41,29 @@ class ProfileScreen extends React.Component {
     this.props.navigation.push("Favorites", {
       list: this.props.user.user["favorites"],
     });
+  };
+
+  // upload new pic to firebase storage
+  onUploadPicture = (type = "extra") => {
+    ImagePicker.showImagePicker(
+      {
+        title: "Pick image for your truck",
+        mediaType: "photo",
+      },
+      res => {
+        console.log("imagepicker response", res);
+        if (!res.didCancel && !res.error) {
+          const source = { uri: res.uri };
+          console.log("image source", source);
+          this.props.uploadImage(
+            this.props.user.user.truck_id,
+            res.uri,
+            type,
+            res.fileName
+          );
+        }
+      }
+    );
   };
 
   // attempt to login
@@ -118,7 +142,7 @@ class ProfileScreen extends React.Component {
               {user && user["truck_id"] && (
                 <>
                   <Button styleName="secondary" onPress={this.onLocationUpdate}>
-                    <Text>Update Location</Text>
+                    <Text>UPDATE LOCATION</Text>
                   </Button>
                   <Button
                     styleName="secondary"
@@ -126,15 +150,24 @@ class ProfileScreen extends React.Component {
                       this.setState({ view: "page_edit" });
                     }}
                   >
-                    <Text>Edit truck info</Text>
+                    <Text>EDIT TRUCK INFO</Text>
+                  </Button>
+                  <Button
+                    styleName="secondary"
+                    onPress={() => this.onUploadPicture("thumbnail")}
+                  >
+                    <Text>UPLOAD THUMBNAIL TRUCK PICTURE</Text>
+                  </Button>
+                  <Button styleName="secondary" onPress={this.onUploadPicture}>
+                    <Text>UPLOAD TRUCK PICTURE</Text>
                   </Button>
                 </>
               )}
               <Button styleName="secondary" onPress={this.onOpenFavorites}>
-                <Text>Favorites</Text>
+                <Text>FAVORITES</Text>
               </Button>
               <Button styleName="secondary" onPress={this.onLogout}>
-                <Text>Logout</Text>
+                <Text>LOGOUT</Text>
               </Button>
             </>
           ) : (
@@ -181,6 +214,7 @@ const mapDispatchToProps = {
   updateTrucksLocation,
   fetchUserInfo,
   resetUserInfo,
+  uploadImage,
 };
 
 export default connect(

@@ -109,23 +109,28 @@ export const removeFavorite = truck_id => async dispatch => {
 
 // actions for uploading truck image to cloud storage
 const uploadImageStart = () => ({
-  type: types.REMOVE_FAVORITE_START,
+  type: types.UPLOAD_IMAGE_START,
 });
 
 const uploadImageFinish = () => ({
-  type: types.REMOVE_FAVORITE_FINISHED,
+  type: types.UPLOAD_IMAGE_FINISHED,
 });
 
 const uploadImageError = error => ({
-  type: types.REMOVE_FAVORITE_ERROR,
+  type: types.UPLOAD_IMAGE_ERROR,
   error,
 });
 
-export const uploadImage = (truck_id, uri) => async dispatch => {
+export const uploadImage = (
+  truck_id,
+  uri,
+  type = "extra",
+  fileName = "image.jpg"
+) => async dispatch => {
   dispatch(uploadImageStart());
   try {
     // get ref to bucket
-    const ref = await firebase.storage().ref(`images/${truck_id}`);
+    const ref = await firebase.storage().ref(`images/${truck_id}/${fileName}`);
     // upload image, TODO: show upload progess?
     await ref.putFile(uri);
     // get url back
@@ -137,9 +142,15 @@ export const uploadImage = (truck_id, uri) => async dispatch => {
       .collection("trucks")
       .doc(truck_id);
 
-    await truckRef.update({
-      images: firebase.firestore.FieldValue.arrayUnion(url),
-    });
+    if (type == "thumbnail") {
+      await truckRef.update({
+        thumbnail: url,
+      });
+    } else {
+      await truckRef.update({
+        images: firebase.firestore.FieldValue.arrayUnion(url),
+      });
+    }
 
     dispatch(uploadImageFinish());
   } catch (e) {

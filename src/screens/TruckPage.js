@@ -104,9 +104,15 @@ class TruckPage extends React.Component {
       isfav = true;
     }
 
+    // make array of pics for gallery
+    let images = [];
+    if (info && info["images"]) {
+      images = info["images"].map(e => ({ source: { uri: e } }));
+    }
+
     return (
       <ScrollView>
-        <InlineGallery styleName="large-banner" data={this.state.photos} />
+        <InlineGallery styleName="large-banner" data={images} />
         <Text style={styles.truckname}>{info["name"]}</Text>
         <Text>{info["description"]}</Text>
 
