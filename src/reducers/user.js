@@ -86,6 +86,30 @@ export default (state = initialState, action) => {
         errorMessage: error,
       };
     }
+    // upload image
+    case types.UPLOAD_IMAGE_START: {
+      return {
+        ...state,
+        isFetching: true,
+      };
+    }
+    case types.UPLOAD_IMAGE_FINISHED: {
+      return {
+        ...state,
+        isFetching: false,
+        hasError: false,
+        errorMessage: "",
+      };
+    }
+    case types.UPLOAD_IMAGE_ERROR: {
+      const { error } = action;
+      return {
+        ...state,
+        isFetching: false,
+        hasError: true,
+        errorMessage: error,
+      };
+    }
     default: {
       return state;
     }

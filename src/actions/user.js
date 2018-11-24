@@ -106,3 +106,43 @@ export const removeFavorite = truck_id => async dispatch => {
     dispatch(removeFavoriteError(e));
   }
 };
+
+// actions for uploading truck image to cloud storage
+const uploadImageStart = () => ({
+  type: types.REMOVE_FAVORITE_START,
+});
+
+const uploadImageFinish = () => ({
+  type: types.REMOVE_FAVORITE_FINISHED,
+});
+
+const uploadImageError = error => ({
+  type: types.REMOVE_FAVORITE_ERROR,
+  error,
+});
+
+export const uploadImage = (truck_id, uri) => async dispatch => {
+  dispatch(uploadImageStart());
+  try {
+    // get ref to bucket
+    const ref = await firebase.storage().ref(`images/${truck_id}`);
+    // upload image, TODO: show upload progess?
+    await ref.putFile(uri);
+    // get url back
+    const url = await ref.getDownloadURL();
+
+    // save url into trucks/ firestore collection
+    const truckRef = await firebase
+      .firestore()
+      .collection("trucks")
+      .doc(truck_id);
+
+    await truckRef.update({
+      images: firebase.firestore.FieldValue.arrayUnion(url),
+    });
+
+    dispatch(uploadImageFinish());
+  } catch (e) {
+    dispatch(uploadImageError(e));
+  }
+};
