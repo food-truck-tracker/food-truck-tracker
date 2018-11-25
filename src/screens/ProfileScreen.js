@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View, Button } from "@shoutem/ui";
+import { StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import ImagePicker from "react-native-image-picker";
 
@@ -135,16 +136,18 @@ class ProfileScreen extends React.Component {
     } else {
       const { user } = this.props.user;
       return (
-        <View>
+        <View style={{ paddingLeft: 12, paddingRight: 12 }}>
           {this.props.auth.loggedIn ? (
             <>
-              <Text>{this.props.auth.user.email}</Text>
+              
+              <Text style={styles.email}>{this.props.auth.user.email}</Text>
               {user && user["truck_id"] && (
                 <>
-                  <Button styleName="secondary" onPress={this.onLocationUpdate}>
+                  <Button style={styles.button} styleName="secondary" onPress={this.onLocationUpdate}>
                     <Text>UPDATE LOCATION</Text>
                   </Button>
                   <Button
+                    style={styles.button}
                     styleName="secondary"
                     onPress={() => {
                       this.setState({ view: "page_edit" });
@@ -153,26 +156,30 @@ class ProfileScreen extends React.Component {
                     <Text>EDIT TRUCK INFO</Text>
                   </Button>
                   <Button
+                    style={styles.button}
                     styleName="secondary"
                     onPress={() => this.onUploadPicture("thumbnail")}
                   >
                     <Text>UPLOAD THUMBNAIL TRUCK PICTURE</Text>
                   </Button>
-                  <Button styleName="secondary" onPress={this.onUploadPicture}>
+                  <Button style={styles.button} styleName="secondary" onPress={this.onUploadPicture}>
                     <Text>UPLOAD TRUCK PICTURE</Text>
                   </Button>
                 </>
               )}
-              <Button styleName="secondary" onPress={this.onOpenFavorites}>
+              <Button style={styles.button} styleName="secondary" onPress={this.onOpenFavorites}>
                 <Text>FAVORITES</Text>
               </Button>
-              <Button styleName="secondary" onPress={this.onLogout}>
+              <Button style={styles.button} styleName="secondary" onPress={this.onLogout}>
                 <Text>LOGOUT</Text>
               </Button>
             </>
           ) : (
             <>
               <Button
+               
+                style={styles.button}
+                paddingTop = {100}
                 styleName="secondary"
                 onPress={() => {
                   this.setState({ view: "login" });
@@ -181,6 +188,7 @@ class ProfileScreen extends React.Component {
                 <Text>Login</Text>
               </Button>
               <Button
+                style={styles.button}
                 styleName="secondary"
                 onPress={() => {
                   this.setState({ view: "register" });
@@ -221,3 +229,23 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(ProfileScreen);
+
+const styles = StyleSheet.create({
+  name: {
+    textAlign: "center",
+    fontSize: 26,
+    fontWeight: "bold",
+    marginTop: 10
+  },
+  email: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+    marginTop: 10,
+    marginBottom: 10
+  },
+  button: {
+    margin: 10,
+  },
+});
+

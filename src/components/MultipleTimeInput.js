@@ -843,6 +843,6 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: 'rgba(255,255,255,0.7)',
     marginBottom: 5,
-    paddingHorizontal: 5
-  }
+    paddingHorizontal: 10
+  },
 });

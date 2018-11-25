@@ -1,12 +1,13 @@
 import React from "react";
-import { Text, View, Button, StyleSheet, TextInput } from "react-native";
-import RadioDayPicker from "../components/RadioDayPicker"
-import MultipleTimeInput from "../components/MultipleTimeInput"
-import ProfileScreen from "./ProfileScreen"
+import { View, ScrollView, StyleSheet, TextInput } from "react-native";
+import { Button, Text } from "@shoutem/ui";
+import RadioDayPicker from "../components/RadioDayPicker";
+import MultipleTimeInput from "../components/MultipleTimeInput";
+import ProfileScreen from "./ProfileScreen";
 import { connect } from "react-redux";
 import { truckRegister } from "../actions/auth";
 
- class TruckRegisterForm extends React.Component {
+class TruckRegisterForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,70 +17,84 @@ import { truckRegister } from "../actions/auth";
       view: "root",
       current_day: 0,
       concat: {
-        sunday:{
+        sunday: {
           open: "",
-          close: "",
+          close: ""
         },
-        monday:{
+        monday: {
           open: "",
-          close: "",
+          close: ""
         },
-        tuesday:{
+        tuesday: {
           open: "",
-          close: "",
+          close: ""
         },
-        wednesday:{
+        wednesday: {
           open: "",
-          close: "",
+          close: ""
         },
-        thursday:{
+        thursday: {
           open: "",
-          close: "",
+          close: ""
         },
-        friday:{
+        friday: {
           open: "",
-          close: "",
+          close: ""
         },
-        saturday:{
+        saturday: {
           open: "",
-          close: "",
-        },
+          close: ""
+        }
       }
     };
   }
-  
+
   //updates the value of the day
-  onUpdate = (val) => {
+  onUpdate = val => {
     this.setState({
       current_day: val
-    })
+    });
   };
 
   //registers truck to firebase.
-  onRegisterVendor = async (uid, truck_name, description, hours_of_operation) => {
+  onRegisterVendor = async (
+    uid,
+    truck_name,
+    description,
+    hours_of_operation
+  ) => {
     try {
-      const response = await this.props.truckRegister(uid, truck_name, description, hours_of_operation);
+      const response = await this.props.truckRegister(
+        uid,
+        truck_name,
+        description,
+        hours_of_operation
+      );
       console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
 
-  
-// places the concat string inside the state variable.
-  onUpdateDay = (certain_day, open_or_closed_section, input) =>{
+  // places the concat string inside the state variable.
+  onUpdateDay = (certain_day, open_or_closed_section, input) => {
     this.state.concat[certain_day][open_or_closed_section] = input;
-  }
+  };
   changeView = view => {
     this.setState({ view: view });
-  }
+  };
   render() {
     if (this.state.view == "Continue") {
-      return <ProfileScreen />
+      return <ProfileScreen />;
     }
     return (
-      <View>
-        {this.props.update ? <Text style={styles.header}>Update truck page</Text> : <Text style={styles.header}>Register truck cont.</Text>}
+      <ScrollView>
+      <View style={{paddingHorizontal: 30}}>
+        {this.props.update ? (
+          <Text style={styles.header}>Update truck page</Text>
+        ) : (
+          <Text style={styles.header}>Register truck cont</Text>
+        )}
         <TextInput
           style={styles.input}
           autoCorrect={false}
@@ -94,38 +109,46 @@ import { truckRegister } from "../actions/auth";
           value={this.state.description}
           onChangeText={description => this.setState({ description })}
         />
-        <Text fontSize='20'> Enter hours of operation: </Text>
-        <View style={{ flexDirection: 'row' }}>
-          <RadioDayPicker
-            onUpdate={this.onUpdate}
-          />
+        <Text fontSize="20"> Enter hours of operation: </Text>
+        <View style={styles.view_row}>
+          <RadioDayPicker onUpdate={this.onUpdate} />
 
           <MultipleTimeInput
             day={this.state.current_day}
             onUpdateDay={this.onUpdateDay}
           />
         </View>
-        <Button style={styles.button_offset}
-          title="Continue"
-          onPress={() => {
-          if(this.props.update){
+          <Button
+            style={styles.button}
+            styleName="secondary"
+            onPress={() => {
+              if (this.props.update) {
+              } else {
+                this.props.truckRegister(
+                  this.props.auth.user.uid,
+                  this.state.truck_name,
+                  this.state.description,
+                  this.state.concat
+                );
+              }
 
-          }
-          else{
-            this.props.truckRegister(this.props.auth.user.uid, this.state.truck_name, 
-              this.state.description, this.state.concat);
-          }
-            
-            this.changeView("Continue");
-          }}
-        />
-        <Button style={styles.button_offset}
-          title="Go back"
-          onPress={() => {
-            this.props.changeView("root");
-          }}
-        />
-      </View>
+              this.changeView("Continue");
+            }}
+          >
+            <Text>Continue</Text>
+          </Button>
+
+          <Button
+            style={styles.button}
+            styleName="secondary"
+            onPress={() => {
+              this.props.changeView("root");
+            }}
+          >
+            <Text>Go back</Text>
+          </Button>
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -139,10 +162,9 @@ const styles = StyleSheet.create({
     margin: 10
   },
   input: {
-    height: 40,
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    marginBottom: 5,
-    paddingHorizontal: 5
+    backgroundColor: "rgba(255,255,255,0.7)",
+    padding: 15,
+    margin: 20,
   },
   text: {
     fontSize: 100,
@@ -152,7 +174,14 @@ const styles = StyleSheet.create({
   },
   button_offset: {
     height: 30
-  }
+  },
+  button: {
+    marginBottom: 5,
+  },
+  view_row: {
+    justifyContent: "space-between",
+    flexDirection: "row",
+  },
 });
 
 const mapDispatchToProps = {
@@ -160,10 +189,10 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth,
+  auth: state.auth
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(TruckRegisterForm);

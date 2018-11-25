@@ -1,16 +1,22 @@
 import React from "react";
-import { Text, View, Button, TextInput, StyleSheet } from "react-native";
+import { ScrollView, TextInput, StyleSheet, View } from "react-native";
+import { Button, Text } from "@shoutem/ui";
 import { connect } from "react-redux";
 
 const styles = StyleSheet.create({
   input: {
+    backgroundColor: "rgba(255,255,255,0.7)",
     padding: 15,
-    margin: 10,
+    margin: 20,
   },
   header: {
     fontSize: 32,
     fontWeight: "bold",
     padding: 10,
+    margin: 10,
+  },
+  button: {
+    //marginBottom: 5,
     margin: 10,
   },
 });
@@ -25,7 +31,7 @@ const LoginForm = ({
   changeView,
 }) => {
   return (
-    <View>
+    <ScrollView>
       <Text style={styles.header}>Login</Text>
       <TextInput
         style={styles.input}
@@ -45,8 +51,10 @@ const LoginForm = ({
         autoCapitalize="none"
         autoCorrect={false}
       />
+      <View style={{ paddingLeft: 12, paddingRight: 12 }}>
       <Button
-        title="Login"
+        style={styles.button}
+        styleName="secondary"
         onPress={() => {
           // force input
           if (!emailValue || !passwordValue) {
@@ -56,9 +64,14 @@ const LoginForm = ({
           // attempt to login, then change view to root
           onPress().then(() => changeView("root"));
         }}
-      />
-      <Button title="Go back" onPress={changeView} disabled={isFetching} />
-    </View>
+      >
+      <Text>Log in</Text>
+      </Button>
+      <Button style={styles.button} styleName="secondary" onPress={changeView} disabled={isFetching}>
+        <Text>Go back</Text>
+      </Button>
+      </View>
+    </ScrollView>
   );
 };
 
