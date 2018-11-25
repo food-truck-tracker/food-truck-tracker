@@ -23,9 +23,10 @@ export const fetchUserInfo = () => async dispatch => {
     let ref = await firebase.firestore().collection("users");
     let user = await firebase.auth().currentUser;
     let doc = await ref.doc(user.uid);
-    let snap = await doc.get();
 
-    dispatch(fetchInfoFinish(await snap.data()));
+    doc.onSnapshot(async snap => {
+      dispatch(fetchInfoFinish(await snap.data()));
+    });
   } catch (e) {
     dispatch(fetchInfoError(e));
   }
