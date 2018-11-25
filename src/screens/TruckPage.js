@@ -32,7 +32,7 @@ class TruckPage extends React.Component {
 
     if (Platform.OS === "ios") {
       Linking.openURL(
-        `http://maps.apple.com/?ll=${location.location[0]}+${
+        `http://maps.google.com/?daddr=${location.location[0]}+${
           location.location[1]
         }`
       );

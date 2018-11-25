@@ -1,10 +1,12 @@
 import React from "react";
-import { Text, View, Button, TextInput, StyleSheet } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
+import { Button, Text, View, TextInput } from "@shoutem/ui";
 
 const styles = StyleSheet.create({
   input: {
+    backgroundColor: "rgba(255,255,255,0.7)",
     padding: 15,
-    margin: 10,
+    margin: 20,
   },
   header: {
     fontSize: 32,
@@ -15,6 +17,8 @@ const styles = StyleSheet.create({
   error: {
     color: "red",
     textAlign: "center",
+  },
+  button: {
     margin: 10,
   },
 });
@@ -29,7 +33,7 @@ const LoginForm = ({
   onChange,
 }) => {
   return (
-    <View>
+    <ScrollView>
       <Text style={styles.header}>Login</Text>
       <TextInput
         style={styles.input}
@@ -52,19 +56,24 @@ const LoginForm = ({
       {hasError ? (
         <Text style={styles.error}>Invalid email/password</Text>
       ) : null}
-      <Button
-        title="Login"
-        onPress={() => {
-          // force input
-          if (!emailValue || !passwordValue) {
-            alert("Input all the fields!");
-            return;
-          }
-          // attempt to login, then change view to root
-          onPress();
-        }}
-      />
-    </View>
+      <View style={{ paddingLeft: 12, paddingRight: 12 }}>
+        <Button
+          style={styles.button}
+          styleName="secondary"
+          onPress={() => {
+            // force input
+            if (!emailValue || !passwordValue) {
+              alert("Input all the fields!");
+              return;
+            }
+            // attempt to login, then change view to root
+            onPress();
+          }}
+        >
+          <Text>Log in</Text>
+        </Button>
+      </View>
+    </ScrollView>
   );
 };
 

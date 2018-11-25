@@ -6,7 +6,7 @@ PODS:
   - BoringSSL/Implementation (10.0.6):
     - BoringSSL/Interface (= 10.0.6)
   - BoringSSL/Interface (10.0.6)
-  - BVLinearGradient (2.2.0):
+  - BVLinearGradient (2.4.3):
     - React
   - DoubleConversion (1.1.6)
   - Firebase/Auth (5.9.0):
@@ -164,6 +164,8 @@ PODS:
     - Google-Maps-iOS-Utils (= 2.1.0)
     - GoogleMaps (= 2.5.0)
     - React
+  - react-native-image-picker (0.27.1):
+    - React
   - react-native-maps (0.21.0):
     - React
   - React/Core (0.57.1):
@@ -211,6 +213,8 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
+  - ReactNativePermissions (1.1.1):
+    - React
   - RNVectorIcons (6.0.2):
     - React
   - yoga (0.57.1.React)
@@ -229,6 +233,7 @@ DEPENDENCIES:
   - GoogleAppMeasurement (~> 5.2.0)
   - GoogleMaps
   - react-native-google-maps (from `../node_modules/react-native-maps`)
+  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
@@ -243,6 +248,7 @@ DEPENDENCIES:
   - React/RCTText (from `../node_modules/react-native`)
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
+  - ReactNativePermissions (from `../node_modules/react-native-permissions`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
@@ -286,8 +292,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native"
   react-native-google-maps:
     :path: "../node_modules/react-native-maps"
+  react-native-image-picker:
+    :path: "../node_modules/react-native-image-picker"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
+  ReactNativePermissions:
+    :path: "../node_modules/react-native-permissions"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   yoga:
@@ -296,7 +306,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
-  BVLinearGradient: 0a02e2fc3e88c3e85fbf6b7ac7317415b2362083
+  BVLinearGradient: 6d8909e3fc6b089defa4b89d967441fa6827a2ee
   DoubleConversion: bb338842f62ab1d708ceb63ec3d999f0f3d98ecd
   Firebase: 383fa29aca93e371cab776b48a5c66544d3c2003
   FirebaseAnalytics: 831f1f127f4a75698e9875a87bf7e2668730d953
@@ -324,10 +334,12 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
   react-native-google-maps: 2cfe3b01f8422c7dae51d8764139fd70f888cfce
+  react-native-image-picker: f42de90075c5b1af53417af927631d909a1a746e
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
+  ReactNativePermissions: 9f2d9c45c98800795e6c2ed330e25d11a66a8169
   RNVectorIcons: 8c52e1e8da1153613fdef44748e865c25556cb9c
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: c10d37864b613bdc4f820a6784b42bc30faa1d82
+PODFILE CHECKSUM: f2b4e5ff4eeff7bf2d7a045d0baae22a6a7303ca
 
 COCOAPODS: 1.5.3

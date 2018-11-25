@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View, Button } from "@shoutem/ui";
+import { StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import ImagePicker from "react-native-image-picker";
 
@@ -182,3 +183,22 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(ProfileScreen);
+
+const styles = StyleSheet.create({
+  name: {
+    textAlign: "center",
+    fontSize: 26,
+    fontWeight: "bold",
+    marginTop: 10,
+  },
+  email: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  button: {
+    margin: 10,
+  },
+});

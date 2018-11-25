@@ -1,5 +1,6 @@
 import React from "react";
-import { Text, View, Button, StyleSheet, TextInput } from "react-native";
+import { StyleSheet } from "react-native";
+import { Button, Text, View, TextInput } from "@shoutem/ui";
 import { connect } from "react-redux";
 
 import RadioDayPicker from "../components/RadioDayPicker";
@@ -131,10 +132,9 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   input: {
-    height: 40,
     backgroundColor: "rgba(255,255,255,0.7)",
-    marginBottom: 5,
-    paddingHorizontal: 5,
+    padding: 15,
+    margin: 20,
   },
   text: {
     fontSize: 100,
@@ -144,6 +144,13 @@ const styles = StyleSheet.create({
   },
   button_offset: {
     height: 30,
+  },
+  button: {
+    marginBottom: 5,
+  },
+  view_row: {
+    justifyContent: "space-between",
+    flexDirection: "row",
   },
 });
 
