@@ -56,23 +56,21 @@ const LoginForm = ({
       {hasError ? (
         <Text style={styles.error}>Invalid email/password</Text>
       ) : null}
-      <View style={{ paddingLeft: 12, paddingRight: 12 }}>
-        <Button
-          style={styles.button}
-          styleName="secondary"
-          onPress={() => {
-            // force input
-            if (!emailValue || !passwordValue) {
-              alert("Input all the fields!");
-              return;
-            }
-            // attempt to login, then change view to root
-            onPress();
-          }}
-        >
-          <Text>Log in</Text>
-        </Button>
-      </View>
+      <Button
+        style={styles.button}
+        styleName="secondary"
+        onPress={() => {
+          // force input
+          if (!emailValue || !passwordValue) {
+            alert("Input all the fields!");
+            return;
+          }
+          // attempt to login, then change view to root
+          onPress();
+        }}
+      >
+        <Text>Log in</Text>
+      </Button>
     </ScrollView>
   );
 };

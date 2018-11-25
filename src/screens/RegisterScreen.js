@@ -1,22 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, Text, ScrollView, Button, TextInput } from "react-native";
+import { StyleSheet, TextInput } from "react-native";
+import { Text, Button, View, Heading } from "@shoutem/ui";
 
 import { registerUser } from "../actions/auth";
 
 const styles = StyleSheet.create({
-  header: {
-    textAlign: "center",
-    fontSize: 26,
-    fontWeight: "bold",
-    padding: 10,
-    margin: 10,
+  view: {
+    paddingHorizontal: 12,
   },
   input: {
-    height: 40,
     backgroundColor: "rgba(255,255,255,0.7)",
-    marginBottom: 5,
-    paddingHorizontal: 5,
+    padding: 15,
+    margin: 20,
   },
   text: {
     fontSize: 100,
@@ -24,16 +20,16 @@ const styles = StyleSheet.create({
     textAlign: "right",
     left: -40,
   },
-  CheckBox: {
-    width: 200,
-    backgroundColor: "rgba(255, 255, 255, 0)",
-  },
-  button_offset: {
-    height: 30,
+  button: {
+    margin: 10,
   },
 });
 
 class RegisterScreen extends React.Component {
+  static navigationOptions = {
+    title: "Register",
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -46,8 +42,7 @@ class RegisterScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView>
-        <Text style={styles.header}>Register</Text>
+      <View style={styles.view}>
         <TextInput
           style={styles.input}
           autoCorrect={false}
@@ -83,7 +78,8 @@ class RegisterScreen extends React.Component {
           autoCapitalize="none"
         />
         <Button
-          title="Register"
+          styleName="secondary"
+          style={styles.button}
           disabled={this.props.auth.isFetching}
           onPress={() => {
             // grab vars from state
@@ -104,8 +100,10 @@ class RegisterScreen extends React.Component {
               .registerUser(full_name, email, password)
               .then(() => this.props.navigation.goBack());
           }}
-        />
-      </ScrollView>
+        >
+          <Text>REGISTER</Text>
+        </Button>
+      </View>
     );
   }
 }

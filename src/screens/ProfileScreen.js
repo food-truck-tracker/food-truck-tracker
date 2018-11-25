@@ -1,6 +1,6 @@
 import React from "react";
-import { Text, View, Button } from "@shoutem/ui";
 import { StyleSheet } from "react-native";
+import { Text, View, Button } from "@shoutem/ui";
 import { connect } from "react-redux";
 import ImagePicker from "react-native-image-picker";
 
@@ -9,6 +9,29 @@ import { loginUser, logoutUser, registerUser } from "../actions/auth";
 import { updateTrucksLocation } from "../actions/location";
 import { fetchUserInfo, resetUserInfo, uploadImage } from "../actions/user";
 import { getUserLocation } from "../utils";
+
+const styles = StyleSheet.create({
+  name: {
+    textAlign: "center",
+    fontSize: 26,
+    fontWeight: "bold",
+    marginTop: 10,
+  },
+  email: {
+    textAlign: "center",
+    fontSize: 16,
+    fontWeight: "bold",
+    marginTop: 10,
+    marginBottom: 10,
+    color: "#808080",
+  },
+  button: {
+    margin: 10,
+  },
+  view: {
+    paddingHorizontal: 12,
+  },
+});
 
 class ProfileScreen extends React.Component {
   constructor(props) {
@@ -100,41 +123,63 @@ class ProfileScreen extends React.Component {
   _chooseRender = () => {
     const { user } = this.props.user;
     return (
-      <View>
+      <View style={styles.view}>
         {this.props.auth.loggedIn ? (
           <>
-            <Text>{this.props.auth.user.email}</Text>
+            {user && <Text style={styles.name}>{user.name}</Text>}
+            <Text style={styles.email}>{this.props.auth.user.email}</Text>
             {user && user["truck_id"] ? (
               <>
-                <Button styleName="secondary" onPress={this.onLocationUpdate}>
+                <Button
+                  style={styles.button}
+                  styleName="secondary"
+                  onPress={this.onLocationUpdate}
+                >
                   <Text>UPDATE LOCATION</Text>
                 </Button>
                 <Button
+                  style={styles.button}
                   styleName="secondary"
                   onPress={() => this.onUploadPicture("thumbnail")}
                 >
                   <Text>UPLOAD THUMBNAIL TRUCK PICTURE</Text>
                 </Button>
-                <Button styleName="secondary" onPress={this.onUploadPicture}>
+                <Button
+                  style={styles.button}
+                  styleName="secondary"
+                  onPress={this.onUploadPicture}
+                >
                   <Text>UPLOAD TRUCK PICTURE</Text>
                 </Button>
               </>
             ) : (
               <>
-                <Button styleName="secondary" onPress={this.onTruckRegister}>
+                <Button
+                  style={styles.button}
+                  styleName="secondary"
+                  onPress={this.onTruckRegister}
+                >
                   <Text>REGISTER A TRUCK</Text>
                 </Button>
               </>
             )}
-            <Button styleName="secondary" onPress={this.onOpenFavorites}>
+            <Button
+              style={styles.button}
+              styleName="secondary"
+              onPress={this.onOpenFavorites}
+            >
               <Text>FAVORITES</Text>
             </Button>
-            <Button styleName="secondary" onPress={this.onLogout}>
+            <Button
+              style={styles.button}
+              styleName="secondary"
+              onPress={this.onLogout}
+            >
               <Text>LOGOUT</Text>
             </Button>
           </>
         ) : (
-          <>
+          <View style={styles.view}>
             <LoginForm
               isFetching={this.props.auth.isFetching}
               hasError={this.props.auth.hasError}
@@ -146,12 +191,13 @@ class ProfileScreen extends React.Component {
             />
             <Button
               styleName="secondary"
+              style={styles.button}
               disabled={this.props.auth.isFetching}
               onPress={this.onRegisterClick}
             >
               <Text>Register</Text>
             </Button>
-          </>
+          </View>
         )}
       </View>
     );
@@ -183,22 +229,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(ProfileScreen);
-
-const styles = StyleSheet.create({
-  name: {
-    textAlign: "center",
-    fontSize: 26,
-    fontWeight: "bold",
-    marginTop: 10,
-  },
-  email: {
-    textAlign: "center",
-    fontSize: 20,
-    fontWeight: "bold",
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  button: {
-    margin: 10,
-  },
-});

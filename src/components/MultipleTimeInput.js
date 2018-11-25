@@ -1,6 +1,30 @@
 import React, { Component } from "react";
 import { TextInput, Text, View, StyleSheet, Switch } from "react-native";
 
+const styles = StyleSheet.create({
+  text: {
+    top: 10,
+    fontWeight: "bold",
+    fontSize: 15,
+  },
+  Switch: {
+    backgroundColor: "rgba(255,255,255,0)",
+    width: 100,
+    right: -50,
+    flexDirection: "row",
+  },
+  input: {
+    height: 40,
+    backgroundColor: "rgba(255,255,255,0.7)",
+    marginBottom: 5,
+    paddingHorizontal: 10,
+  },
+  timerow: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+});
+
 export default class MultipleTimeInput extends Component {
   constructor() {
     super();
@@ -290,6 +314,7 @@ export default class MultipleTimeInput extends Component {
       return (
         <View style={{ flexDirection: "column" }}>
           <View style={styles.Switch}>
+            <Text>Closed?</Text>
             <Switch
               onValueChange={() => {
                 this._checkBox(0);
@@ -297,65 +322,67 @@ export default class MultipleTimeInput extends Component {
               value={this.state.day.sunday.closed}
             />
           </View>
-          <View style={{ flexDirection: "row" }}>
-            <Text style={styles.text}> Open: </Text>
-            <TextInput
-              style={styles.input}
-              editable={!this.state.day.sunday.closed}
-              maxLength={2}
-              keyboardType="decimal-pad"
-              placeholder="Hour"
-              value={this.state.day.sunday.open_time_hour}
-              onChangeText={input => {
-                this.check_input_hour(input, "sunday", "open_time_hour");
-                console.log("attemp should run next");
-                this.attempt_concat_input("sunday", "open");
-              }}
-            />
-            <Text style={styles.text}> : </Text>
-            <TextInput
-              style={styles.input}
-              editable={!this.state.day.sunday.closed}
-              maxLength={2}
-              keyboardType="decimal-pad"
-              placeholder="min"
-              value={this.state.day.sunday.open_time_min}
-              onChangeText={input => {
-                this.check_input_min(input, "sunday", "open_time_min");
-                this.attempt_concat_input("sunday", "open");
-                this.forceUpdate();
-              }}
-            />
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <Text style={styles.text}> Closed: </Text>
-            <TextInput
-              style={styles.input}
-              editable={!this.state.day.sunday.closed}
-              maxLength={2}
-              keyboardType="decimal-pad"
-              placeholder="Hour"
-              value={this.state.day.sunday.close_time_hour}
-              onChangeText={input => {
-                this.check_input_hour(input, "sunday", "close_time_hour");
-                this.attempt_concat_input("sunday", "close");
-                this.forceUpdate();
-              }}
-            />
-            <Text style={styles.text}> : </Text>
-            <TextInput
-              style={styles.input}
-              editable={!this.state.day.sunday.closed}
-              maxLength={2}
-              keyboardType="decimal-pad"
-              placeholder="min"
-              value={this.state.day.sunday.close_time_min}
-              onChangeText={input => {
-                this.check_input_min(input, "sunday", "close_time_min");
-                this.attempt_concat_input("sunday", "close");
-                this.forceUpdate();
-              }}
-            />
+          <View style={{ flexDirection: "column" }}>
+            <View style={styles.timerow}>
+              <Text style={styles.text}> Open: </Text>
+              <TextInput
+                style={styles.input}
+                editable={!this.state.day.sunday.closed}
+                maxLength={2}
+                keyboardType="decimal-pad"
+                placeholder="Hour"
+                value={this.state.day.sunday.open_time_hour}
+                onChangeText={input => {
+                  this.check_input_hour(input, "sunday", "open_time_hour");
+                  console.log("attemp should run next");
+                  this.attempt_concat_input("sunday", "open");
+                }}
+              />
+              <Text style={styles.text}> : </Text>
+              <TextInput
+                style={styles.input}
+                editable={!this.state.day.sunday.closed}
+                maxLength={2}
+                keyboardType="decimal-pad"
+                placeholder="min"
+                value={this.state.day.sunday.open_time_min}
+                onChangeText={input => {
+                  this.check_input_min(input, "sunday", "open_time_min");
+                  this.attempt_concat_input("sunday", "open");
+                  this.forceUpdate();
+                }}
+              />
+            </View>
+            <View style={styles.timerow}>
+              <Text style={styles.text}> Closed: </Text>
+              <TextInput
+                style={styles.input}
+                editable={!this.state.day.sunday.closed}
+                maxLength={2}
+                keyboardType="decimal-pad"
+                placeholder="Hour"
+                value={this.state.day.sunday.close_time_hour}
+                onChangeText={input => {
+                  this.check_input_hour(input, "sunday", "close_time_hour");
+                  this.attempt_concat_input("sunday", "close");
+                  this.forceUpdate();
+                }}
+              />
+              <Text style={styles.text}> : </Text>
+              <TextInput
+                style={styles.input}
+                editable={!this.state.day.sunday.closed}
+                maxLength={2}
+                keyboardType="decimal-pad"
+                placeholder="min"
+                value={this.state.day.sunday.close_time_min}
+                onChangeText={input => {
+                  this.check_input_min(input, "sunday", "close_time_min");
+                  this.attempt_concat_input("sunday", "close");
+                  this.forceUpdate();
+                }}
+              />
+            </View>
           </View>
         </View>
       );
@@ -800,28 +827,3 @@ export default class MultipleTimeInput extends Component {
     }
   }
 }
-
-const styles = StyleSheet.create({
-  header: {
-    fontSize: 26,
-    fontWeight: "bold",
-    padding: 10,
-    margin: 10,
-  },
-  text: {
-    top: 10,
-    fontWeight: "bold",
-    fontSize: 15,
-  },
-  Switch: {
-    backgroundColor: "rgba(255,255,255,0)",
-    width: 100,
-    right: -50,
-  },
-  input: {
-    height: 40,
-    backgroundColor: "rgba(255,255,255,0.7)",
-    marginBottom: 5,
-    paddingHorizontal: 10,
-  },
-});

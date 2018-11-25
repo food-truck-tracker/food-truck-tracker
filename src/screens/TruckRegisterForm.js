@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
 import { Button, Text, View, TextInput } from "@shoutem/ui";
 import { connect } from "react-redux";
 
@@ -7,7 +7,28 @@ import RadioDayPicker from "../components/RadioDayPicker";
 import MultipleTimeInput from "../components/MultipleTimeInput";
 import { truckRegister } from "../actions/auth";
 
+const styles = StyleSheet.create({
+  input: {
+    backgroundColor: "rgba(255,255,255,0.7)",
+    marginVertical: 10,
+  },
+  button: {
+    marginVertical: 10,
+  },
+  view: {
+    paddingHorizontal: 12,
+  },
+  right: {
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+});
 class TruckRegisterForm extends React.Component {
+  static navigationOptions = {
+    title: "Register a Truck",
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -81,8 +102,7 @@ class TruckRegisterForm extends React.Component {
 
   render() {
     return (
-      <View>
-        <Text style={styles.header}>Register truck cont.</Text>
+      <ScrollView style={styles.view}>
         <TextInput
           style={styles.input}
           placeholder="Enter truck name..."
@@ -96,7 +116,7 @@ class TruckRegisterForm extends React.Component {
           onChangeText={description => this.setState({ description })}
         />
         <Text fontSize="20"> Enter hours of operation: </Text>
-        <View style={{ flexDirection: "row" }}>
+        <View style={styles.right}>
           <RadioDayPicker onUpdate={this.onUpdate} />
           <MultipleTimeInput
             day={this.state.current_day}
@@ -104,10 +124,15 @@ class TruckRegisterForm extends React.Component {
           />
         </View>
         <Button
-          style={styles.button_offset}
+          styleName="secondary"
+          style={styles.button}
           disabled={this.props.auth.isFetching}
-          title="REGISTER TRUCK"
           onPress={() => {
+            const { truck_name, description } = this.state;
+            if ((!truck_name, !description)) {
+              alert("Please enter name and description");
+              return;
+            }
             this.props
               .truckRegister(
                 this.props.auth.user.uid,
@@ -117,42 +142,13 @@ class TruckRegisterForm extends React.Component {
               )
               .then(() => this.props.navigation.goBack());
           }}
-        />
-      </View>
+        >
+          <Text>REGISTER TRUCK</Text>
+        </Button>
+      </ScrollView>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  header: {
-    textAlign: "center",
-    fontSize: 26,
-    fontWeight: "bold",
-    padding: 10,
-    margin: 10,
-  },
-  input: {
-    backgroundColor: "rgba(255,255,255,0.7)",
-    padding: 15,
-    margin: 20,
-  },
-  text: {
-    fontSize: 100,
-    top: 100,
-    textAlign: "right",
-    left: -40,
-  },
-  button_offset: {
-    height: 30,
-  },
-  button: {
-    marginBottom: 5,
-  },
-  view_row: {
-    justifyContent: "space-between",
-    flexDirection: "row",
-  },
-});
 
 const mapDispatchToProps = {
   truckRegister,
