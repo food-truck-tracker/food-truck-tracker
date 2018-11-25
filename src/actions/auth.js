@@ -18,18 +18,14 @@ const loginError = error => ({
   error,
 });
 
-export const loginUser = (email, pass) => async (dispatch, getState) => {
+export const loginUser = (email, pass) => async dispatch => {
   dispatch(loginStart());
   try {
     const response = await firebase
       .auth()
       .signInWithEmailAndPassword(email, pass);
-    if (response.error) {
-      throw new Error(response);
-    }
     dispatch(loginFinished(response.user));
   } catch (error) {
-    console.error(error);
     dispatch(loginError(error));
   }
 };

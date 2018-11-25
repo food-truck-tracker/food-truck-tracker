@@ -1,11 +1,33 @@
-import React, { Component } from 'react';
-import { TextInput, Text, View, StyleSheet, } from "react-native";
-import { CheckBox } from 'react-native-elements';
+import React, { Component } from "react";
+import { TextInput, Text, View, StyleSheet, Switch } from "react-native";
 
+const styles = StyleSheet.create({
+  text: {
+    top: 10,
+    fontWeight: "bold",
+    fontSize: 15,
+  },
+  Switch: {
+    backgroundColor: "rgba(255,255,255,0)",
+    width: 100,
+    right: -50,
+    flexDirection: "row",
+  },
+  input: {
+    height: 40,
+    backgroundColor: "rgba(255,255,255,0.7)",
+    marginBottom: 5,
+    paddingHorizontal: 10,
+  },
+  timerow: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+});
 
 export default class MultipleTimeInput extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       day: {
         sunday: {
@@ -13,51 +35,50 @@ export default class MultipleTimeInput extends Component {
           open_time_hour: "",
           open_time_min: "",
           close_time_hour: "",
-          close_time_min: ""
-
+          close_time_min: "",
         },
         monday: {
           closed: true,
           open_time_hour: "",
           open_time_min: "",
           close_time_hour: "",
-          close_time_min: ""
+          close_time_min: "",
         },
         tuesday: {
           closed: true,
           open_time_hour: "",
           open_time_min: "",
           close_time_hour: "",
-          close_time_min: ""
+          close_time_min: "",
         },
         wednesday: {
           closed: true,
           open_time_hour: "",
           open_time_min: "",
           close_time_hour: "",
-          close_time_min: ""
+          close_time_min: "",
         },
         thursday: {
           closed: true,
           open_time_hour: "",
           open_time_min: "",
           close_time_hour: "",
-          close_time_min: ""
+          close_time_min: "",
         },
         friday: {
           closed: true,
           open_time_hour: "",
           open_time_min: "",
           close_time_hour: "",
-          close_time_min: ""
+          close_time_min: "",
         },
         saturday: {
           closed: true,
           open_time_hour: "",
           open_time_min: "",
           close_time_hour: "",
-          close_time_min: ""
-        }
+          close_time_min: "",
+        },
       },
       concat: {
         sunday: {
@@ -87,9 +108,9 @@ export default class MultipleTimeInput extends Component {
         saturday: {
           open: "",
           close: "",
-        }
-      }
-    }
+        },
+      },
+    };
   }
 
   //updates the values of checkboxes to present to the user.
@@ -107,14 +128,11 @@ export default class MultipleTimeInput extends Component {
       if (this.state.day.sunday.closed == false) {
         this.state.day.sunday.closed = true;
         this.forceUpdate();
-      }
-      else {
+      } else {
         this.state.day.sunday.closed = false;
         this.forceUpdate();
       }
-    }
-
-    else if (certain_day == 1) {
+    } else if (certain_day == 1) {
       this.state.day.monday.close_time_hour = "";
       this.state.day.monday.close_time_min = "";
       this.state.day.monday.open_time_hour = "";
@@ -126,14 +144,11 @@ export default class MultipleTimeInput extends Component {
       if (this.state.day.monday.closed == false) {
         this.state.day.monday.closed = true;
         this.forceUpdate();
-      }
-      else {
+      } else {
         this.state.day.monday.closed = false;
         this.forceUpdate();
       }
-    }
-
-    else if (certain_day == 2) {
+    } else if (certain_day == 2) {
       this.state.day.tuesday.close_time_hour = "";
       this.state.day.tuesday.close_time_min = "";
       this.state.day.tuesday.open_time_hour = "";
@@ -145,14 +160,11 @@ export default class MultipleTimeInput extends Component {
       if (this.state.day.tuesday.closed == false) {
         this.state.day.tuesday.closed = true;
         this.forceUpdate();
-      }
-      else {
+      } else {
         this.state.day.tuesday.closed = false;
         this.forceUpdate();
       }
-    }
-
-    else if (certain_day == 3) {
+    } else if (certain_day == 3) {
       this.state.day.wednesday.close_time_hour = "";
       this.state.day.wednesday.close_time_min = "";
       this.state.day.wednesday.open_time_hour = "";
@@ -164,14 +176,11 @@ export default class MultipleTimeInput extends Component {
       if (this.state.day.wednesday.closed == false) {
         this.state.day.wednesday.closed = true;
         this.forceUpdate();
-      }
-      else {
+      } else {
         this.state.day.wednesday.closed = false;
         this.forceUpdate();
       }
-    }
-
-    else if (certain_day == 4) {
+    } else if (certain_day == 4) {
       this.state.day.thursday.close_time_hour = "";
       this.state.day.thursday.close_time_min = "";
       this.state.day.thursday.open_time_hour = "";
@@ -183,14 +192,11 @@ export default class MultipleTimeInput extends Component {
       if (this.state.day.thursday.closed == false) {
         this.state.day.thursday.closed = true;
         this.forceUpdate();
-      }
-      else {
+      } else {
         this.state.day.thursday.closed = false;
         this.forceUpdate();
       }
-    }
-
-    else if (certain_day == 5) {
+    } else if (certain_day == 5) {
       this.state.day.friday.close_time_hour = "";
       this.state.day.friday.close_time_min = "";
       this.state.day.friday.open_time_hour = "";
@@ -202,14 +208,11 @@ export default class MultipleTimeInput extends Component {
       if (this.state.day.friday.closed == false) {
         this.state.day.friday.closed = true;
         this.forceUpdate();
-      }
-      else {
+      } else {
         this.state.day.friday.closed = false;
         this.forceUpdate();
       }
-    }
-
-    else if (certain_day == 6) {
+    } else if (certain_day == 6) {
       this.state.day.saturday.close_time_hour = "";
       this.state.day.saturday.close_time_min = "";
       this.state.day.saturday.open_time_hour = "";
@@ -221,14 +224,12 @@ export default class MultipleTimeInput extends Component {
       if (this.state.day.saturday.closed == false) {
         this.state.day.saturday.closed = true;
         this.forceUpdate();
-      }
-      else {
+      } else {
         this.state.day.saturday.closed = false;
         this.forceUpdate();
       }
     }
   };
-
 
   //user error handling to make sure that the time format is correct.
   check_input_hour(input, certain_day, open_close_hour) {
@@ -243,8 +244,7 @@ export default class MultipleTimeInput extends Component {
     if (input >= 24 || input < -1) {
       alert("Please enter numbers between 00 through 23");
       this.state.day[certain_day][open_close_hour] = "";
-    }
-    else {
+    } else {
       this.state.day[certain_day][open_close_hour] = input;
     }
     this.forceUpdate();
@@ -262,8 +262,7 @@ export default class MultipleTimeInput extends Component {
     if (input >= 60 || input < -1) {
       alert("Please enter numbers between 00 through 59");
       this.state.day[certain_day][open_close_min] = "";
-    }
-    else {
+    } else {
       this.state.day[certain_day][open_close_min] = input;
     }
     this.forceUpdate();
@@ -271,123 +270,140 @@ export default class MultipleTimeInput extends Component {
 
   //concatenates hour/time together and sends info to parent function.
   attempt_concat_input(certain_day, open_or_closed_section) {
-      
-      if (open_or_closed_section == "open") {
-      if (this.state.day[certain_day].open_time_hour == "" || this.state.day[certain_day].open_time_min == "") {
+    if (open_or_closed_section == "open") {
+      if (
+        this.state.day[certain_day].open_time_hour == "" ||
+        this.state.day[certain_day].open_time_min == ""
+      ) {
         return;
+      } else {
+        this.state.concat[certain_day].open =
+          this.state.day[certain_day].open_time_hour +
+          ":" +
+          this.state.day[certain_day].open_time_min;
+        this.props.onUpdateDay(
+          certain_day,
+          open_or_closed_section,
+          this.state.concat[certain_day].open
+        );
       }
-      else {
-        
-        this.state.concat[certain_day].open = this.state.day[certain_day].open_time_hour + ":" + this.state.day[certain_day].open_time_min;
-        this.props.onUpdateDay(certain_day, open_or_closed_section, this.state.concat[certain_day].open);
-      }
-    }
-    else if (open_or_closed_section == "close") {
-      if (this.state.day[certain_day].close_time_hour == "" || this.state.day[certain_day].close_time_min == "") {
+    } else if (open_or_closed_section == "close") {
+      if (
+        this.state.day[certain_day].close_time_hour == "" ||
+        this.state.day[certain_day].close_time_min == ""
+      ) {
         return;
-      }
-      else {
-        
-        this.state.concat[certain_day].close = this.state.day[certain_day].close_time_hour + ":" + this.state.day[certain_day].close_time_min;
-        this.props.onUpdateDay(certain_day, open_or_closed_section, this.state.concat[certain_day].close);
+      } else {
+        this.state.concat[certain_day].close =
+          this.state.day[certain_day].close_time_hour +
+          ":" +
+          this.state.day[certain_day].close_time_min;
+        this.props.onUpdateDay(
+          certain_day,
+          open_or_closed_section,
+          this.state.concat[certain_day].close
+        );
       }
     }
   }
-
-
 
   render() {
     // depending on the day thats clicked in the parent component,
     // this component will update the input fields for that day.
     if (this.props.day == 0) {
       return (
-        <View style={{ flexDirection: 'column' }}>
-          <CheckBox
-            containerStyle={styles.CheckBox}
-            title='Closed?'
-            onPress={() => { this._checkBox(0) }}
-            checked={this.state.day.sunday.closed}
-          />
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.text}>     Open: </Text>
-            <TextInput
-              style={styles.input}
-              editable={!this.state.day.sunday.closed}
-              maxLength={2}
-              keyboardType='decimal-pad'
-              placeholder="Hour"
-              value={this.state.day.sunday.open_time_hour}
-              onChangeText={input => {
-                this.check_input_hour(input, "sunday", "open_time_hour");
-                console.log("attemp should run next");
-                this.attempt_concat_input("sunday", "open");
+        <View style={{ flexDirection: "column" }}>
+          <View style={styles.Switch}>
+            <Text>Closed?</Text>
+            <Switch
+              onValueChange={() => {
+                this._checkBox(0);
               }}
-            />
-            <Text style={styles.text}>  :  </Text>
-            <TextInput
-              style={styles.input}
-              editable={!this.state.day.sunday.closed}
-              maxLength={2}
-              keyboardType='decimal-pad'
-              placeholder="min"
-              value={this.state.day.sunday.open_time_min}
-              onChangeText={input => {
-                this.check_input_min(input, "sunday", "open_time_min");
-                this.attempt_concat_input("sunday", "open");
-                this.forceUpdate();
-              }}
+              value={this.state.day.sunday.closed}
             />
           </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.text}>  Closed: </Text>
-            <TextInput
-              style={styles.input}
-              editable={!this.state.day.sunday.closed}
-              maxLength={2}
-              keyboardType='decimal-pad'
-              placeholder="Hour"
-              value={this.state.day.sunday.close_time_hour}
-              onChangeText={input => {
-                this.check_input_hour(input, "sunday", "close_time_hour")
-                this.attempt_concat_input("sunday", "close");
-                this.forceUpdate();
-              }}
-            />
-            <Text style={styles.text}>  :  </Text>
-            <TextInput
-              style={styles.input}
-              editable={!this.state.day.sunday.closed}
-              maxLength={2}
-              keyboardType='decimal-pad'
-              placeholder="min"
-              value={this.state.day.sunday.close_time_min}
-              onChangeText={input => {
-                this.check_input_min(input, "sunday", "close_time_min");
-                this.attempt_concat_input("sunday", "close");
-                this.forceUpdate();
-              }}
-            />
+          <View style={{ flexDirection: "column" }}>
+            <View style={styles.timerow}>
+              <Text style={styles.text}> Open: </Text>
+              <TextInput
+                style={styles.input}
+                editable={!this.state.day.sunday.closed}
+                maxLength={2}
+                keyboardType="decimal-pad"
+                placeholder="Hour"
+                value={this.state.day.sunday.open_time_hour}
+                onChangeText={input => {
+                  this.check_input_hour(input, "sunday", "open_time_hour");
+                  console.log("attemp should run next");
+                  this.attempt_concat_input("sunday", "open");
+                }}
+              />
+              <Text style={styles.text}> : </Text>
+              <TextInput
+                style={styles.input}
+                editable={!this.state.day.sunday.closed}
+                maxLength={2}
+                keyboardType="decimal-pad"
+                placeholder="min"
+                value={this.state.day.sunday.open_time_min}
+                onChangeText={input => {
+                  this.check_input_min(input, "sunday", "open_time_min");
+                  this.attempt_concat_input("sunday", "open");
+                  this.forceUpdate();
+                }}
+              />
+            </View>
+            <View style={styles.timerow}>
+              <Text style={styles.text}> Closed: </Text>
+              <TextInput
+                style={styles.input}
+                editable={!this.state.day.sunday.closed}
+                maxLength={2}
+                keyboardType="decimal-pad"
+                placeholder="Hour"
+                value={this.state.day.sunday.close_time_hour}
+                onChangeText={input => {
+                  this.check_input_hour(input, "sunday", "close_time_hour");
+                  this.attempt_concat_input("sunday", "close");
+                  this.forceUpdate();
+                }}
+              />
+              <Text style={styles.text}> : </Text>
+              <TextInput
+                style={styles.input}
+                editable={!this.state.day.sunday.closed}
+                maxLength={2}
+                keyboardType="decimal-pad"
+                placeholder="min"
+                value={this.state.day.sunday.close_time_min}
+                onChangeText={input => {
+                  this.check_input_min(input, "sunday", "close_time_min");
+                  this.attempt_concat_input("sunday", "close");
+                  this.forceUpdate();
+                }}
+              />
+            </View>
           </View>
         </View>
       );
-    }
-    else if (this.props.day == 1) {
+    } else if (this.props.day == 1) {
       return (
         <View>
-          <CheckBox
-            containerStyle={styles.CheckBox}
-            title='Closed?'
-            onPress={() => this._checkBox(1)}
-            checked={this.state.day.monday.closed}
-          />
-
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.text}>     Open: </Text>
+          <View style={styles.Switch}>
+            <Switch
+              onValueChange={() => {
+                this._checkBox(1);
+              }}
+              value={this.state.day.monday.closed}
+            />
+          </View>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.text}> Open: </Text>
             <TextInput
               editable={!this.state.day.monday.closed}
               style={styles.input}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="Hour"
               value={this.state.day.monday.open_time_hour}
               onChangeText={input => {
@@ -396,12 +412,12 @@ export default class MultipleTimeInput extends Component {
                 this.forceUpdate();
               }}
             />
-            <Text style={styles.text}>  :  </Text>
+            <Text style={styles.text}> : </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.monday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="min"
               value={this.state.day.monday.open_time_min}
               onChangeText={input => {
@@ -411,13 +427,13 @@ export default class MultipleTimeInput extends Component {
               }}
             />
           </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.text}>  Closed: </Text>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.text}> Closed: </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.monday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="Hour"
               value={this.state.day.monday.close_time_hour}
               onChangeText={input => {
@@ -426,12 +442,12 @@ export default class MultipleTimeInput extends Component {
                 this.forceUpdate();
               }}
             />
-            <Text style={styles.text}>  :  </Text>
+            <Text style={styles.text}> : </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.monday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="min"
               value={this.state.day.monday.close_time_min}
               onChangeText={input => {
@@ -441,27 +457,26 @@ export default class MultipleTimeInput extends Component {
               }}
             />
           </View>
-
         </View>
       );
-    }
-    else if (this.props.day == 2) {
+    } else if (this.props.day == 2) {
       return (
         <View>
-          <CheckBox
-            containerStyle={styles.CheckBox}
-            title='Closed?'
-            onPress={() => this._checkBox(2)}
-            checked={this.state.day.tuesday.closed}
-          />
-
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.text}>     Open: </Text>
+          <View style={styles.Switch}>
+            <Switch
+              onValueChange={() => {
+                this._checkBox(2);
+              }}
+              value={this.state.day.tuesday.closed}
+            />
+          </View>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.text}> Open: </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.tuesday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="Hour"
               value={this.state.day.tuesday.open_time_hour}
               onChangeText={input => {
@@ -470,12 +485,12 @@ export default class MultipleTimeInput extends Component {
                 this.forceUpdate();
               }}
             />
-            <Text style={styles.text}>  :  </Text>
+            <Text style={styles.text}> : </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.tuesday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="min"
               value={this.state.day.tuesday.open_time_min}
               onChangeText={input => {
@@ -485,13 +500,13 @@ export default class MultipleTimeInput extends Component {
               }}
             />
           </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.text}>  Closed: </Text>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.text}> Closed: </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.tuesday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="Hour"
               value={this.state.day.tuesday.close_time_hour}
               onChangeText={input => {
@@ -500,12 +515,12 @@ export default class MultipleTimeInput extends Component {
                 this.forceUpdate();
               }}
             />
-            <Text style={styles.text}>  :  </Text>
+            <Text style={styles.text}> : </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.tuesday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="min"
               value={this.state.day.tuesday.close_time_min}
               onChangeText={input => {
@@ -515,27 +530,26 @@ export default class MultipleTimeInput extends Component {
               }}
             />
           </View>
-
         </View>
       );
-    }
-
-    else if (this.props.day == 3) {
+    } else if (this.props.day == 3) {
       return (
         <View>
-          <CheckBox
-            containerStyle={styles.CheckBox}
-            title='Closed?'
-            onPress={() => this._checkBox(3)}
-            checked={this.state.day.wednesday.closed}
-          />
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.text}>     Open: </Text>
+          <View style={styles.Switch}>
+            <Switch
+              onValueChange={() => {
+                this._checkBox(3);
+              }}
+              value={this.state.day.wednesday.closed}
+            />
+          </View>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.text}> Open: </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.wednesday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="Hour"
               value={this.state.day.wednesday.open_time_hour}
               onChangeText={input => {
@@ -544,12 +558,12 @@ export default class MultipleTimeInput extends Component {
                 this.forceUpdate();
               }}
             />
-            <Text style={styles.text}>  :  </Text>
+            <Text style={styles.text}> : </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.wednesday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="min"
               value={this.state.day.wednesday.open_time_min}
               onChangeText={input => {
@@ -559,13 +573,13 @@ export default class MultipleTimeInput extends Component {
               }}
             />
           </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.text}>  Closed: </Text>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.text}> Closed: </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.wednesday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="Hour"
               value={this.state.day.wednesday.close_time_hour}
               onChangeText={input => {
@@ -574,12 +588,12 @@ export default class MultipleTimeInput extends Component {
                 this.forceUpdate();
               }}
             />
-            <Text style={styles.text}>  :  </Text>
+            <Text style={styles.text}> : </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.wednesday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="min"
               value={this.state.day.wednesday.close_time_min}
               onChangeText={input => {
@@ -589,28 +603,26 @@ export default class MultipleTimeInput extends Component {
               }}
             />
           </View>
-
         </View>
       );
-    }
-
-    else if (this.props.day == 4) {
+    } else if (this.props.day == 4) {
       return (
         <View>
-          <CheckBox
-            containerStyle={styles.CheckBox}
-            title='Closed?'
-            onPress={() => this._checkBox(4)}
-            checked={this.state.day.thursday.closed}
-          />
-
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.text}>     Open: </Text>
+          <View style={styles.Switch}>
+            <Switch
+              onValueChange={() => {
+                this._checkBox(4);
+              }}
+              value={this.state.day.thursday.closed}
+            />
+          </View>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.text}> Open: </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.thursday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="Hour"
               value={this.state.day.thursday.open_time_hour}
               onChangeText={input => {
@@ -619,12 +631,12 @@ export default class MultipleTimeInput extends Component {
                 this.forceUpdate();
               }}
             />
-            <Text style={styles.text}>  :  </Text>
+            <Text style={styles.text}> : </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.thursday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="min"
               value={this.state.day.thursday.open_time_min}
               onChangeText={input => {
@@ -634,13 +646,13 @@ export default class MultipleTimeInput extends Component {
               }}
             />
           </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.text}>  Closed: </Text>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.text}> Closed: </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.thursday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="Hour"
               value={this.state.day.thursday.close_time_hour}
               onChangeText={input => {
@@ -649,12 +661,12 @@ export default class MultipleTimeInput extends Component {
                 this.forceUpdate();
               }}
             />
-            <Text style={styles.text}>  :  </Text>
+            <Text style={styles.text}> : </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.thursday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="min"
               value={this.state.day.thursday.close_time_min}
               onChangeText={input => {
@@ -664,29 +676,26 @@ export default class MultipleTimeInput extends Component {
               }}
             />
           </View>
-
-
         </View>
       );
-    }
-
-    else if (this.props.day == 5) {
+    } else if (this.props.day == 5) {
       return (
         <View>
-          <CheckBox
-            containerStyle={styles.CheckBox}
-            title='Closed?'
-            onPress={() => this._checkBox(5)}
-            checked={this.state.day.friday.closed}
-          />
-
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.text}>     Open: </Text>
+          <View style={styles.Switch}>
+            <Switch
+              onValueChange={() => {
+                this._checkBox(5);
+              }}
+              value={this.state.day.friday.closed}
+            />
+          </View>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.text}> Open: </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.friday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="Hour"
               value={this.state.day.friday.open_time_hour}
               onChangeText={input => {
@@ -695,12 +704,12 @@ export default class MultipleTimeInput extends Component {
                 this.forceUpdate();
               }}
             />
-            <Text style={styles.text}>  :  </Text>
+            <Text style={styles.text}> : </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.friday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="min"
               value={this.state.day.friday.open_time_min}
               onChangeText={input => {
@@ -710,13 +719,13 @@ export default class MultipleTimeInput extends Component {
               }}
             />
           </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.text}>  Closed: </Text>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.text}> Closed: </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.friday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="Hour"
               value={this.state.day.friday.close_time_hour}
               onChangeText={input => {
@@ -725,12 +734,12 @@ export default class MultipleTimeInput extends Component {
                 this.forceUpdate();
               }}
             />
-            <Text style={styles.text}>  :  </Text>
+            <Text style={styles.text}> : </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.friday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="min"
               value={this.state.day.friday.close_time_min}
               onChangeText={input => {
@@ -742,26 +751,24 @@ export default class MultipleTimeInput extends Component {
           </View>
         </View>
       );
-    }
-
-    else if (this.props.day == 6) {
+    } else if (this.props.day == 6) {
       return (
         <View>
-          <CheckBox
-            containerStyle={styles.CheckBox}
-            title='Closed?'
-            onPress={() => this._checkBox(6)}
-            checked={this.state.day.saturday.closed}
-          />
-
-
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.text}>     Open: </Text>
+          <View style={styles.Switch}>
+            <Switch
+              onValueChange={() => {
+                this._checkBox(6);
+              }}
+              value={this.state.day.saturday.closed}
+            />
+          </View>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.text}> Open: </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.saturday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="Hour"
               value={this.state.day.saturday.open_time_hour}
               onChangeText={input => {
@@ -770,12 +777,12 @@ export default class MultipleTimeInput extends Component {
                 this.forceUpdate();
               }}
             />
-            <Text style={styles.text}>  :  </Text>
+            <Text style={styles.text}> : </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.saturday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="min"
               value={this.state.day.saturday.open_time_min}
               onChangeText={input => {
@@ -785,13 +792,13 @@ export default class MultipleTimeInput extends Component {
               }}
             />
           </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.text}>  Closed: </Text>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.text}> Closed: </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.saturday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="Hour"
               value={this.state.day.saturday.close_time_hour}
               onChangeText={input => {
@@ -800,12 +807,12 @@ export default class MultipleTimeInput extends Component {
                 this.forceUpdate();
               }}
             />
-            <Text style={styles.text}>  :  </Text>
+            <Text style={styles.text}> : </Text>
             <TextInput
               style={styles.input}
               editable={!this.state.day.saturday.closed}
               maxLength={2}
-              keyboardType='decimal-pad'
+              keyboardType="decimal-pad"
               placeholder="min"
               value={this.state.day.saturday.close_time_min}
               onChangeText={input => {
@@ -820,29 +827,3 @@ export default class MultipleTimeInput extends Component {
     }
   }
 }
-
-
-const styles = StyleSheet.create({
-  header: {
-    fontSize: 26,
-    fontWeight: "bold",
-    padding: 10,
-    margin: 10
-  },
-  text: {
-    top: 10,
-    fontWeight: "bold",
-    fontSize: 15
-  },
-  CheckBox: {
-    backgroundColor: 'rgba(255,255,255,0)',
-    width: 100,
-    right: -50
-  },
-  input: {
-    height: 40,
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    marginBottom: 5,
-    paddingHorizontal: 10
-  },
-});

@@ -23,9 +23,10 @@ export const fetchUserInfo = () => async dispatch => {
     let ref = await firebase.firestore().collection("users");
     let user = await firebase.auth().currentUser;
     let doc = await ref.doc(user.uid);
-    let snap = await doc.get();
 
-    dispatch(fetchInfoFinish(await snap.data()));
+    doc.onSnapshot(async snap => {
+      dispatch(fetchInfoFinish(await snap.data()));
+    });
   } catch (e) {
     dispatch(fetchInfoError(e));
   }
@@ -130,7 +131,14 @@ export const uploadImage = (
   dispatch(uploadImageStart());
   try {
     // get ref to bucket
-    const ref = await firebase.storage().ref(`images/${truck_id}/${fileName}`);
+    let path = `images/${truck_id}/`;
+    if (type == "thumbnail") {
+      path += "thumbnail";
+    } else {
+      path += fileName;
+    }
+
+    const ref = await firebase.storage().ref(path);
     // upload image, TODO: show upload progess?
     await ref.putFile(uri);
     // get url back

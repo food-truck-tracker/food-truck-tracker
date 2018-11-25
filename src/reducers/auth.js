@@ -15,6 +15,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isFetching: true,
+        hasError: false,
+        errorMessage: "",
       };
     }
     case types.LOGIN_FINISHED: {
@@ -23,6 +25,8 @@ export default (state = initialState, action) => {
         ...state,
         isFetching: false,
         loggedIn: true,
+        hasError: false,
+        errorMessage: "",
         user,
       };
     }
@@ -42,6 +46,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isFetching: true,
+        hasError: false,
+        errorMessage: "",
       };
     }
     case types.LOGOUT_FINISHED: {

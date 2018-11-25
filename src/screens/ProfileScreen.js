@@ -1,23 +1,42 @@
 import React from "react";
-import { Text, View, Button } from "@shoutem/ui";
 import { StyleSheet } from "react-native";
+import { Text, View, Button } from "@shoutem/ui";
 import { connect } from "react-redux";
 import ImagePicker from "react-native-image-picker";
 
 import LoginForm from "../components/LoginForm";
-import Register from "./Register";
-import TruckRegisterForm from "./TruckRegisterForm";
 import { loginUser, logoutUser, registerUser } from "../actions/auth";
 import { updateTrucksLocation } from "../actions/location";
 import { fetchUserInfo, resetUserInfo, uploadImage } from "../actions/user";
 import { getUserLocation } from "../utils";
 
+const styles = StyleSheet.create({
+  name: {
+    textAlign: "center",
+    fontSize: 26,
+    fontWeight: "bold",
+    marginTop: 10,
+  },
+  email: {
+    textAlign: "center",
+    fontSize: 16,
+    fontWeight: "bold",
+    marginTop: 10,
+    marginBottom: 10,
+    color: "#808080",
+  },
+  button: {
+    margin: 10,
+  },
+  view: {
+    paddingHorizontal: 12,
+  },
+});
+
 class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.authUnsubscriber = null;
     this.state = {
-      view: "root",
       emailValue: "",
       passwordValue: "",
     };
@@ -39,9 +58,7 @@ class ProfileScreen extends React.Component {
 
   // open page of favroites
   onOpenFavorites = () => {
-    this.props.navigation.push("Favorites", {
-      list: this.props.user.user["favorites"],
-    });
+    this.props.navigation.push("Favorites");
   };
 
   // upload new pic to firebase storage
@@ -52,10 +69,8 @@ class ProfileScreen extends React.Component {
         mediaType: "photo",
       },
       res => {
-        console.log("imagepicker response", res);
         if (!res.didCancel && !res.error) {
           const source = { uri: res.uri };
-          console.log("image source", source);
           this.props.uploadImage(
             this.props.user.user.truck_id,
             res.uri,
@@ -76,17 +91,7 @@ class ProfileScreen extends React.Component {
       );
       await this.props.fetchUserInfo();
     } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // attempt to register
-  onRegister = async (name, email, pass) => {
-    try {
-      const response = await this.props.registerUser(name, email, pass);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -105,102 +110,97 @@ class ProfileScreen extends React.Component {
     this.setState({ [`${type}Value`]: e });
   };
 
-  // changes mounted component based on view var
-  _changeView = view => {
-    this.setState({ view });
+  // when register a truck is clicked
+  onTruckRegister = () => {
+    this.props.navigation.push("TruckRegisterForm");
+  };
+
+  onRegisterClick = () => {
+    this.props.navigation.push("Register");
   };
 
   // returns view to render
   _chooseRender = () => {
-    if (this.state.view == "register") {
-      return (
-        <Register
-          changeView={this._changeView}
-          registerUser={this.onRegister}
-          isFetching={this.props.auth.isFetching}
-        />
-      );
-    } else if (this.state.view == "login") {
-      return (
-        <LoginForm
-          isFetching={this.props.auth.isFetching}
-          changeView={this._changeView}
-          emailValue={this.state.emailValue}
-          passwordValue={this.state.passwordValue}
-          onChange={(e, type) => this.onChangeLogin(e, type)}
-          onPress={this.onLogin}
-        />
-      );
-    } else if (this.state.view == "page_edit") {
-      return <TruckRegisterForm update={true} changeView={this._changeView} />;
-    } else {
-      const { user } = this.props.user;
-      return (
-        <View style={{ paddingLeft: 12, paddingRight: 12 }}>
-          {this.props.auth.loggedIn ? (
-            <>
-              
-              <Text style={styles.email}>{this.props.auth.user.email}</Text>
-              {user && user["truck_id"] && (
-                <>
-                  <Button style={styles.button} styleName="secondary" onPress={this.onLocationUpdate}>
-                    <Text>UPDATE LOCATION</Text>
-                  </Button>
-                  <Button
-                    style={styles.button}
-                    styleName="secondary"
-                    onPress={() => {
-                      this.setState({ view: "page_edit" });
-                    }}
-                  >
-                    <Text>EDIT TRUCK INFO</Text>
-                  </Button>
-                  <Button
-                    style={styles.button}
-                    styleName="secondary"
-                    onPress={() => this.onUploadPicture("thumbnail")}
-                  >
-                    <Text>UPLOAD THUMBNAIL TRUCK PICTURE</Text>
-                  </Button>
-                  <Button style={styles.button} styleName="secondary" onPress={this.onUploadPicture}>
-                    <Text>UPLOAD TRUCK PICTURE</Text>
-                  </Button>
-                </>
-              )}
-              <Button style={styles.button} styleName="secondary" onPress={this.onOpenFavorites}>
-                <Text>FAVORITES</Text>
-              </Button>
-              <Button style={styles.button} styleName="secondary" onPress={this.onLogout}>
-                <Text>LOGOUT</Text>
-              </Button>
-            </>
-          ) : (
-            <>
-              <Button
-               
-                style={styles.button}
-                paddingTop = {100}
-                styleName="secondary"
-                onPress={() => {
-                  this.setState({ view: "login" });
-                }}
-              >
-                <Text>Login</Text>
-              </Button>
-              <Button
-                style={styles.button}
-                styleName="secondary"
-                onPress={() => {
-                  this.setState({ view: "register" });
-                }}
-              >
-                <Text>Register</Text>
-              </Button>
-            </>
-          )}
-        </View>
-      );
-    }
+    const { user } = this.props.user;
+    return (
+      <View style={styles.view}>
+        {this.props.auth.loggedIn ? (
+          <>
+            {user && <Text style={styles.name}>{user.name}</Text>}
+            <Text style={styles.email}>{this.props.auth.user.email}</Text>
+            {user && user["truck_id"] ? (
+              <>
+                <Button
+                  style={styles.button}
+                  styleName="secondary"
+                  onPress={this.onLocationUpdate}
+                >
+                  <Text>UPDATE LOCATION</Text>
+                </Button>
+                <Button
+                  style={styles.button}
+                  styleName="secondary"
+                  onPress={() => this.onUploadPicture("thumbnail")}
+                >
+                  <Text>UPLOAD THUMBNAIL TRUCK PICTURE</Text>
+                </Button>
+                <Button
+                  style={styles.button}
+                  styleName="secondary"
+                  onPress={this.onUploadPicture}
+                >
+                  <Text>UPLOAD TRUCK PICTURE</Text>
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  style={styles.button}
+                  styleName="secondary"
+                  onPress={this.onTruckRegister}
+                >
+                  <Text>REGISTER A TRUCK</Text>
+                </Button>
+              </>
+            )}
+            <Button
+              style={styles.button}
+              styleName="secondary"
+              onPress={this.onOpenFavorites}
+            >
+              <Text>FAVORITES</Text>
+            </Button>
+            <Button
+              style={styles.button}
+              styleName="secondary"
+              onPress={this.onLogout}
+            >
+              <Text>LOGOUT</Text>
+            </Button>
+          </>
+        ) : (
+          <View style={styles.view}>
+            <LoginForm
+              isFetching={this.props.auth.isFetching}
+              hasError={this.props.auth.hasError}
+              changeView={this._changeView}
+              emailValue={this.state.emailValue}
+              passwordValue={this.state.passwordValue}
+              onChange={(e, type) => this.onChangeLogin(e, type)}
+              onPress={this.onLogin}
+            />
+            <Button
+              styleName="secondary"
+              style={styles.button}
+              disabled={this.props.auth.isFetching}
+              onPress={this.onRegisterClick}
+            >
+              <Text>Register</Text>
+            </Button>
+          </View>
+        )}
+      </View>
+    );
   };
 
   render() {
@@ -229,23 +229,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(ProfileScreen);
-
-const styles = StyleSheet.create({
-  name: {
-    textAlign: "center",
-    fontSize: 26,
-    fontWeight: "bold",
-    marginTop: 10
-  },
-  email: {
-    textAlign: "center",
-    fontSize: 20,
-    fontWeight: "bold",
-    marginTop: 10,
-    marginBottom: 10
-  },
-  button: {
-    margin: 10,
-  },
-});
-

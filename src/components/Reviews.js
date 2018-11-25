@@ -1,5 +1,15 @@
 import React from "react";
-import { Text, TextInput, Button, View } from "@shoutem/ui";
+import {
+  Text,
+  TextInput,
+  Button,
+  View,
+  Row,
+  Subtitle,
+  Caption,
+  Heading,
+  Divider,
+} from "@shoutem/ui";
 import { connect } from "react-redux";
 import { AirbnbRating } from "react-native-ratings";
 
@@ -36,29 +46,55 @@ class Reviews extends React.Component {
 
   render() {
     const { reviews } = this.props.review;
+
+    // check if already left review
+    let hasLeftReview = false;
+    let user_id = "";
+    if (this.props.auth.user) {
+      user_id = this.props.auth.user.uid;
+    }
+    if (reviews) {
+      for (let i = 0; i < reviews.length; i++) {
+        if (reviews[i].user_id == user_id) {
+          hasLeftReview = true;
+          break;
+        }
+      }
+    }
     return (
       <View>
-        <Text>Reviews</Text>
-        <AirbnbRating
-          reviews={["", "", "", "", ""]}
-          onFinishRating={this.ratingCompleted}
-        />
-        <TextInput
-          placeholder={"Write a review..."}
-          borderWidth={2}
-          multiline={true}
-          marginBottom={10}
-          onChangeText={body => this.setState({ body })}
-        />
-        <Button styleName="secondary" onPress={this.onSubmit}>
-          <Text>Submit review...</Text>
-        </Button>
+        <Divider />
+        <Heading>Reviews</Heading>
+        <Divider styleName="line" />
+        {!hasLeftReview && (
+          <View>
+            <AirbnbRating
+              reviews={["", "", "", "", ""]}
+              onFinishRating={this.ratingCompleted}
+            />
+            <TextInput
+              placeholder={"Write a review..."}
+              borderWidth={2}
+              multiline={true}
+              marginBottom={10}
+              onChangeText={body => this.setState({ body })}
+            />
+            <Button styleName="secondary" onPress={this.onSubmit}>
+              <Text>Submit review...</Text>
+            </Button>
+          </View>
+        )}
         {reviews ? (
           reviews.map((review, i) => (
-            <View key={i}>
-              <Text>{review.body}</Text>
-              <Text>Rating: {review.stars}</Text>
-            </View>
+            <Row key={i}>
+              <View styleName="vertical">
+                <View styleName="horizontal space-between">
+                  <Subtitle>{review.name}</Subtitle>
+                  <Caption>{review.stars} stars</Caption>
+                </View>
+                <Text styleName="multiline">{review.body}</Text>
+              </View>
+            </Row>
           ))
         ) : (
           <Text>Be the first to review!</Text>
@@ -71,6 +107,7 @@ class Reviews extends React.Component {
 // redux connection
 const mapStateToProps = state => ({
   review: state.review,
+  auth: state.auth,
 });
 
 const mapDispatchToProps = {

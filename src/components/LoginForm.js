@@ -1,7 +1,6 @@
 import React from "react";
-import { ScrollView, TextInput, StyleSheet, View } from "react-native";
-import { Button, Text } from "@shoutem/ui";
-import { connect } from "react-redux";
+import { StyleSheet, ScrollView } from "react-native";
+import { Button, Text, View, TextInput } from "@shoutem/ui";
 
 const styles = StyleSheet.create({
   input: {
@@ -15,8 +14,11 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 10,
   },
+  error: {
+    color: "red",
+    textAlign: "center",
+  },
   button: {
-    //marginBottom: 5,
     margin: 10,
   },
 });
@@ -24,11 +26,11 @@ const styles = StyleSheet.create({
 const LoginForm = ({
   // navigation,
   isFetching,
+  hasError,
   onPress,
   emailValue,
   passwordValue,
   onChange,
-  changeView,
 }) => {
   return (
     <ScrollView>
@@ -51,7 +53,9 @@ const LoginForm = ({
         autoCapitalize="none"
         autoCorrect={false}
       />
-      <View style={{ paddingLeft: 12, paddingRight: 12 }}>
+      {hasError ? (
+        <Text style={styles.error}>Invalid email/password</Text>
+      ) : null}
       <Button
         style={styles.button}
         styleName="secondary"
@@ -62,24 +66,13 @@ const LoginForm = ({
             return;
           }
           // attempt to login, then change view to root
-          onPress().then(() => changeView("root"));
+          onPress();
         }}
       >
-      <Text>Log in</Text>
+        <Text>Log in</Text>
       </Button>
-      <Button style={styles.button} styleName="secondary" onPress={changeView} disabled={isFetching}>
-        <Text>Go back</Text>
-      </Button>
-      </View>
     </ScrollView>
   );
 };
 
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = {};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginForm);
+export default LoginForm;
