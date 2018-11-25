@@ -6,6 +6,7 @@ import {
   Subtitle,
   Caption,
   TouchableOpacity,
+  Heading,
 } from "@shoutem/ui";
 import { connect } from "react-redux";
 
@@ -24,7 +25,7 @@ class Favorites extends React.Component {
     const list = user.favorites;
     return (
       <View>
-        {list &&
+        {list ? (
           list.map((truckid, i) => {
             const truck = this.props.truck.trucksInfo[truckid];
             if (!truck) return null;
@@ -47,7 +48,12 @@ class Favorites extends React.Component {
                 </Row>
               </TouchableOpacity>
             );
-          })}
+          })
+        ) : (
+          <Heading style={{ textAlign: "center", padding: 20 }}>
+            Add favorites from truck screen!
+          </Heading>
+        )}
       </View>
     );
   }

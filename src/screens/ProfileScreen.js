@@ -5,7 +5,6 @@ import ImagePicker from "react-native-image-picker";
 
 import LoginForm from "../components/LoginForm";
 import Register from "./Register";
-import TruckRegisterForm from "./TruckRegisterForm";
 import { loginUser, logoutUser, registerUser } from "../actions/auth";
 import { updateTrucksLocation } from "../actions/location";
 import { fetchUserInfo, resetUserInfo, uploadImage } from "../actions/user";
@@ -107,6 +106,11 @@ class ProfileScreen extends React.Component {
     this.setState({ view });
   };
 
+  // when register a truck is clicked
+  onTruckRegister = () => {
+    this.props.navigation.push("TruckRegisterForm");
+  };
+
   // returns view to render
   _chooseRender = () => {
     if (this.state.view == "register") {
@@ -117,19 +121,6 @@ class ProfileScreen extends React.Component {
           isFetching={this.props.auth.isFetching}
         />
       );
-    } else if (this.state.view == "login") {
-      return (
-        <LoginForm
-          isFetching={this.props.auth.isFetching}
-          changeView={this._changeView}
-          emailValue={this.state.emailValue}
-          passwordValue={this.state.passwordValue}
-          onChange={(e, type) => this.onChangeLogin(e, type)}
-          onPress={this.onLogin}
-        />
-      );
-    } else if (this.state.view == "page_edit") {
-      return <TruckRegisterForm update={true} changeView={this._changeView} />;
     } else {
       const { user } = this.props.user;
       return (
@@ -137,18 +128,10 @@ class ProfileScreen extends React.Component {
           {this.props.auth.loggedIn ? (
             <>
               <Text>{this.props.auth.user.email}</Text>
-              {user && user["truck_id"] && (
+              {user && user["truck_id"] ? (
                 <>
                   <Button styleName="secondary" onPress={this.onLocationUpdate}>
                     <Text>UPDATE LOCATION</Text>
-                  </Button>
-                  <Button
-                    styleName="secondary"
-                    onPress={() => {
-                      this.setState({ view: "page_edit" });
-                    }}
-                  >
-                    <Text>EDIT TRUCK INFO</Text>
                   </Button>
                   <Button
                     styleName="secondary"
@@ -158,6 +141,12 @@ class ProfileScreen extends React.Component {
                   </Button>
                   <Button styleName="secondary" onPress={this.onUploadPicture}>
                     <Text>UPLOAD TRUCK PICTURE</Text>
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button styleName="secondary" onPress={this.onTruckRegister}>
+                    <Text>REGISTER A TRUCK</Text>
                   </Button>
                 </>
               )}
@@ -170,16 +159,18 @@ class ProfileScreen extends React.Component {
             </>
           ) : (
             <>
+              <LoginForm
+                isFetching={this.props.auth.isFetching}
+                hasError={this.props.auth.hasError}
+                changeView={this._changeView}
+                emailValue={this.state.emailValue}
+                passwordValue={this.state.passwordValue}
+                onChange={(e, type) => this.onChangeLogin(e, type)}
+                onPress={this.onLogin}
+              />
               <Button
                 styleName="secondary"
-                onPress={() => {
-                  this.setState({ view: "login" });
-                }}
-              >
-                <Text>Login</Text>
-              </Button>
-              <Button
-                styleName="secondary"
+                disabled={this.props.auth.isFetching}
                 onPress={() => {
                   this.setState({ view: "register" });
                 }}
