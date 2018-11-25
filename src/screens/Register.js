@@ -170,6 +170,6 @@ const styles = StyleSheet.create({
     height: 30
   },
   button: {
-    marginBottom: 5,
+    margin: 10,
   }
 });

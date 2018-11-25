@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, TextInput, StyleSheet } from "react-native";
+import { ScrollView, TextInput, StyleSheet, View } from "react-native";
 import { Button, Text } from "@shoutem/ui";
 import { connect } from "react-redux";
 
@@ -68,7 +68,7 @@ const LoginForm = ({
       <Text>Log in</Text>
       </Button>
       <Button style={styles.button} styleName="secondary" onPress={changeView} disabled={isFetching}>
-        <Text>Go backkkk</Text>
+        <Text>Go back</Text>
       </Button>
       </View>
     </ScrollView>
