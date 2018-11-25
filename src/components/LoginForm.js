@@ -1,6 +1,5 @@
 import React from "react";
 import { Text, View, Button, TextInput, StyleSheet } from "react-native";
-import { connect } from "react-redux";
 
 const styles = StyleSheet.create({
   input: {
@@ -13,16 +12,21 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 10,
   },
+  error: {
+    color: "red",
+    textAlign: "center",
+    margin: 10,
+  },
 });
 
 const LoginForm = ({
   // navigation,
   isFetching,
+  hasError,
   onPress,
   emailValue,
   passwordValue,
   onChange,
-  changeView,
 }) => {
   return (
     <View>
@@ -45,6 +49,9 @@ const LoginForm = ({
         autoCapitalize="none"
         autoCorrect={false}
       />
+      {hasError ? (
+        <Text style={styles.error}>Invalid email/password</Text>
+      ) : null}
       <Button
         title="Login"
         onPress={() => {
@@ -54,19 +61,11 @@ const LoginForm = ({
             return;
           }
           // attempt to login, then change view to root
-          onPress().then(() => changeView("root"));
+          onPress();
         }}
       />
-      <Button title="Go back" onPress={changeView} disabled={isFetching} />
     </View>
   );
 };
 
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = {};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginForm);
+export default LoginForm;

@@ -8,9 +8,9 @@ import { Icon } from "@shoutem/ui";
 import DiscoverScreen from "../screens/DiscoverScreen";
 import MapViewScreen from "../screens/MapViewScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-import LoginForm from "../components/LoginForm";
 import TruckPage from "../screens/TruckPage";
 import Favorites from "../screens/Favorites";
+import TruckRegisterForm from "../screens/TruckRegisterForm";
 
 const DiscoverStack = createStackNavigator(
   {
@@ -45,9 +45,9 @@ MapStack.navigationOptions = {
 const ProfileStack = createStackNavigator(
   {
     Profile: ProfileScreen,
-    Login: LoginForm,
     Favorites: Favorites,
     Truck: TruckPage,
+    TruckRegisterForm: TruckRegisterForm,
   },
   {
     initialRouteName: "Profile",
