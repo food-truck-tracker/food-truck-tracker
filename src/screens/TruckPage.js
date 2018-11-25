@@ -25,33 +25,6 @@ class TruckPage extends React.Component {
     tabBarVisible: false,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      photos: [
-        {
-          source: {
-            uri:
-              "https://shoutem.github.io/static/getting-started/restaurant-1.jpg",
-          },
-        },
-        {
-          source: {
-            uri:
-              "https://shoutem.github.io/static/getting-started/restaurant-2.jpg",
-          },
-        },
-        {
-          source: {
-            uri:
-              "https://shoutem.github.io/static/getting-started/restaurant-3.jpg",
-          },
-        },
-      ],
-    };
-  }
-
   openMaps = () => {
     // set up url
     const { navigation } = this.props;
@@ -113,30 +86,30 @@ class TruckPage extends React.Component {
     return (
       <ScrollView>
         <InlineGallery styleName="large-banner" data={images} />
-        <Text style={styles.truckname}>{info["name"]}</Text>
-        <Text>{info["description"]}</Text>
-
-        <Button onPress={this.openMaps} styleName="secondary">
-          <Text>Get Directions</Text>
-        </Button>
-
-        {isfav ? (
-          <Button
-            onPress={() => this.onRemoveFavorite(truck_id)}
-            styleName="secondary"
-          >
-            <Text>Remove from favorite</Text>
-          </Button>
-        ) : (
-          <Button
-            onPress={() => this.onAddFavorite(truck_id)}
-            styleName="secondary"
-          >
-            <Text>Add to favorite</Text>
-          </Button>
-        )}
-
         <View style={{ paddingLeft: 32, paddingRight: 32 }}>
+          <Text style={styles.truckname}>{info["name"]}</Text>
+          <Text>{info["description"]}</Text>
+
+          <Button onPress={this.openMaps} styleName="secondary">
+            <Text>Get Directions</Text>
+          </Button>
+
+          {isfav ? (
+            <Button
+              onPress={() => this.onRemoveFavorite(truck_id)}
+              styleName="secondary"
+            >
+              <Text>Remove from favorite</Text>
+            </Button>
+          ) : (
+            <Button
+              onPress={() => this.onAddFavorite(truck_id)}
+              styleName="secondary"
+            >
+              <Text>Add to favorite</Text>
+            </Button>
+          )}
+
           <Text style={styles.text}>Hours of operation</Text>
 
           {info["hours"] &&

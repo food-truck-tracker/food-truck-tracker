@@ -58,9 +58,18 @@ export const addReview = ({ stars, body, truck_id }) => async dispatch => {
     const ref = await firebase.firestore().collection("reviews");
     const user = await firebase.auth().currentUser;
 
+    // get user name
+    const uref = await firebase
+      .firestore()
+      .collection("users")
+      .doc(user.uid);
+    const doc = await uref.get();
+    const name = doc.data().name;
+
     // add review logic
     await ref.add({
       user_id: user.uid,
+      name,
       stars,
       body,
       truck_id,

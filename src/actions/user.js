@@ -130,7 +130,14 @@ export const uploadImage = (
   dispatch(uploadImageStart());
   try {
     // get ref to bucket
-    const ref = await firebase.storage().ref(`images/${truck_id}/${fileName}`);
+    let path = `images/${truck_id}/`;
+    if (type == "thumbnail") {
+      path += "thumbnail";
+    } else {
+      path += fileName;
+    }
+
+    const ref = await firebase.storage().ref(path);
     // upload image, TODO: show upload progess?
     await ref.putFile(uri);
     // get url back
