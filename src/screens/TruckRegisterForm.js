@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, TextInput } from "react-native";
+import { View, ScrollView, StyleSheet, TextInput } from "react-native";
 import { Button, Text } from "@shoutem/ui";
 import RadioDayPicker from "../components/RadioDayPicker";
 import MultipleTimeInput from "../components/MultipleTimeInput";
@@ -88,11 +88,12 @@ class TruckRegisterForm extends React.Component {
       return <ProfileScreen />;
     }
     return (
-      <View>
+      <ScrollView>
+      <View style={{paddingHorizontal: 30}}>
         {this.props.update ? (
           <Text style={styles.header}>Update truck page</Text>
         ) : (
-          <Text style={styles.header}>Register truck cont.</Text>
+          <Text style={styles.header}>Register truck cont</Text>
         )}
         <TextInput
           style={styles.input}
@@ -109,7 +110,7 @@ class TruckRegisterForm extends React.Component {
           onChangeText={description => this.setState({ description })}
         />
         <Text fontSize="20"> Enter hours of operation: </Text>
-        <View style={{ flexDirection: "row" }}>
+        <View style={styles.view_row}>
           <RadioDayPicker onUpdate={this.onUpdate} />
 
           <MultipleTimeInput
@@ -117,7 +118,6 @@ class TruckRegisterForm extends React.Component {
             onUpdateDay={this.onUpdateDay}
           />
         </View>
-        <View style={{ paddingLeft: 32, paddingRight: 32 }}>
           <Button
             style={styles.button}
             styleName="secondary"
@@ -148,7 +148,7 @@ class TruckRegisterForm extends React.Component {
             <Text>Go back</Text>
           </Button>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -162,10 +162,9 @@ const styles = StyleSheet.create({
     margin: 10
   },
   input: {
-    height: 40,
     backgroundColor: "rgba(255,255,255,0.7)",
-    marginBottom: 5,
-    paddingHorizontal: 5
+    padding: 15,
+    margin: 20,
   },
   text: {
     fontSize: 100,
@@ -178,7 +177,11 @@ const styles = StyleSheet.create({
   },
   button: {
     marginBottom: 5,
-  }
+  },
+  view_row: {
+    justifyContent: "space-between",
+    flexDirection: "row",
+  },
 });
 
 const mapDispatchToProps = {

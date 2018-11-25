@@ -152,10 +152,9 @@ const styles = StyleSheet.create({
     margin: 10
   },
   input: {
-    height: 40,
     backgroundColor: "rgba(255,255,255,0.7)",
-    marginBottom: 5,
-    paddingHorizontal: 5
+    padding: 15,
+    margin: 20,
   },
   text: {
     fontSize: 100,

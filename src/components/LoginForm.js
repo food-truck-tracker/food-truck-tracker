@@ -1,12 +1,13 @@
 import React from "react";
-import { View, TextInput, StyleSheet } from "react-native";
+import { ScrollView, TextInput, StyleSheet } from "react-native";
 import { Button, Text } from "@shoutem/ui";
 import { connect } from "react-redux";
 
 const styles = StyleSheet.create({
   input: {
+    backgroundColor: "rgba(255,255,255,0.7)",
     padding: 15,
-    margin: 10,
+    margin: 20,
   },
   header: {
     fontSize: 32,
@@ -15,7 +16,8 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   button: {
-    marginBottom: 5,
+    //marginBottom: 5,
+    margin: 10,
   },
 });
 
@@ -29,7 +31,7 @@ const LoginForm = ({
   changeView,
 }) => {
   return (
-    <View>
+    <ScrollView>
       <Text style={styles.header}>Login</Text>
       <TextInput
         style={styles.input}
@@ -49,7 +51,7 @@ const LoginForm = ({
         autoCapitalize="none"
         autoCorrect={false}
       />
-      <View style={{ paddingLeft: 32, paddingRight: 32 }}>
+      <View style={{ paddingLeft: 12, paddingRight: 12 }}>
       <Button
         style={styles.button}
         styleName="secondary"
@@ -66,10 +68,10 @@ const LoginForm = ({
       <Text>Log in</Text>
       </Button>
       <Button style={styles.button} styleName="secondary" onPress={changeView} disabled={isFetching}>
-        <Text>Go backkkkkkkk</Text>
+        <Text>Go backkkk</Text>
       </Button>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
