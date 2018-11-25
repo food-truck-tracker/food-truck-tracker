@@ -11,6 +11,10 @@ import {
 import { connect } from "react-redux";
 
 class Favorites extends React.Component {
+  static navigationOptions = {
+    title: "Favorites",
+  };
+
   onRowClick = truck_id => {
     // navigate to truck page
     this.props.navigation.push("Truck", {

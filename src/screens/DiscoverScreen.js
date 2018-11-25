@@ -47,10 +47,17 @@ class DiscoverScreen extends React.Component {
 
   truckTileClick = truck_id => {
     // navigate to truck page
+    let location = { location: [] };
+    if (
+      this.props.location.trucksLocation &&
+      this.props.location.trucksLocation[truck_id]
+    ) {
+      location = this.props.location.trucksLocation[truck_id];
+    }
     this.props.navigation.push("Truck", {
       truck_id,
       info: this.props.truck.trucksInfo[truck_id],
-      location: this.props.location.trucksLocation[truck_id],
+      location,
     });
   };
 
@@ -82,6 +89,10 @@ class DiscoverScreen extends React.Component {
     }
 
     const cellViews = rowData.map((truck, id) => {
+      let desc = truck.description;
+      if (desc && desc.length > 25) {
+        desc = desc.substring(0, 23) + "...";
+      }
       return (
         <TouchableOpacity
           key={id}
@@ -99,7 +110,7 @@ class DiscoverScreen extends React.Component {
               <Subtitle numberOfLines={3}>{truck.name}</Subtitle>
               <View styleName="horizontal">
                 <Caption styleName="collapsible" numberOfLines={2}>
-                  {truck.description}
+                  {desc}
                 </Caption>
               </View>
             </View>

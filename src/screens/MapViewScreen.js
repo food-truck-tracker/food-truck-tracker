@@ -69,18 +69,19 @@ class MapViewScreen extends React.Component {
       const { trucksInfo } = this.props.truck;
 
       for (let truck in trucksLocation) {
-        console.log("TRUCK: ", truck);
-        const marker = {
-          coordinate: {
-            latitude: trucksLocation[truck].location[0],
-            longitude: trucksLocation[truck].location[1],
-          },
-          image: { uri: trucksInfo[truck].thumbnail },
-          title: trucksInfo[truck].name,
-          description: trucksInfo[truck].description,
-          id: truck,
-        };
-        markers.push(marker);
+        if (trucksInfo[truck]) {
+          const marker = {
+            coordinate: {
+              latitude: trucksLocation[truck].location[0],
+              longitude: trucksLocation[truck].location[1],
+            },
+            image: { uri: trucksInfo[truck].thumbnail },
+            title: trucksInfo[truck].name,
+            description: trucksInfo[truck].description,
+            id: truck,
+          };
+          markers.push(marker);
+        }
       }
 
       this.setState({ markers });

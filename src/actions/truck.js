@@ -20,15 +20,14 @@ export const fetchTrucksInfo = () => async dispatch => {
   dispatch(fetchInfoStart());
   try {
     let ref = await firebase.firestore().collection("trucks");
-    let snap = await ref.get();
 
-    let data = {};
-
-    snap.forEach(async e => {
-      data[e.id] = e.data();
+    ref.onSnapshot(snap => {
+      let data = {};
+      snap.forEach(async e => {
+        data[e.id] = e.data();
+      });
+      dispatch(fetchInfoFinish(data));
     });
-
-    dispatch(fetchInfoFinish(data));
   } catch (e) {
     dispatch(fetchInfoError(e));
   }

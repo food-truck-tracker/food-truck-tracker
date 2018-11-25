@@ -1,4 +1,5 @@
 import React from "react";
+import { KeyboardAvoidingView } from "react-native";
 import {
   Text,
   TextInput,
@@ -62,7 +63,7 @@ class Reviews extends React.Component {
       }
     }
     return (
-      <View>
+      <KeyboardAvoidingView>
         <Divider />
         <Heading>Reviews</Heading>
         <Divider styleName="line" />
@@ -99,7 +100,7 @@ class Reviews extends React.Component {
         ) : (
           <Text>Be the first to review!</Text>
         )}
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
