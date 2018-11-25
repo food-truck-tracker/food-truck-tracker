@@ -53,13 +53,14 @@ class Reviews extends React.Component {
     if (this.props.auth.user) {
       user_id = this.props.auth.user.uid;
     }
-    for (let i = 0; i < reviews.length; i++) {
-      if (reviews[i].user_id == user_id) {
-        hasLeftReview = true;
-        break;
+    if (reviews) {
+      for (let i = 0; i < reviews.length; i++) {
+        if (reviews[i].user_id == user_id) {
+          hasLeftReview = true;
+          break;
+        }
       }
     }
-
     return (
       <View>
         <Divider />

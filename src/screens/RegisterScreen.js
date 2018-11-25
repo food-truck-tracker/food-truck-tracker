@@ -1,22 +1,48 @@
 import React from "react";
+import { connect } from "react-redux";
 import { StyleSheet, Text, ScrollView, Button, TextInput } from "react-native";
 
-export default class Registerform extends React.Component {
+import { registerUser } from "../actions/auth";
+
+const styles = StyleSheet.create({
+  header: {
+    textAlign: "center",
+    fontSize: 26,
+    fontWeight: "bold",
+    padding: 10,
+    margin: 10,
+  },
+  input: {
+    height: 40,
+    backgroundColor: "rgba(255,255,255,0.7)",
+    marginBottom: 5,
+    paddingHorizontal: 5,
+  },
+  text: {
+    fontSize: 100,
+    top: 100,
+    textAlign: "right",
+    left: -40,
+  },
+  CheckBox: {
+    width: 200,
+    backgroundColor: "rgba(255, 255, 255, 0)",
+  },
+  button_offset: {
+    height: 30,
+  },
+});
+
+class RegisterScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: "root",
       full_name: "",
       email: "",
       password: "",
       re_password: "",
     };
   }
-
-  // changes view from given variable
-  _changeView = view => {
-    this.setState({ view });
-  };
 
   render() {
     return (
@@ -58,7 +84,7 @@ export default class Registerform extends React.Component {
         />
         <Button
           title="Register"
-          disabled={this.props.isFetching}
+          disabled={this.props.auth.isFetching}
           onPress={() => {
             // grab vars from state
             const { full_name, email, password, re_password } = this.state;
@@ -74,13 +100,9 @@ export default class Registerform extends React.Component {
               return;
             }
             // attempt to register
-            this.props.registerUser(full_name, email, password);
-          }}
-        />
-        <Button
-          title="Go back"
-          onPress={() => {
-            this.props.changeView("root");
+            this.props
+              .registerUser(full_name, email, password)
+              .then(() => this.props.navigation.goBack());
           }}
         />
       </ScrollView>
@@ -88,31 +110,16 @@ export default class Registerform extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  header: {
-    textAlign: "center",
-    fontSize: 26,
-    fontWeight: "bold",
-    padding: 10,
-    margin: 10,
-  },
-  input: {
-    height: 40,
-    backgroundColor: "rgba(255,255,255,0.7)",
-    marginBottom: 5,
-    paddingHorizontal: 5,
-  },
-  text: {
-    fontSize: 100,
-    top: 100,
-    textAlign: "right",
-    left: -40,
-  },
-  CheckBox: {
-    width: 200,
-    backgroundColor: "rgba(255, 255, 255, 0)",
-  },
-  button_offset: {
-    height: 30,
-  },
+// redux connection
+const mapStateToProps = state => ({
+  auth: state.auth,
 });
+
+const mapDispatchToProps = {
+  registerUser,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RegisterScreen);

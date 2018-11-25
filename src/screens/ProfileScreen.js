@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import ImagePicker from "react-native-image-picker";
 
 import LoginForm from "../components/LoginForm";
-import Register from "./Register";
 import { loginUser, logoutUser, registerUser } from "../actions/auth";
 import { updateTrucksLocation } from "../actions/location";
 import { fetchUserInfo, resetUserInfo, uploadImage } from "../actions/user";
@@ -13,9 +12,7 @@ import { getUserLocation } from "../utils";
 class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.authUnsubscriber = null;
     this.state = {
-      view: "root",
       emailValue: "",
       passwordValue: "",
     };
@@ -48,10 +45,8 @@ class ProfileScreen extends React.Component {
         mediaType: "photo",
       },
       res => {
-        console.log("imagepicker response", res);
         if (!res.didCancel && !res.error) {
           const source = { uri: res.uri };
-          console.log("image source", source);
           this.props.uploadImage(
             this.props.user.user.truck_id,
             res.uri,
@@ -72,17 +67,7 @@ class ProfileScreen extends React.Component {
       );
       await this.props.fetchUserInfo();
     } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // attempt to register
-  onRegister = async (name, email, pass) => {
-    try {
-      const response = await this.props.registerUser(name, email, pass);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -101,87 +86,74 @@ class ProfileScreen extends React.Component {
     this.setState({ [`${type}Value`]: e });
   };
 
-  // changes mounted component based on view var
-  _changeView = view => {
-    this.setState({ view });
-  };
-
   // when register a truck is clicked
   onTruckRegister = () => {
     this.props.navigation.push("TruckRegisterForm");
   };
 
+  onRegisterClick = () => {
+    this.props.navigation.push("Register");
+  };
+
   // returns view to render
   _chooseRender = () => {
-    if (this.state.view == "register") {
-      return (
-        <Register
-          changeView={this._changeView}
-          registerUser={this.onRegister}
-          isFetching={this.props.auth.isFetching}
-        />
-      );
-    } else {
-      const { user } = this.props.user;
-      return (
-        <View>
-          {this.props.auth.loggedIn ? (
-            <>
-              <Text>{this.props.auth.user.email}</Text>
-              {user && user["truck_id"] ? (
-                <>
-                  <Button styleName="secondary" onPress={this.onLocationUpdate}>
-                    <Text>UPDATE LOCATION</Text>
-                  </Button>
-                  <Button
-                    styleName="secondary"
-                    onPress={() => this.onUploadPicture("thumbnail")}
-                  >
-                    <Text>UPLOAD THUMBNAIL TRUCK PICTURE</Text>
-                  </Button>
-                  <Button styleName="secondary" onPress={this.onUploadPicture}>
-                    <Text>UPLOAD TRUCK PICTURE</Text>
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Button styleName="secondary" onPress={this.onTruckRegister}>
-                    <Text>REGISTER A TRUCK</Text>
-                  </Button>
-                </>
-              )}
-              <Button styleName="secondary" onPress={this.onOpenFavorites}>
-                <Text>FAVORITES</Text>
-              </Button>
-              <Button styleName="secondary" onPress={this.onLogout}>
-                <Text>LOGOUT</Text>
-              </Button>
-            </>
-          ) : (
-            <>
-              <LoginForm
-                isFetching={this.props.auth.isFetching}
-                hasError={this.props.auth.hasError}
-                changeView={this._changeView}
-                emailValue={this.state.emailValue}
-                passwordValue={this.state.passwordValue}
-                onChange={(e, type) => this.onChangeLogin(e, type)}
-                onPress={this.onLogin}
-              />
-              <Button
-                styleName="secondary"
-                disabled={this.props.auth.isFetching}
-                onPress={() => {
-                  this.setState({ view: "register" });
-                }}
-              >
-                <Text>Register</Text>
-              </Button>
-            </>
-          )}
-        </View>
-      );
-    }
+    const { user } = this.props.user;
+    return (
+      <View>
+        {this.props.auth.loggedIn ? (
+          <>
+            <Text>{this.props.auth.user.email}</Text>
+            {user && user["truck_id"] ? (
+              <>
+                <Button styleName="secondary" onPress={this.onLocationUpdate}>
+                  <Text>UPDATE LOCATION</Text>
+                </Button>
+                <Button
+                  styleName="secondary"
+                  onPress={() => this.onUploadPicture("thumbnail")}
+                >
+                  <Text>UPLOAD THUMBNAIL TRUCK PICTURE</Text>
+                </Button>
+                <Button styleName="secondary" onPress={this.onUploadPicture}>
+                  <Text>UPLOAD TRUCK PICTURE</Text>
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button styleName="secondary" onPress={this.onTruckRegister}>
+                  <Text>REGISTER A TRUCK</Text>
+                </Button>
+              </>
+            )}
+            <Button styleName="secondary" onPress={this.onOpenFavorites}>
+              <Text>FAVORITES</Text>
+            </Button>
+            <Button styleName="secondary" onPress={this.onLogout}>
+              <Text>LOGOUT</Text>
+            </Button>
+          </>
+        ) : (
+          <>
+            <LoginForm
+              isFetching={this.props.auth.isFetching}
+              hasError={this.props.auth.hasError}
+              changeView={this._changeView}
+              emailValue={this.state.emailValue}
+              passwordValue={this.state.passwordValue}
+              onChange={(e, type) => this.onChangeLogin(e, type)}
+              onPress={this.onLogin}
+            />
+            <Button
+              styleName="secondary"
+              disabled={this.props.auth.isFetching}
+              onPress={this.onRegisterClick}
+            >
+              <Text>Register</Text>
+            </Button>
+          </>
+        )}
+      </View>
+    );
   };
 
   render() {

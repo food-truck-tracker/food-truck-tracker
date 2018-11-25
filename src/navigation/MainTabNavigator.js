@@ -11,6 +11,7 @@ import ProfileScreen from "../screens/ProfileScreen";
 import TruckPage from "../screens/TruckPage";
 import Favorites from "../screens/Favorites";
 import TruckRegisterForm from "../screens/TruckRegisterForm";
+import RegisterScreen from "../screens/RegisterScreen";
 
 const DiscoverStack = createStackNavigator(
   {
@@ -48,6 +49,7 @@ const ProfileStack = createStackNavigator(
     Favorites: Favorites,
     Truck: TruckPage,
     TruckRegisterForm: TruckRegisterForm,
+    Register: RegisterScreen,
   },
   {
     initialRouteName: "Profile",
