@@ -81,7 +81,7 @@ export default class Registerform extends React.Component {
               onPress={this._checkBox}
               checked={this.state.check_box_value}
             />
-            <View style={{ paddingLeft: 32, paddingRight: 32 }}>
+            <View style={{ paddingLeft: 12, paddingRight: 12 }}>
             <Button
               style={styles.button}
               styleName="secondary"
