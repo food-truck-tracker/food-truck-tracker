@@ -38,9 +38,7 @@ class ProfileScreen extends React.Component {
 
   // open page of favroites
   onOpenFavorites = () => {
-    this.props.navigation.push("Favorites", {
-      list: this.props.user.user["favorites"],
-    });
+    this.props.navigation.push("Favorites");
   };
 
   // upload new pic to firebase storage
